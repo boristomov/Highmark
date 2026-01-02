@@ -36,4 +36,10 @@ To enable:
 
 The site will publish automatically on each push to `main`.
 
+### Your site URL
+Because this is a **project** repo (`boristomov/Highmark`), GitHub Pages will serve it at:
+- `https://boristomov.github.io/Highmark/`
+
+If you see a 404 at `https://boristomov.github.io/`, that’s expected (that URL is only for `boristomov.github.io` repos).
+
 
