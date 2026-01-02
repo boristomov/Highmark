@@ -1,0 +1,521 @@
+.section {
+    position: relative;
+    height: 120vh;
+    border-top: 1px solid grey;
+    width: 100%;
+    background: linear-gradient(to bottom, #E9E1D3 10%, rgba(233, 225, 211, 0.739) 100%);
+    margin-bottom: 15vh;
+
+    /* Top fade to visually transition from the hero into this section */
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        pointer-events: none;
+        /* match lighter banner fade tone */
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+        z-index: 3;
+    }
+
+    /* Theme variables scoped locally to avoid CSS Modules :root error */
+    --map-black: #0b0b0b;
+    --map-silver: #c0c0c0;
+    --map-silver-dim: #9aa0a6;
+    --map-bronze: #cd7f32;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: start;
+    // column-gap: 1.5rem;
+    // row-gap: 1.5rem;
+    width: 100%;
+    height: 100vh;
+
+}
+
+.headerWrap {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.headerInner {
+    margin-left: 0;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+
+    /* Remove prior plain separator; we'll use the HM separator underline */
+    &::after {
+        display: none;
+    }
+
+    /* Use the global section title markup but tune it locally */
+    :global(.wpo-section-title) {
+        margin-bottom: 8px;
+
+        h2 {
+            margin-bottom: 5rem;
+            position: relative;
+
+            /* Use the exact underline style from "Celebrating Your Special Day" */
+            &::after {
+                content: "";
+                display: block;
+                width: 45vw;
+                height: 2px;
+                margin: 12px auto 0;
+                background: linear-gradient(90deg, rgba(192, 192, 192, 0) 0%, rgba(47, 47, 47, 0.3) 50%, rgba(192, 192, 192, 0) 100%);
+                opacity: .9;
+                box-shadow: 15px 5px 30px 10px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        /* Hide HM separator here to use the same underline as the Celebrating section */
+        :global(.section-title-img) {
+            display: none;
+        }
+    }
+}
+
+.mapWrap {
+    position: relative;
+    justify-self: start;
+    width: 100%;
+    height: 100%;
+    filter: none;
+    animation: mapRise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    margin-top: -8vh;
+    overflow: hidden;
+
+    /* Dedicated map fade (beige only) at top and bottom */
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &::before {
+        top: 0;
+        height: min(16vh, 260px);
+        background: linear-gradient(to bottom,
+                rgba(233, 225, 211, 1) 0%,
+                rgba(233, 225, 211, 0.0) 100%);
+    }
+
+    &::after {
+        bottom: 0;
+        height: min(16vh, 260px);
+        background: linear-gradient(to top,
+                rgba(233, 225, 211, 1) 0%,
+                rgba(233, 225, 211, 0.0) 100%);
+    }
+}
+
+.svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.6);
+    transform-origin: center center;
+}
+
+/* Theme colors */
+
+/* Geography theming via react-simple-maps inline styles uses these as reference in code */
+.countyStroke {
+    stroke: var(--map-silver);
+    stroke-width: 0.7;
+}
+
+.serviceable {
+    filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+}
+
+.serviceable:hover {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Shimmer stroke animation for serviceable areas */
+@keyframes shimmerStroke {
+    0% {
+        stroke: var(--map-silver);
+    }
+
+    50% {
+        stroke: #e5e7eb;
+    }
+
+    100% {
+        stroke: var(--map-silver);
+    }
+}
+
+/* Bronze pulse on active */
+@keyframes bronzePulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(205, 127, 50, 0));
+    }
+
+    60% {
+        transform: scale(1.02);
+        filter: drop-shadow(0 6px 12px rgba(205, 127, 50, 0.35));
+    }
+
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(205, 127, 50, 0));
+    }
+}
+
+@keyframes mapRise {
+    0% {
+        transform: translateY(18px) scale(0.985);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .mapWrap {
+        animation: none;
+    }
+}
+
+.state path {
+    fill: #f3f4f6;
+    /* light */
+    stroke: #9ca3af;
+    /* gray-400 */
+    stroke-width: 2;
+    filter: saturate(0.85);
+}
+
+.region circle {
+    fill: #4f46e5;
+    /* indigo-600 */
+    opacity: 0.75;
+    cursor: pointer;
+    transition: transform 220ms ease, opacity 220ms ease;
+    transform-origin: center;
+}
+
+.region:hover circle {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.active circle:first-child {
+    fill: #7c3aed;
+    /* violet-600 */
+    opacity: 0.9;
+}
+
+.pulse {
+    fill: transparent;
+    stroke: #7c3aed;
+    stroke-width: 3;
+    opacity: 0.6;
+    animation: pulse 1.8s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    70% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.labelHidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.labelVisible {
+    display: none;
+}
+
+.labelPill {
+    display: none;
+}
+
+.panelHidden {
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 220ms ease, transform 220ms ease;
+    pointer-events: none;
+}
+
+.panelVisible {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.infoPanel {
+    background: linear-gradient(135deg, rgba(47, 47, 47, 0.8) 0%, rgba(47, 47, 47, 0.4) 60%, rgba(47, 47, 47, 0.4) 70%, transparent 100%);
+    // border: 1px solid rgba(233, 225, 211, 0.45);
+    border-radius: 0 14px 14px 0;
+    padding: 30px 20px;
+    max-width: 560px;
+    width: 100%;
+    color: rgba(47, 47, 47, 0.86);
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    text-align: left;
+    margin-top: -14vh;
+    margin-left: 5%;
+    box-shadow: 10px 10px 40px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+
+    /* vertical separator between map (left) and text (right) on large screens */
+    @media (min-width: 1024px) {
+        &::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 8%;
+            bottom: 8%;
+            width: 2px;
+            background: linear-gradient(180deg,
+                    rgba(192, 192, 192, 0) 0%,
+                    var(--map-silver) 15%,
+                    var(--map-silver) 85%,
+                    rgba(192, 192, 192, 0) 100%);
+            opacity: 0.9;
+        }
+    }
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 4px 0 8px 0;
+}
+
+.sepLine {
+    flex: 1 1 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(192, 192, 192, 0) 0%, var(--map-silver) 50%, rgba(192, 192, 192, 0) 100%);
+}
+
+.sepBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--map-black);
+    background: linear-gradient(180deg, var(--map-silver) 0%, #e5e7eb 100%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    padding: 4px 8px;
+    font-size: 12px;
+    min-width: 36px;
+}
+
+.sepSubtext {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    margin-bottom: 8px;
+    color: #e5e7eb;
+}
+
+.infoHeadline {
+    margin: 0 0 25px 0;
+    text-align: right;
+    font-size: 42px;
+    letter-spacing: 1.2px;
+    color: #E9E1D3;
+    font-weight: 400;
+}
+
+.infoDesc {
+    margin: 0 0 16px 0;
+    font-size: 19px;
+    line-height: 1.6;
+    color: #E9E1D3;
+}
+
+.infoList {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    color: rgba(47, 47, 47, 0.8);
+    font-size: 17px;
+    line-height: 1.4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    justify-content: center;
+    margin-top: 24px;
+
+    li {
+        position: relative;
+        padding: 10px 22px;
+        background: linear-gradient(135deg, rgba(233, 225, 211, 0.4) 0%, rgba(233, 225, 211, 0.2) 100%);
+        border: 1px solid rgba(233, 225, 211, 0.6);
+        border-radius: 30px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+        &::before {
+            content: '◆';
+            position: relative;
+            margin-right: 8px;
+            color: rgba(233, 225, 211, 0.9);
+            font-size: 10px;
+            top: -2px;
+        }
+
+        &:hover {
+            background: linear-gradient(135deg, rgba(233, 225, 211, 0.6) 0%, rgba(233, 225, 211, 0.4) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-color: rgba(233, 225, 211, 0.8);
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .content {
+        grid-template-columns: 1fr;
+        height: min(88vh, 860px);
+        gap: 1.5rem;
+        transform: translateY(-6vh);
+    }
+
+    .mapWrap {
+        height: min(65vh, 560px);
+    }
+
+    .svg {
+        transform: scale(1.5);
+    }
+
+    .infoList {
+        font-size: 15px;
+        gap: 10px 16px;
+
+        li {
+            padding: 9px 18px;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .labelVisible {
+        top: 4%;
+    }
+
+    .infoPanel {
+        padding: 18px;
+        border-radius: 14px;
+        margin-top: -5vh;
+        margin-left: 0;
+    }
+
+    .content {
+        transform: translateY(-4vh);
+    }
+
+    .svg {
+        transform: scale(1.4);
+    }
+
+    .infoHeadline {
+        font-size: 32px;
+    }
+
+    .infoDesc {
+        font-size: 16px;
+    }
+
+    .infoList {
+        font-size: 14px;
+        gap: 8px 12px;
+        margin-top: 16px;
+
+        li {
+            padding: 8px 16px;
+
+            &::before {
+                font-size: 8px;
+                margin-right: 6px;
+            }
+        }
+    }
+}
+
+.labelBg {
+    fill: rgba(17, 24, 39, 0.85);
+    /* gray-900 */
+    stroke: rgba(255, 255, 255, 0.15);
+    stroke-width: 1;
+}
+
+.labelText {
+    fill: #fff;
+    font-family: 'Futura PT', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+}
+
+.bay circle:first-child {
+    fill: #10b981;
+    /* emerald */
+}
+
+.napa circle:first-child {
+    fill: #ef4444;
+    /* red */
+}
+
+.sonoma circle:first-child {
+    fill: #f59e0b;
+    /* amber */
+}

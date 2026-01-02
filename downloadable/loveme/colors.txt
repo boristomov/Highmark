@@ -1,0 +1,7 @@
+Near-black, rich charcoal tone
+Hex: #1B1B1B
+RGB: 27, 27, 27
+
+Warm beige / ivory tone
+Hex: #E9E1D3
+RGB: 233, 225, 211

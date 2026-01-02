@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "slug": "Wedding-Gown",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "title": "chiavari gold",
+    "price": "340.00",
+    "delPrice": "380.00",
+    "brand": "Gucci",
+    "size": "Xl"
+  },
+  {
+    "id": 2,
+    "slug": "Bridal-Flower",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari transparent.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari transparent.png",
+    "title": "chiavari transparent",
+    "price": "65.00",
+    "delPrice": "85.00",
+    "brand": "Gucci",
+    "size": "XXl"
+  },
+  {
+    "id": 3,
+    "slug": "Bridal-Shoes",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari white.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari white.png",
+    "title": "chiavari white",
+    "price": "285.00",
+    "delPrice": "300.00",
+    "brand": "Gucci",
+    "size": "L"
+  },
+  {
+    "id": 4,
+    "slug": "Wedding-Cake",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "title": "chiavari gold",
+    "price": "176.00",
+    "delPrice": "178.00",
+    "brand": "Gucci",
+    "size": "M"
+  },
+  {
+    "id": 5,
+    "slug": "Bride’s-Crown",
+    "proImg": "/images/boris/rental_equipment/chairs/french_crown.png",
+    "psImg": "/images/boris/rental_equipment/chairs/french_crown.png",
+    "title": "french_crown",
+    "price": "125.00",
+    "delPrice": "130.00",
+    "brand": "Gucci",
+    "size": "XXl"
+  },
+  {
+    "id": 6,
+    "slug": "Wedding-Rings",
+    "proImg": "/images/boris/rental_equipment/chairs/ghost.png",
+    "psImg": "/images/boris/rental_equipment/chairs/ghost.png",
+    "title": "ghost",
+    "price": "548.00",
+    "delPrice": "600.00",
+    "brand": "Gucci",
+    "size": "Xl"
+  },
+  {
+    "id": 7,
+    "slug": "Wedding-Dress",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "title": "chiavari gold",
+    "price": "380.00",
+    "delPrice": "400.00",
+    "brand": "Gucci",
+    "size": "Xl"
+  },
+  {
+    "id": 8,
+    "slug": "Hair-Style",
+    "proImg": "/images/boris/rental_equipment/chairs/wr03-light.png",
+    "psImg": "/images/boris/rental_equipment/chairs/wr03-light.png",
+    "title": "wr03-light",
+    "price": "290.00",
+    "delPrice": "300.00",
+    "brand": "Gucci",
+    "size": "XX"
+  },
+  {
+    "id": 9,
+    "slug": "Wedding-Cake",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "title": "chiavari gold",
+    "price": "176.00",
+    "delPrice": "178.00",
+    "brand": "Gucci",
+    "size": "M"
+  },
+  {
+    "id": 14,
+    "slug": "Wedding-Cake",
+    "proImg": "/images/boris/rental_equipment/chairs/wr16.png",
+    "psImg": "/images/boris/rental_equipment/chairs/wr16.png",
+    "title": "wr16",
+    "price": "285",
+    "delPrice": "295.00",
+    "brand": "Gucci",
+    "size": "L"
+  },
+  {
+    "id": 10,
+    "slug": "Heavy-Work-Gown",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "title": "chiavari gold",
+    "price": "285",
+    "delPrice": "295.00",
+    "brand": "Gucci",
+    "size": "L"
+  },
+  {
+    "id": 11,
+    "slug": "Simple-Gown",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari transparent.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari transparent.png",
+    "title": "chiavari transparent",
+    "price": "165",
+    "delPrice": "175.00",
+    "brand": "Gucci",
+    "size": "L"
+  },
+  {
+    "id": 12,
+    "slug": "Back-Deep-Cut",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari white.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari white.png",
+    "title": "chiavari white",
+    "price": "125",
+    "delPrice": "185.00",
+    "brand": "Gucci",
+    "size": "L"
+  },
+  {
+    "id": 13,
+    "slug": "Pearl-Work-Gown",
+    "proImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "psImg": "/images/boris/rental_equipment/chairs/chiavari gold.png",
+    "title": "chiavari gold",
+    "price": "548",
+    "delPrice": "585.00",
+    "brand": "Gucci",
+    "size": "L"
+  }
+]

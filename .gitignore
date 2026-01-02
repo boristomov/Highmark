@@ -1,0 +1,32 @@
+# Root gitignore (repo-level)
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Cursor / local tooling
+.cursor/
+
+# Node
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js build outputs
+**/.next/
+**/out/
+**/dist/
+**/build/
+
+# Env / secrets
+**/.env.local
+**/.env.*.local
+
+# Misc
+*.pem
+
+

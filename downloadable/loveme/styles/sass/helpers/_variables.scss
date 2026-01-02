@@ -1,0 +1,94 @@
+/*---------------------------
+	Fonts
+----------------------------*/
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('../../../fonts/FuturaPT-Demi.woff2') format('woff2'),
+    url('../../../fonts/FuturaPT-Demi.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('../../../fonts/FuturaPT-Heavy.woff2') format('woff2'),
+    url('../../../fonts/FuturaPT-Heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('../../../fonts/FuturaPT-Medium.woff2') format('woff2'),
+    url('../../../fonts/FuturaPT-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Muli Regular'), url('../../../fonts/text-font/Muli-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Muli SemiBold'), url('../../../fonts/text-font/Muli-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Muli Bold'), url('../../../fonts/text-font/Muli-Bold.woff') format('woff');
+}
+
+/* Using Urbanist - modern elegant sans with clean G */
+// Urbanist has refined letterforms with clean, modern G shape
+// Using Extra Light (200) weight for very thin, sophisticated look
+// Perfect for luxury/upscale branding
+
+// fonts
+$base-font-size: 15px; // give it a unit!
+
+$base-font: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$heading-font: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+// colors…
+
+html,
+body {
+  font-family: $base-font;
+  font-weight: 200; // use Extra Light for extremely thin, elegant look
+  font-synthesis: none; // avoid fake bold/regular if the face is missing
+}
+
+
+
+// color
+// Highmark theme: light beige base with dark text
+$dark-gray: rgba(47, 47, 47, 0.8); // headings - semi-transparent dark gray
+$body-color: rgba(47, 47, 47, 0.8); // body text - semi-transparent dark gray
+$white: #E9E1D3; // changed from pure white to beige
+$light: #F5F0E8; // lighter beige for accents
+$black: #1B1B1B; // dark charcoal instead of pure black
+$small-black: #1B1B1B;
+$cyan: #9aa0a6;
+
+// Primary brand beige and secondary variations
+$theme-primary-color: #E9E1D3; // beige/cream primary color
+$theme-primary-color-s2: #D4C9B8; // slightly darker beige for hovers/alt sections
+$body-bg-color: #E9E1D3; // warm beige page background
+$section-bg-color: #FFFFFF; // white section background
+$text-color: #1B1B1B; // dark charcoal text
+$text-light-color: #4a4a4a; // lighter charcoal for secondary text
+$heading-color: rgba(47, 47, 47, 0.8); // semi-transparent dark gray headings
+$border-color: #D4C9B8; // beige border
+$border-color-s2: #E9E1D3; // lighter beige border

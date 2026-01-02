@@ -1,0 +1,52 @@
+/*==========================================
+Family Story Section
+===========================================*/
+
+.wpo-family-story-section {
+    background: $theme-primary-color;
+    padding-top: 0px;
+
+    @media (max-width: 767px) {
+        padding-top: 30px;
+    }
+
+    .family-story-wrapper {
+        max-width: 100%;
+    }
+
+    .family-story-content {
+        text-align: center;
+
+        p {
+            font-size: 19px;
+            line-height: 1.9;
+            color: $body-color;
+            margin-bottom: 40px;
+            font-weight: 300;
+
+            @media (max-width: 767px) {
+                font-size: 15px;
+                line-height: 1.8;
+                margin-bottom: 30px;
+            }
+        }
+
+        .family-story-tagline {
+            font-size: 28px;
+            font-weight: 400;
+            color: $heading-color;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            @media (max-width: 767px) {
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 18px;
+            }
+        }
+    }
+}

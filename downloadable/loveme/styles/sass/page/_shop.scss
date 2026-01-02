@@ -1,0 +1,25 @@
+/*--------------------------------------------------------------
+14. wpo-shop-page
+--------------------------------------------------------------*/
+.wpo-shop-page {
+	padding-bottom: 50px;
+	.wpo-product-section{
+		padding: 0;
+		padding-left: 30px;
+
+		@media(max-width:991px){
+          padding-left: 0;
+		}
+		.wpo-product-img{
+			img{
+				width: 100%;
+				@media(min-width:991px){
+                  max-height: 310px;
+				  object-fit: cover;
+				}
+			}
+		}
+	}
+	
+}
+

@@ -1,0 +1,59 @@
+/*======================================
+ 7. Home-style-4 
+ =======================================*/
+
+
+/*--------------------------------------------------------------
+7.1 wpo-portfolio-section-s3
+--------------------------------------------------------------*/
+
+.wpo-portfolio-section-s3{
+	padding-bottom: 0;
+	.portfolio-grids{
+		.grid{
+			width: 33.33%;
+
+			@media(max-width:991px){
+                width: 50%;
+			}
+			@media(max-width:575px){
+                width: 100%;
+			}
+
+			&:last-child{
+				width: 33.33%;
+
+				@media(max-width:991px){
+                	width: 50%;
+				}
+				@media(max-width:575px){
+					width: 100%;
+				}
+			}
+
+			.img-holder .hover-content i {
+				font-size: 30px;
+				color: $dark-gray;
+			}
+
+			.img-holder{
+				&:before{
+					display: none;
+				}
+
+				img{
+					cursor: pointer;
+				}
+			}
+
+			.close-btn{
+				width: unset;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.react-fancybox .box{
+	z-index: 9999;
+}
