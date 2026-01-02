@@ -40,6 +40,10 @@ jobs:
           # Build for GitHub Pages project site under /<repo-name>
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: |
+          if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
+            echo "::error::Missing required GitHub Actions secrets. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in Settings → Secrets and variables → Actions."
+            exit 1
+          fi
           npm run export
           touch out/.nojekyll
 
