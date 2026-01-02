@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "next-cloudinary": "^6.16.1",
-    "nodemailer": "^7.0.11"
-  }
-}
