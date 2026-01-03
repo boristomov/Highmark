@@ -82,9 +82,9 @@ const RentalProductGrid = ({ products, addToCartProduct, loading }) => {
                                 )}
                                 <div className={styles.productContent}>
                                     <h3>{product.name}</h3>
-                                {product.short_description && (
-                                    <p className={styles.shortDesc}>{product.short_description}</p>
-                                )}
+                                    {product.short_description && (
+                                        <p className={styles.shortDesc}>{product.short_description}</p>
+                                    )}
                                     <span className={styles.price}>${product.price.toFixed(2)}</span>
                                 </div>
                             </Link>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
+import { withBasePath } from '../../utils/basePath';
 
 const Product = ({ item, addToCart }) => {
 
@@ -14,18 +15,19 @@ const Product = ({ item, addToCart }) => {
               {item.image_url ? (
                 <Zoom>
                   <img
-                    src={item.image_url}
+                    src={withBasePath(item.image_url)}
                     alt={item.name}
-                    data-img-base={item.imgBase || ''}
+                    data-img-base={item.imgBase ? withBasePath(item.imgBase) : ''}
                     data-ext-index="0"
                     style={{ width: '100%', height: '450px', objectFit: 'contain', background: 'transparent' }}
                     onError={(e) => {
                       const exts = ["png", "jpg", "jpeg", "webp", "avif"];
                       const img = e.currentTarget;
                       const base = img.getAttribute("data-img-base");
+                      const placeholderUrl = withBasePath("/images/placeholder-product.jpg");
                       if (!base) {
-                        if (img.src.indexOf("/images/placeholder-product.jpg") === -1) {
-                          img.src = "/images/placeholder-product.jpg";
+                        if (img.src.indexOf("placeholder-product.jpg") === -1) {
+                          img.src = placeholderUrl;
                         }
                         return;
                       }
@@ -35,7 +37,7 @@ const Product = ({ item, addToCart }) => {
                         img.setAttribute("data-ext-index", String(nextIdx));
                         img.src = `${base}.${exts[nextIdx]}`;
                       } else {
-                        img.src = "/images/placeholder-product.jpg";
+                        img.src = placeholderUrl;
                       }
                     }}
                   />
