@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './CategorySelector.module.scss';
+import { withBasePath } from '../../utils/basePath';
 
 const CategorySelector = ({ selectedCategory, onCategorySelect }) => {
     const categories = [
@@ -44,7 +45,7 @@ const CategorySelector = ({ selectedCategory, onCategorySelect }) => {
                         onClick={() => onCategorySelect(category.id)}
                     >
                         <div className={styles.categoryImageWrapper}>
-                            <img src={category.image} alt={category.title} className={styles.categoryImage} />
+                            <img src={withBasePath(category.image)} alt={category.title} className={styles.categoryImage} />
                             <div className={styles.categoryOverlay}></div>
                         </div>
                         <div className={styles.categoryContent}>
