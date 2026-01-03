@@ -30,7 +30,7 @@ jobs:
 
       - name: Install
         working-directory: downloadable/loveme
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Export static site
         working-directory: downloadable/loveme
