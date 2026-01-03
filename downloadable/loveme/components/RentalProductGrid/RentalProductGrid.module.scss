@@ -32,6 +32,15 @@
     }
 }
 
+.productLink {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
 .productCard {
     position: relative;
     height: 450px;
@@ -223,9 +232,12 @@
 .productFooter {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 16px;
     margin-top: 16px;
+    position: relative;
+    z-index: 3;
+    padding: 0 26px 20px;
 }
 
 .price {
