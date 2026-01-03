@@ -5,6 +5,7 @@ import MobileMenu from "../../components/MobileMenu";
 import { removeFromCart } from "../../store/actions/action";
 import { totalPrice } from "../../utils";
 import HeaderTopbar from "../HeaderTopbar";
+import { withBasePath } from "../../utils/basePath";
 
 class Header extends Component {
   state = {
@@ -64,7 +65,7 @@ class Header extends Component {
                 </div>
                 <div className="col-lg-3 col-md-6 col-6">
                   <div className="navbar-header">
-                    <Link onClick={ClickHandler} className="navbar-brand" href="/"><img src='/images/boris/HighmarkLogo.PNG'
+                    <Link onClick={ClickHandler} className="navbar-brand" href="/"><img src={withBasePath('/images/boris/HighmarkLogo.PNG')}
                       alt="" /></Link>
                   </div>
                 </div>
@@ -167,7 +168,7 @@ class Header extends Component {
                               <div className="mini-cart-item clearfix" key={crt}>
                                 <div className="mini-cart-item-image">
                                   <span>
-                                    <img src={cart.proImg} alt="icon" />
+                                    <img src={withBasePath(cart.proImg)} alt="icon" />
                                   </span>
                                 </div>
                                 <div className="mini-cart-item-des">
@@ -206,7 +207,7 @@ class Header extends Component {
                           </button>
                         </div>
                         <div className="visible-icon">
-                          <img src='/images/love.png' alt="icon" />
+                          <img src={withBasePath('/images/love.png')} alt="icon" />
                         </div>
                       </div>
                     </div>

@@ -4,6 +4,7 @@ import MobileMenu2 from "../../components/MobileMenu2";
 import { removeFromCart } from "../../store/actions/action";
 import { Link } from 'react-scroll'
 import NavLink from 'next/link'
+import { withBasePath } from "../../utils/basePath";
 
 
 class Header2 extends Component {
@@ -57,7 +58,7 @@ class Header2 extends Component {
                 <div className="col-lg-3 col-md-6 col-6">
                   <div className="navbar-header">
                     <NavLink className="navbar-brand" href="/home">
-                      <img src='/images/boris/HighmarkLogo.PNG' alt="" />
+                      <img src={withBasePath('/images/boris/HighmarkLogo.PNG')} alt="" />
                     </NavLink>
                   </div>
                 </div>
@@ -148,7 +149,7 @@ class Header2 extends Component {
                             carts.map((cart, i) => (
                               <div className="mini-cart-item clearfix" key={i}>
                                 <div className="mini-cart-item-image">
-                                  <img src={cart.proImg} alt="icon" />
+                                  <img src={withBasePath(cart.proImg)} alt="icon" />
                                 </div>
                                 <div className="mini-cart-item-des">
                                   <p>{cart.title}</p>
@@ -184,7 +185,7 @@ class Header2 extends Component {
                           </div>
                         </div>
                         <div className="visible-icon">
-                          <img src='/images/love.png' alt="icon" />
+                          <img src={withBasePath('/images/love.png')} alt="icon" />
                         </div>
                       </div>
                     </div>

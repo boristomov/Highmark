@@ -3,6 +3,7 @@ import Image from 'next/image'
 import SectionTitle from '../../components/SectionTitle'
 import vec1 from '/public/images/contact/1.png'
 import vec2 from '/public/images/contact/2.png'
+import { withBasePath } from '../../utils/basePath'
 
 class RSVP extends Component {
 
@@ -100,8 +101,8 @@ class RSVP extends Component {
             <section className="wpo-contact-section section-padding" id="RSVP">
                 <div className="container">
                     <div className="wpo-contact-section-wrapper">
-                        <div className="wpo-contact-form-area">
-                            <SectionTitle topTitle={'Let’s Meet'} MainTitle={'Make an inquiry'} />
+                        <div className="wpo-contact-form-area" style={{ backgroundImage: `url(${withBasePath('/images/boris/squarespacebackground.avif')})` }}>
+                            <SectionTitle topTitle={'Let's Meet'} MainTitle={'Make an inquiry'} />
                             <form onSubmit={this.subimtHandler} className="form">
                                 <div className="row">
                                     <div className="form-field-col">

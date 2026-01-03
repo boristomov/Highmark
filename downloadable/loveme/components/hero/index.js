@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import Link from 'next/link'
+import { withBasePath } from '../../utils/basePath'
 
 
 
@@ -24,7 +25,7 @@ const Hero = () => {
                 <div className="swiper-wrapper">
                     <Slider {...settings}>
                         <div className="hero-slide">
-                            <div className="slide-inner slide-bg-image" style={{ backgroundImage: `url(${'images/boris/background.avif'})` }}>
+                            <div className="slide-inner slide-bg-image" style={{ backgroundImage: `url(${withBasePath('/images/boris/background.avif')})` }}>
                                 <div className="container-fluid">
                                     <div className="slide-content">
                                         <div className="slide-title">
@@ -42,7 +43,7 @@ const Hero = () => {
                             </div>
                         </div>
                         <div className="hero-slide">
-                            <div className="slide-inner slide-bg-image" style={{ backgroundImage: `url(${'images/boris/homepageServices/7.jpg'})` }}>
+                            <div className="slide-inner slide-bg-image" style={{ backgroundImage: `url(${withBasePath('/images/boris/homepageServices/7.jpg')})` }}>
                                 <div className="container-fluid">
                                     <div className="slide-content">
                                         <div className="slide-title">
@@ -60,7 +61,7 @@ const Hero = () => {
                             </div>
                         </div>
                         <div className="hero-slide">
-                            <div className="slide-inner slide-bg-image" style={{ backgroundImage: `url(${'images/boris/homepageServices/3.jpg'})` }}>
+                            <div className="slide-inner slide-bg-image" style={{ backgroundImage: `url(${withBasePath('/images/boris/homepageServices/3.jpg')})` }}>
                                 <div className="container-fluid">
                                     <div className="slide-content">
                                         <div className="slide-title">

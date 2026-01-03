@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import Link from 'next/link'
 import Image from "next/image";
+import { withBasePath } from '../../utils/basePath';
 
 
 const ServiceSection = (props) => {
@@ -101,7 +102,7 @@ const ServiceSection = (props) => {
                         {categories.map((category, sitem) => (
                             <div className="wpo-service-item" key={sitem}>
                                 <div className="wpo-service-img">
-                                    <Image src={category.image} alt={category.title} width={1200} height={800} />
+                                    <Image src={withBasePath(category.image)} alt={category.title} width={1200} height={800} />
                                     <div className="wpo-service-text">
                                         <div className="s-icon">
                                             <i className={`fi  ${category.fIcon1}`}></i>

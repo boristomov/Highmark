@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './RentalProductGrid.module.scss';
+import { withBasePath } from '../../utils/basePath';
 
 const RentalProductGrid = ({ products, addToCartProduct, loading }) => {
     const ClickHandler = () => {
@@ -41,18 +42,19 @@ const RentalProductGrid = ({ products, addToCartProduct, loading }) => {
                                 {product.image_url ? (
                                     <>
                                         <img
-                                            src={product.image_url}
+                                            src={withBasePath(product.image_url)}
                                             alt={product.name}
-                                            data-img-base={product.imgBase || ""}
+                                            data-img-base={product.imgBase ? withBasePath(product.imgBase) : ""}
                                             data-ext-index="0"
                                             onError={(e) => {
                                                 const exts = ["png", "jpg", "jpeg", "webp", "avif"];
                                                 const img = e.currentTarget;
                                                 const base = img.getAttribute("data-img-base");
+                                                const placeholderUrl = withBasePath("/images/placeholder-product.jpg");
                                                 // If no base, fallback to placeholder once
                                                 if (!base) {
-                                                    if (img.src.indexOf("/images/placeholder-product.jpg") === -1) {
-                                                        img.src = "/images/placeholder-product.jpg";
+                                                    if (img.src.indexOf("placeholder-product.jpg") === -1) {
+                                                        img.src = placeholderUrl;
                                                     }
                                                     return;
                                                 }
@@ -62,7 +64,7 @@ const RentalProductGrid = ({ products, addToCartProduct, loading }) => {
                                                     img.setAttribute("data-ext-index", String(nextIdx));
                                                     img.src = `${base}.${exts[nextIdx]}`;
                                                 } else {
-                                                    img.src = "/images/placeholder-product.jpg";
+                                                    img.src = placeholderUrl;
                                                 }
                                             }}
                                         />

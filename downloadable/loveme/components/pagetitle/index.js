@@ -1,9 +1,10 @@
 import React from 'react'
 import  Link  from 'next/link'
+import { withBasePath } from '../../utils/basePath'
 
 const PageTitle = (props) => {
     return(
-        <section className="wpo-page-title">
+        <section className="wpo-page-title" style={{ backgroundImage: `url(${withBasePath('/images/boris/homepageServices/1.jpg')})` }}>
             <div className="container">
                 <div className="row">
                     <div className="col col-xs-12">

@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Projects from '../../api/projects'
+import { withBasePath } from '../../utils/basePath'
 
 const Footer = (props) => {
 
@@ -16,7 +17,7 @@ const Footer = (props) => {
                         <div className="col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
                             <div className="widget about-widget">
                                 <div className="logo widget-title">
-                                    <img src="/images/boris/HighmarkLogo.PNG" alt="logo" style={{ maxWidth: 220, height: 'auto' }} />
+                                    <img src={withBasePath("/images/boris/HighmarkLogo.PNG")} alt="logo" style={{ maxWidth: 220, height: 'auto' }} />
                                 </div>
                                 <p>Welcome to Highmark Rentals — quality event rentals across the Bay Area.</p>
                                 <ul>
@@ -80,7 +81,7 @@ const Footer = (props) => {
                                 </div>
                                 <ul className="d-flex">
                                     {Projects.slice(0, 6).map((project, pitem) => (
-                                        <li key={pitem}><img src={project.pimg1} alt="" /></li>
+                                        <li key={pitem}><img src={withBasePath(project.pimg1)} alt="" /></li>
                                     ))}
                                 </ul>
                             </div>

@@ -13,8 +13,15 @@ import 'photoswipe/dist/photoswipe.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Head from "next/head";
+import { useEffect } from "react";
+import basePath from "../utils/basePath";
 
 function MyApp({ Component, pageProps }) {
+  // Set CSS variable for base path so SCSS can use it for background images
+  useEffect(() => {
+    document.documentElement.style.setProperty('--base-path', `"${basePath}"`);
+  }, []);
+
   return (
     <div>
       <Head>

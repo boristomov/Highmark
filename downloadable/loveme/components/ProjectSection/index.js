@@ -2,12 +2,13 @@ import React, { useMemo, useState } from 'react'
 import SectionTitle from '../../components/SectionTitle'
 import Projects from '../../api/projects'
 import MasonryGallery from '../MasonryGallery'
+import { withBasePath } from '../../utils/basePath'
 
 const ProjectSection = (props) => {
     const [expanded, setExpanded] = useState(false)
     const [seeAllHover, setSeeAllHover] = useState(false)
     const [layoutMeta, setLayoutMeta] = useState({ totalHeight: 0, columnWidth: 0, boxes: [] })
-    const allImages = useMemo(() => Projects.map((p) => ({ src: p.pimg1, alt: p.title, meta: p })), [])
+    const allImages = useMemo(() => Projects.map((p) => ({ src: withBasePath(p.pimg1), alt: p.title, meta: p })), [])
     const rowsToShow = 2
     const cutoffHeight = useMemo(() => {
         if (!layoutMeta || !layoutMeta.boxes || layoutMeta.boxes.length === 0) return 0
