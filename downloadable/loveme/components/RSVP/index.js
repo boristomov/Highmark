@@ -102,7 +102,7 @@ class RSVP extends Component {
                 <div className="container">
                     <div className="wpo-contact-section-wrapper">
                         <div className="wpo-contact-form-area" style={{ backgroundImage: `url(${withBasePath('/images/boris/squarespacebackground.avif')})` }}>
-                            <SectionTitle topTitle={'Let's Meet'} MainTitle={'Make an inquiry'} />
+                            <SectionTitle topTitle={"Let's Meet"} MainTitle={'Make an inquiry'} />
                             <form onSubmit={this.subimtHandler} className="form">
                                 <div className="row">
                                     <div className="form-field-col">
