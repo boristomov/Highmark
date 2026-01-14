@@ -115,11 +115,18 @@ export const sendQuoteEmail = async (formData, cartItems, totals) => {
  * @returns {boolean} - True if all required env vars are set
  */
 export const isEmailConfigured = () => {
-    return (
+    const isConfigured = (
         EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID' &&
         EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY' &&
-        (EMAILJS_TEMPLATE_INQUIRY !== 'YOUR_INQUIRY_TEMPLATE_ID' || 
-         EMAILJS_TEMPLATE_QUOTE !== 'YOUR_QUOTE_TEMPLATE_ID')
+        EMAILJS_TEMPLATE_INQUIRY !== 'YOUR_INQUIRY_TEMPLATE_ID' &&
+        EMAILJS_TEMPLATE_QUOTE !== 'YOUR_QUOTE_TEMPLATE_ID'
     );
+    
+    // Initialize EmailJS if configured
+    if (isConfigured) {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+    }
+    
+    return isConfigured;
 };
 
