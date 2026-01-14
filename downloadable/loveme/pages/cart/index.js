@@ -302,13 +302,13 @@ const CartPage = (props) => {
                                                 Price<span>${subTotal}</span>
                                             </li>
                                             <li>
-                                                Tax<span>Calculate upon quote approval</span>
+                                                Tax (7.25%)<span>${taxAmount}</span>
                                             </li>
                                             <li>
                                                 Delivery<span>TBD - available in return email upon sending a quote request</span>
                                             </li>
                                             <li className="cart-b">
-                                                <strong>Total Price</strong><span><strong>${grandTotal}</strong></span>
+                                                <strong>Total Price (excluding Delivery)</strong><span><strong>${grandTotal}</strong></span>
                                             </li>
                                         </ul>
                                     </div>
