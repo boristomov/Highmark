@@ -49,6 +49,8 @@ const CartPage = (props) => {
         error: null,
     });
 
+    const [captchaToken, setCaptchaToken] = React.useState(null);
+
     const handleQuoteChange = (e) => {
         const { name, value } = e.target;
         setQuoteForm(prev => ({ ...prev, [name]: value }));
