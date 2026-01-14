@@ -241,21 +241,23 @@ const RSVP = () => {
                                 </div>
                                 
                                 {/* reCAPTCHA */}
-                                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-                                    <div className="form-field-col form-field-full" style={{ marginTop: '20px', marginBottom: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <div className="form-field-col form-field-full" style={{ marginTop: '20px', marginBottom: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
                                         <ReCAPTCHA
                                             ref={recaptchaRef}
                                             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                                             onChange={onCaptchaChange}
                                             theme="light"
                                         />
-                                        {errors.captcha && (
-                                            <p className="error-text" style={{ marginTop: '8px', color: '#f44336', textAlign: 'center' }}>
-                                                {errors.captcha}
-                                            </p>
-                                        )}
-                                    </div>
-                                )}
+                                    ) : (
+                                        <p style={{ color: '#999', fontSize: '12px' }}>reCAPTCHA not configured</p>
+                                    )}
+                                    {errors.captcha && (
+                                        <p className="error-text" style={{ marginTop: '8px', color: '#f44336', textAlign: 'center' }}>
+                                            {errors.captcha}
+                                        </p>
+                                    )}
+                                </div>
                                 
                                 <div className="submit-area">
                                     <div className="form-submit">
