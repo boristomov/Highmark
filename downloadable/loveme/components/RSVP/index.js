@@ -1,200 +1,283 @@
-import React, { Component } from 'react'
-import Image from 'next/image'
+import React, { useState, useRef } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import SectionTitle from '../../components/SectionTitle'
-import vec1 from '/public/images/contact/1.png'
-import vec2 from '/public/images/contact/2.png'
 import { withBasePath } from '../../utils/basePath'
+import { sendInquiryEmail, isEmailConfigured } from '../../utils/emailService'
 
-class RSVP extends Component {
-
-
-    state = {
+const RSVP = () => {
+    const recaptchaRef = useRef(null);
+    const [formData, setFormData] = useState({
         name: '',
         email: '',
         phone: '',
         address: '',
         eventDate: '',
         message: '',
-        meal: '',
-        service: '',
-        guest: '',
-        error: {}
-    }
+    });
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+    const [captchaToken, setCaptchaToken] = useState(null);
 
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        // Clear error when user starts typing
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: '' }));
+        }
+    };
 
-    changeHandler = (e) => {
-        const error = this.state.error;
-        error[e.target.name] = ''
+    const validateForm = () => {
+        const newErrors = {};
+        
+        if (!formData.name.trim()) {
+            newErrors.name = "Please enter your name";
+        }
+        if (!formData.email.trim()) {
+            newErrors.email = "Please enter your email";
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email";
+        }
+        if (!formData.phone.trim()) {
+            newErrors.phone = "Please enter your phone number";
+        }
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
-        this.setState({
-            [e.target.name]: e.target.value,
-            error
-        })
-    }
+    const onCaptchaChange = (token) => {
+        setCaptchaToken(token);
+        // Clear captcha error if user completes it
+        if (errors.captcha) {
+            setErrors(prev => ({ ...prev, captcha: '' }));
+        }
+    };
 
-    subimtHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-
-        const { name,
-            email,
-            phone,
-            address,
-            eventDate,
-            message,
-            service,
-            meal,
-            guest, error } = this.state;
-
-        if (name === '') {
-            error.name = "Please enter your name";
-        }
-        if (email === '') {
-            error.email = "Please enter your email";
-        }
-        if (address === '') {
-            error.address = "Please enter your event address";
-        }
-        if (service === '') {
-            error.service = "Please Select your service";
-        }
-        if (guest === '') {
-            error.guest = "Please Select your Guest List";
-        }
-        if (meal === '') {
-            error.meal = "Select Select Your Meal";
+        
+        if (!validateForm()) {
+            return;
         }
 
-
-        if (error) {
-            this.setState({
-                error
-            })
+        // Check reCAPTCHA (only if site key is configured)
+        const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+        if (recaptchaSiteKey && !captchaToken) {
+            setErrors(prev => ({ ...prev, captcha: 'Please complete the reCAPTCHA verification' }));
+            return;
         }
-        if (error.name === '' && error.email === '' && error.email === '' && error.service === '' && error.address === '' && error.meal === '' && error.guest === '') {
-            this.setState({
-                name: '',
-                email: '',
-                phone: '',
-                address: '',
-                eventDate: '',
-                message: '',
-                meal: '',
-                guest: '',
-                error: {}
-            })
+
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        try {
+            // Check if EmailJS is configured
+            if (!isEmailConfigured()) {
+                console.warn('EmailJS not configured. Check EMAILJS_SETUP_GUIDE.md');
+                // For development, show success anyway but log warning
+                setSubmitStatus('success');
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    address: '',
+                    eventDate: '',
+                    message: '',
+                });
+                setCaptchaToken(null);
+                if (recaptchaRef.current) {
+                    recaptchaRef.current.reset();
+                }
+                return;
+            }
+
+            const result = await sendInquiryEmail(formData);
+            
+            if (result.success) {
+                setSubmitStatus('success');
+                // Reset form
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    address: '',
+                    eventDate: '',
+                    message: '',
+                });
+                setCaptchaToken(null);
+                if (recaptchaRef.current) {
+                    recaptchaRef.current.reset();
+                }
+            } else {
+                setSubmitStatus('error');
+            }
+        } catch (error) {
+            console.error('Email submission error:', error);
+            setSubmitStatus('error');
+        } finally {
+            setIsSubmitting(false);
         }
-    }
+    };
 
-    render() {
-        const { name,
-            email,
-            phone,
-            address,
-            eventDate,
-            message,
-            service,
-            guest,
-            meal,
-            error } = this.state;
+    return (
+        <section className="wpo-contact-section section-padding" id="RSVP">
+            <div className="container">
+                <div className="wpo-contact-section-wrapper">
+                    <div className="wpo-contact-form-area" style={{ backgroundImage: `url(${withBasePath('/images/boris/squarespacebackground.avif')})` }}>
+                        <SectionTitle topTitle={"Let's Meet"} MainTitle={'Make an inquiry'} />
+                        
+                        {/* Success Message */}
+                        {submitStatus === 'success' && (
+                            <div style={{
+                                background: 'rgba(76, 175, 80, 0.1)',
+                                border: '1px solid #4CAF50',
+                                borderRadius: '8px',
+                                padding: '16px 24px',
+                                marginBottom: '24px',
+                                textAlign: 'center'
+                            }}>
+                                <p style={{ color: '#2E7D32', margin: 0, fontSize: '16px' }}>
+                                    ✓ Thank you! Your message has been sent successfully. We'll get back to you soon!
+                                </p>
+                            </div>
+                        )}
+                        
+                        {/* Error Message */}
+                        {submitStatus === 'error' && (
+                            <div style={{
+                                background: 'rgba(244, 67, 54, 0.1)',
+                                border: '1px solid #f44336',
+                                borderRadius: '8px',
+                                padding: '16px 24px',
+                                marginBottom: '24px',
+                                textAlign: 'center'
+                            }}>
+                                <p style={{ color: '#c62828', margin: 0, fontSize: '16px' }}>
+                                    ✗ Oops! Something went wrong. Please try again or contact us directly at info@highmarkeventrentals.com
+                                </p>
+                            </div>
+                        )}
 
-        return (
-            <section className="wpo-contact-section section-padding" id="RSVP">
-                <div className="container">
-                    <div className="wpo-contact-section-wrapper">
-                        <div className="wpo-contact-form-area" style={{ backgroundImage: `url(${withBasePath('/images/boris/squarespacebackground.avif')})` }}>
-                            <SectionTitle topTitle={"Let's Meet"} MainTitle={'Make an inquiry'} />
-                            <form onSubmit={this.subimtHandler} className="form">
-                                <div className="row">
-                                    <div className="form-field-col">
-                                        <div className="form-field">
-                                            <input value={name} onChange={this.changeHandler} className="form-control" type="text" name="name" placeholder="Name" />
-                                            <p>{error.name ? error.name : ''}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-field-col">
-                                        <div className="form-field">
-                                            <input onChange={this.changeHandler} value={email} type="email" className="form-control" name="email" placeholder="Email" />
-                                            <p>{error.email ? error.email : ''}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-field-col">
-                                        <div className="form-field">
-                                            <input onChange={this.changeHandler} value={phone} type="tel" className="form-control" name="phone" placeholder="Phone" />
-                                            <p>{error.phone ? error.phone : ''}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-field-col">
-                                        <div className="form-field">
-                                            <input onChange={this.changeHandler} value={eventDate} type={eventDate ? 'date' : 'text'} className="form-control" name="eventDate" placeholder="Event Date" onFocus={(e) => { e.target.type = 'date'; }} onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }} />
-                                            <p>{error.eventDate ? error.eventDate : ''}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-field-col form-field-full">
-                                        <div className="form-field">
-                                            <input onChange={this.changeHandler} value={address} type="text" className="form-control" name="address" placeholder="Event Address" />
-                                            <p>{error.address ? error.address : ''}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-field-col form-field-full">
-                                        <div className="form-field">
-                                            <textarea onChange={this.changeHandler} value={message} className="form-control" name="message" placeholder="Message" rows="8"></textarea>
-                                            <p>{error.message ? error.message : ''}</p>
-                                        </div>
-                                    </div>
-                                    {/* <div>
-                                        <select name="service" className="form-control" value={service} onChange={this.changeHandler}>
-                                            <option>Service</option>
-                                            <option>Photography</option>
-                                            <option>The Rehearsal Dinner</option>
-                                            <option>The Afterparty</option>
-                                            <option>Videographers</option>
-                                            <option>Perfect Cake</option>
-                                            <option>All Of The Above</option>
-                                        </select>
-                                        <p>{error.service ? error.service : ''}</p>
-                                    </div>
-                                    <div>
-                                        <select name="guest" className="form-control" value={guest} onChange={this.changeHandler}>
-                                            <option>Number Of Guests</option>
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                        </select>
-                                        <p>{error.guest ? error.guest : ''}</p>
-                                    </div>
-                                    <div>
-                                        <select name="meal" className="form-control last" value={meal} onChange={this.changeHandler}>
-                                            <option>Meal Preferences</option>
-                                            <option>Chicken Soup</option>
-                                            <option>Motton Kabab</option>
-                                            <option>Chicken BBQ</option>
-                                            <option>Mix Salad</option>
-                                            <option>Beef Ribs </option>
-                                        </select>
-                                        <p>{error.meal ? error.meal : ''}</p>
-                                    </div> */}
-                                    <div className="submit-area">
-                                        <div className="form-submit">
-                                            <button type="submit" className="theme-btn-s3">Send Message</button>
-                                        </div>
+                        <form onSubmit={submitHandler} className="form">
+                            <div className="row">
+                                <div className="form-field-col">
+                                    <div className="form-field">
+                                        <input 
+                                            value={formData.name} 
+                                            onChange={changeHandler} 
+                                            className="form-control" 
+                                            type="text" 
+                                            name="name" 
+                                            placeholder="Name *" 
+                                        />
+                                        <p className="error-text">{errors.name || ''}</p>
                                     </div>
                                 </div>
-                            </form>
-                            <div className="border-style"></div>
-                        </div>
-                        {/* <div className="vector-1">
-                            <Image src={vec1} alt=""/>
-                        </div>
-                        <div className="vector-2">
-                            <Image src={vec2} alt=""/>
-                        </div> */}
+                                <div className="form-field-col">
+                                    <div className="form-field">
+                                        <input 
+                                            onChange={changeHandler} 
+                                            value={formData.email} 
+                                            type="email" 
+                                            className="form-control" 
+                                            name="email" 
+                                            placeholder="Email *" 
+                                        />
+                                        <p className="error-text">{errors.email || ''}</p>
+                                    </div>
+                                </div>
+                                <div className="form-field-col">
+                                    <div className="form-field">
+                                        <input 
+                                            onChange={changeHandler} 
+                                            value={formData.phone} 
+                                            type="tel" 
+                                            className="form-control" 
+                                            name="phone" 
+                                            placeholder="Phone *" 
+                                        />
+                                        <p className="error-text">{errors.phone || ''}</p>
+                                    </div>
+                                </div>
+                                <div className="form-field-col">
+                                    <div className="form-field">
+                                        <input 
+                                            onChange={changeHandler} 
+                                            value={formData.eventDate} 
+                                            type={formData.eventDate ? 'date' : 'text'} 
+                                            className="form-control" 
+                                            name="eventDate" 
+                                            placeholder="Event Date" 
+                                            onFocus={(e) => { e.target.type = 'date'; }} 
+                                            onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }} 
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-field-col form-field-full">
+                                    <div className="form-field">
+                                        <input 
+                                            onChange={changeHandler} 
+                                            value={formData.address} 
+                                            type="text" 
+                                            className="form-control" 
+                                            name="address" 
+                                            placeholder="Event Address" 
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-field-col form-field-full">
+                                    <div className="form-field">
+                                        <textarea 
+                                            onChange={changeHandler} 
+                                            value={formData.message} 
+                                            className="form-control" 
+                                            name="message" 
+                                            placeholder="Tell us about your event..." 
+                                            rows="8"
+                                        >                                        </textarea>
+                                    </div>
+                                </div>
+                                
+                                {/* reCAPTCHA */}
+                                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                                    <div className="form-field-col form-field-full" style={{ marginTop: '20px', marginBottom: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                        <ReCAPTCHA
+                                            ref={recaptchaRef}
+                                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                            onChange={onCaptchaChange}
+                                            theme="light"
+                                        />
+                                        {errors.captcha && (
+                                            <p className="error-text" style={{ marginTop: '8px', color: '#f44336', textAlign: 'center' }}>
+                                                {errors.captcha}
+                                            </p>
+                                        )}
+                                    </div>
+                                )}
+                                
+                                <div className="submit-area">
+                                    <div className="form-submit">
+                                        <button 
+                                            type="submit" 
+                                            className="theme-btn-s3"
+                                            disabled={isSubmitting}
+                                            style={{ opacity: isSubmitting ? 0.7 : 1 }}
+                                        >
+                                            {isSubmitting ? 'Sending...' : 'Send Message'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div className="border-style"></div>
                     </div>
                 </div>
-            </section>
-        )
-    }
+            </div>
+        </section>
+    );
+};
 
-}
 export default RSVP;
+

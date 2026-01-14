@@ -19,27 +19,17 @@ const Footer = (props) => {
                                 <div className="logo widget-title">
                                     <img src={withBasePath("/images/boris/HighmarkLogo.PNG")} alt="logo" style={{ maxWidth: 220, height: 'auto' }} />
                                 </div>
-                                <p>Welcome to Highmark Rentals — quality event rentals across the Bay Area.</p>
+                                <p>Care and Craft in Every Detail.</p>
                                 <ul>
                                     <li>
-                                        <Link onClick={ClickHandler} href="/">
-                                            <i className="ti-facebook"></i>
-                                        </Link>
+                                        <a href="https://www.linkedin.com/in/marc-quiachon/" target="_blank" rel="noopener noreferrer">
+                                            <i className="ti-linkedin"></i>
+                                        </a>
                                     </li>
                                     <li>
-                                        <Link onClick={ClickHandler} href="/">
-                                            <i className="ti-twitter-alt"></i>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={ClickHandler} href="/">
+                                        <a href="https://www.instagram.com/highmarkeventrentals/" target="_blank" rel="noopener noreferrer">
                                             <i className="ti-instagram"></i>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={ClickHandler} href="/">
-                                            <i className="ti-google"></i>
-                                        </Link>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -54,6 +44,7 @@ const Footer = (props) => {
                                     <li><Link onClick={ClickHandler} href="/portfolio-grid">Inspiration</Link></li>
                                     <li><Link onClick={ClickHandler} href="/contact">Contact us</Link></li>
                                     <li><Link onClick={ClickHandler} href="/shop">Shop</Link></li>
+                                    <li><Link onClick={ClickHandler} href="/privacy-policy">Privacy Policy</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -65,10 +56,9 @@ const Footer = (props) => {
                                 <div className="contact-ft">
                                     <p>Questions? Please feel free to contact us.</p>
                                     <ul>
-                                        <li><i className="fi flaticon-email"></i>highmarkrentals@gmail.com</li>
-                                        <li><i className="fi flaticon-phone-call"></i>+888 (123) 869523</li>
-                                        <li><i className="fi flaticon-maps-and-flags"></i>123 Market St, San Jose, CA
-                                        </li>
+                                        <li><i className="fi flaticon-email"></i>info@highmarkeventrentals.com</li>
+                                        <li><i className="fi flaticon-phone-call"></i>+1 925 856 5618</li>
+                                        <li><i className="fi flaticon-maps-and-flags"></i>Bay Area</li>
                                     </ul>
                                 </div>
                             </div>

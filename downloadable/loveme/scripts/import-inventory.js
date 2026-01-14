@@ -220,7 +220,7 @@ async function importInventory() {
             // Prefer internal Product SKU, fallback to manufacturer number
             sku: (row.productSku || row.manufacturerNumber || '').trim() || null,
             description: row.description || null,
-            short_description: row.itemName || row.websiteName || null,
+            short_description: row.details || row.itemName || row.websiteName || null, // Store details in short_description temporarily
             price: price,
             category: category,
             quantity_available: row.stock ? parseInt(row.stock) || 0 : 0,

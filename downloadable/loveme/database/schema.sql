@@ -35,6 +35,9 @@ CREATE TABLE products (
   -- Tags (array of strings - simple!)
   tags TEXT[],
   
+  -- Product specifications/details (color, dimensions, material, etc.)
+  details TEXT,
+  
   -- Display
   active BOOLEAN DEFAULT true,
   featured BOOLEAN DEFAULT false,

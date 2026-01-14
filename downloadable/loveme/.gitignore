@@ -31,5 +31,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# EmailJS keys (never commit these!)
+EMAILJS_CONFIG.txt
+*_KEYS.txt
+
 # vercel
 .vercel

@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import { Button, Grid } from "@mui/material";
+import ReCAPTCHA from 'react-google-recaptcha';
 import PageTitle from '../../components/pagetitle';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/footer';
@@ -13,30 +14,33 @@ import {
     setQuantity,
 } from "../../store/actions/action";
 import Scrollbar from '../../components/scrollbar';
+import { sendQuoteEmail, isEmailConfigured } from '../../utils/emailService';
 
 
 const CartPage = (props) => {
+    const recaptchaRef = useRef(null);
 
     const ClickHandler = () => {
         window.scrollTo(10, 0);
     };
 
     const { carts } = props;
-    const quoteEndpoint = process.env.NEXT_PUBLIC_QUOTE_ENDPOINT; // optional external backend endpoint
 
     // Pricing calculations
     const subTotal = totalPrice(carts);
-    // Tax will be calculated upon quote approval
-    const grandTotal = subTotal;
+    const taxRate = 0.0725;
+    const taxAmount = +(subTotal * taxRate).toFixed(2);
+    const grandTotal = +(subTotal + taxAmount).toFixed(2);
 
     // Quote form state
     const [quoteForm, setQuoteForm] = React.useState({
-        name: '',
+        fname: '',
+        lname: '',
         email: '',
         phone: '',
         eventDate: '',
-        address: '',
-        message: '',
+        eventLocation: '',
+        note: '',
     });
 
     const [emailStatus, setEmailStatus] = React.useState({
@@ -50,15 +54,39 @@ const CartPage = (props) => {
         setQuoteForm(prev => ({ ...prev, [name]: value }));
     };
 
+    const onCaptchaChange = (token) => {
+        setCaptchaToken(token);
+    };
+
     const handleQuoteSubmit = async (e) => {
         e.preventDefault();
 
         // Validate required fields
-        if (!quoteForm.name || !quoteForm.email) {
+        if (!quoteForm.fname || !quoteForm.email || !quoteForm.phone) {
             setEmailStatus({
                 sending: false,
                 success: false,
-                error: 'Please fill in your name and email address.',
+                error: 'Please fill in your name, email, and phone number.',
+            });
+            return;
+        }
+
+        if (carts.length === 0) {
+            setEmailStatus({
+                sending: false,
+                success: false,
+                error: 'Your cart is empty. Please add items before requesting a quote.',
+            });
+            return;
+        }
+
+        // Check reCAPTCHA (only if site key is configured)
+        const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+        if (recaptchaSiteKey && !captchaToken) {
+            setEmailStatus({
+                sending: false,
+                success: false,
+                error: 'Please complete the reCAPTCHA verification before submitting.',
             });
             return;
         }
@@ -66,92 +94,77 @@ const CartPage = (props) => {
         setEmailStatus({ sending: true, success: false, error: null });
 
         try {
-            // Prepare data for email
-            const emailData = {
-                formData: quoteForm,
-                cartItems: carts,
-                totals: {
-                    subTotal,
-                    grandTotal,
-                },
-            };
+            // Check if EmailJS is configured
+            if (isEmailConfigured()) {
+                // Use EmailJS
+                const result = await sendQuoteEmail(
+                    quoteForm,
+                    carts,
+                    { subtotal: subTotal, tax: taxAmount, total: grandTotal }
+                );
 
-            // Static hosting fallback:
-            // - If NEXT_PUBLIC_QUOTE_ENDPOINT is configured, POST there.
-            // - Otherwise open a mailto draft so the site still "works" on GitHub Pages.
-            if (!quoteEndpoint) {
+                if (result.success) {
+                    setEmailStatus({ sending: false, success: true, error: null });
+                    setQuoteForm({
+                        fname: '',
+                        lname: '',
+                        email: '',
+                        phone: '',
+                        eventDate: '',
+                        eventLocation: '',
+                        note: '',
+                    });
+                    setCaptchaToken(null);
+                    if (recaptchaRef.current) {
+                        recaptchaRef.current.reset();
+                    }
+                } else {
+                    throw new Error('Failed to send email via EmailJS');
+                }
+            } else {
+                // Fallback: Open mailto link
                 const lines = [];
-                lines.push(`Name: ${quoteForm.name}`);
+                lines.push(`Name: ${quoteForm.fname} ${quoteForm.lname}`);
                 lines.push(`Email: ${quoteForm.email}`);
                 if (quoteForm.phone) lines.push(`Phone: ${quoteForm.phone}`);
                 if (quoteForm.eventDate) lines.push(`Event Date: ${quoteForm.eventDate}`);
-                if (quoteForm.address) lines.push(`Event Address: ${quoteForm.address}`);
-                if (quoteForm.message) lines.push(`Message: ${quoteForm.message}`);
+                if (quoteForm.eventLocation) lines.push(`Event Location: ${quoteForm.eventLocation}`);
+                if (quoteForm.note) lines.push(`Notes: ${quoteForm.note}`);
                 lines.push('');
                 lines.push('Requested Items:');
                 carts.forEach((it) => {
-                    lines.push(`- ${it.title} (qty: ${it.qty})`);
+                    lines.push(`- ${it.title} x ${it.qty} @ $${it.price}/ea = $${(it.qty * it.price).toFixed(2)}`);
                 });
                 lines.push('');
-                lines.push(`Subtotal: $${subTotal}`);
-                lines.push(`Total: $${grandTotal}`);
+                lines.push(`Subtotal: $${subTotal.toFixed(2)}`);
+                lines.push(`Tax (7.25%): $${taxAmount.toFixed(2)}`);
+                lines.push(`Total: $${grandTotal.toFixed(2)}`);
 
                 const subject = encodeURIComponent('Highmark Rentals Quote Request');
                 const body = encodeURIComponent(lines.join('\n'));
-                window.location.href = `mailto:highmarkrentals@gmail.com?subject=${subject}&body=${body}`;
+                window.open(`mailto:info@highmarkeventrentals.com?subject=${subject}&body=${body}`, '_blank');
 
-                setEmailStatus({
-                    sending: false,
-                    success: true,
-                    error: null,
-                });
-                // Reset form after successful submission
+                setEmailStatus({ sending: false, success: true, error: null });
                 setQuoteForm({
-                    name: '',
+                    fname: '',
+                    lname: '',
                     email: '',
                     phone: '',
                     eventDate: '',
-                    address: '',
-                    message: '',
+                    eventLocation: '',
+                    note: '',
                 });
-                return;
-            }
-
-            // Send email via external backend endpoint
-            const response = await fetch(quoteEndpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(emailData),
-            });
-
-            const result = await response.json().catch(() => ({}));
-
-            if (response.ok && result.success) {
-                setEmailStatus({
-                    sending: false,
-                    success: true,
-                    error: null,
-                });
-                // Reset form after successful submission
-                setQuoteForm({
-                    name: '',
-                    email: '',
-                    phone: '',
-                    eventDate: '',
-                    address: '',
-                    message: '',
-                });
-            } else {
-                const errorMessage = result.message || 'Failed to send email';
-                const errorDetails = result.error ? ` (${result.error})` : '';
-                throw new Error(errorMessage + errorDetails);
+                setCaptchaToken(null);
+                if (recaptchaRef.current) {
+                    recaptchaRef.current.reset();
+                }
             }
         } catch (error) {
             console.error('Error sending quote email:', error);
             setEmailStatus({
                 sending: false,
                 success: false,
-                error: error.message || 'Failed to send quote request. Please try again.',
+                error: 'Failed to send quote request. Please try again or email us directly at info@highmarkeventrentals.com',
             });
         }
     };
@@ -298,141 +311,154 @@ const CartPage = (props) => {
                                         </ul>
                                     </div>
 
-                                    {/* Quote Request Form - with same background as homepage contact */}
-                                    <div className="wpo-contact-section" style={{ marginTop: '60px', paddingTop: '0', paddingBottom: '60px' }}>
-                                        <div className="wpo-contact-section-wrapper">
-                                            <div className="wpo-contact-form-area">
-                                                <form onSubmit={handleQuoteSubmit} className="form">
-                                                    <div className="row">
-                                                        <div className="form-field-col">
-                                                            <div className="form-field">
-                                                                <input
-                                                                    value={quoteForm.name}
-                                                                    onChange={handleQuoteChange}
-                                                                    className="form-control"
-                                                                    type="text"
-                                                                    name="name"
-                                                                    placeholder="Name"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-field-col">
-                                                            <div className="form-field">
-                                                                <input
-                                                                    onChange={handleQuoteChange}
-                                                                    value={quoteForm.email}
-                                                                    type="email"
-                                                                    className="form-control"
-                                                                    name="email"
-                                                                    placeholder="Email"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-field-col">
-                                                            <div className="form-field">
-                                                                <input
-                                                                    onChange={handleQuoteChange}
-                                                                    value={quoteForm.phone}
-                                                                    type="tel"
-                                                                    className="form-control"
-                                                                    name="phone"
-                                                                    placeholder="Phone"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-field-col">
-                                                            <div className="form-field">
-                                                                <input
-                                                                    onChange={handleQuoteChange}
-                                                                    value={quoteForm.eventDate}
-                                                                    type={quoteForm.eventDate ? 'date' : 'text'}
-                                                                    className="form-control"
-                                                                    name="eventDate"
-                                                                    placeholder="Event Date"
-                                                                    onFocus={(e) => { e.target.type = 'date'; }}
-                                                                    onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-field-col form-field-full">
-                                                            <div className="form-field">
-                                                                <input
-                                                                    onChange={handleQuoteChange}
-                                                                    value={quoteForm.address}
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    name="address"
-                                                                    placeholder="Event Address"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="form-field-col form-field-full">
-                                                            <div className="form-field">
-                                                                <textarea
-                                                                    onChange={handleQuoteChange}
-                                                                    value={quoteForm.message}
-                                                                    className="form-control"
-                                                                    name="message"
-                                                                    placeholder="Message"
-                                                                    rows="8"
-                                                                ></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div className="submit-area">
-                                                            <div className="form-submit">
-                                                                <button
-                                                                    type="submit"
-                                                                    className="theme-btn-s3"
-                                                                    disabled={emailStatus.sending}
-                                                                    style={{
-                                                                        opacity: emailStatus.sending ? 0.7 : 1,
-                                                                        cursor: emailStatus.sending ? 'not-allowed' : 'pointer'
-                                                                    }}
-                                                                >
-                                                                    {emailStatus.sending ? 'Sending...' : 'Request Quote and Approval'}
-                                                                </button>
-                                                            </div>
-
-                                                            {/* Success Message */}
-                                                            {emailStatus.success && (
-                                                                <div style={{
-                                                                    marginTop: '20px',
-                                                                    padding: '20px',
-                                                                    backgroundColor: '#d4edda',
-                                                                    border: '1px solid #c3e6cb',
-                                                                    borderRadius: '8px',
-                                                                    color: '#155724',
-                                                                    textAlign: 'center'
-                                                                }}>
-                                                                    <h4 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>✅ Quote Request Sent Successfully!</h4>
-                                                                    <p style={{ margin: 0, fontSize: '15px' }}>
-                                                                        Thank you! Please check your email for a confirmation. We'll get back to you within 1-2 business days.
-                                                                    </p>
-                                                                </div>
-                                                            )}
-
-                                                            {/* Error Message */}
-                                                            {emailStatus.error && (
-                                                                <div style={{
-                                                                    marginTop: '20px',
-                                                                    padding: '20px',
-                                                                    backgroundColor: '#f8d7da',
-                                                                    border: '1px solid #f5c6cb',
-                                                                    borderRadius: '8px',
-                                                                    color: '#721c24',
-                                                                    textAlign: 'center'
-                                                                }}>
-                                                                    <h4 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>❌ Error</h4>
-                                                                    <p style={{ margin: 0, fontSize: '15px' }}>
-                                                                        {emailStatus.error}
-                                                                    </p>
-                                                                </div>
-                                                            )}
-                                                        </div>
+                                    {/* Quote Request Form */}
+                                    <div className="quote-request-section" style={{ marginTop: '60px', padding: '40px', background: 'linear-gradient(135deg, rgba(233, 225, 211, 0.4) 0%, rgba(212, 201, 184, 0.3) 100%)', borderRadius: '12px' }}>
+                                        <h3 style={{ marginBottom: '30px', fontSize: '24px', fontWeight: '400', color: '#2f2f2f', textAlign: 'center' }}>
+                                            Request a Quote
+                                        </h3>
+                                        <form onSubmit={handleQuoteSubmit}>
+                                            <div className="row">
+                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <input
+                                                        value={quoteForm.fname}
+                                                        onChange={handleQuoteChange}
+                                                        className="form-control"
+                                                        type="text"
+                                                        name="fname"
+                                                        placeholder="First Name *"
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <input
+                                                        value={quoteForm.lname}
+                                                        onChange={handleQuoteChange}
+                                                        className="form-control"
+                                                        type="text"
+                                                        name="lname"
+                                                        placeholder="Last Name"
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <input
+                                                        onChange={handleQuoteChange}
+                                                        value={quoteForm.email}
+                                                        type="email"
+                                                        className="form-control"
+                                                        name="email"
+                                                        placeholder="Email *"
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <input
+                                                        onChange={handleQuoteChange}
+                                                        value={quoteForm.phone}
+                                                        type="tel"
+                                                        className="form-control"
+                                                        name="phone"
+                                                        placeholder="Phone *"
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <input
+                                                        onChange={handleQuoteChange}
+                                                        value={quoteForm.eventDate}
+                                                        type={quoteForm.eventDate ? 'date' : 'text'}
+                                                        className="form-control"
+                                                        name="eventDate"
+                                                        placeholder="Event Date"
+                                                        onFocus={(e) => { e.target.type = 'date'; }}
+                                                        onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }}
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <input
+                                                        onChange={handleQuoteChange}
+                                                        value={quoteForm.eventLocation}
+                                                        type="text"
+                                                        className="form-control"
+                                                        name="eventLocation"
+                                                        placeholder="Event Location / Address"
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
+                                                    />
+                                                </div>
+                                                <div className="col-12" style={{ marginBottom: '20px' }}>
+                                                    <textarea
+                                                        onChange={handleQuoteChange}
+                                                        value={quoteForm.note}
+                                                        className="form-control"
+                                                        name="note"
+                                                        placeholder="Additional notes or special requests..."
+                                                        rows="4"
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px', resize: 'vertical' }}
+                                                    ></textarea>
+                                                </div>
+                                                
+                                                {/* reCAPTCHA */}
+                                                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                                                    <div className="col-12" style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
+                                                        <ReCAPTCHA
+                                                            ref={recaptchaRef}
+                                                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                                            onChange={onCaptchaChange}
+                                                            theme="light"
+                                                        />
                                                     </div>
-                                                </form>
+                                                )}
+                                                
+                                                <div className="col-12" style={{ textAlign: 'center' }}>
+                                                    <button
+                                                        type="submit"
+                                                        className="theme-btn-s3"
+                                                        disabled={emailStatus.sending}
+                                                        style={{
+                                                            opacity: emailStatus.sending ? 0.7 : 1,
+                                                            cursor: emailStatus.sending ? 'not-allowed' : 'pointer',
+                                                            padding: '16px 40px',
+                                                            fontSize: '16px'
+                                                        }}
+                                                    >
+                                                        {emailStatus.sending ? 'Sending...' : 'Request Quote'}
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
+
+                                            {/* Success Message */}
+                                            {emailStatus.success && (
+                                                <div style={{
+                                                    marginTop: '24px',
+                                                    padding: '20px',
+                                                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                                                    border: '1px solid #4CAF50',
+                                                    borderRadius: '8px',
+                                                    textAlign: 'center'
+                                                }}>
+                                                    <p style={{ color: '#2E7D32', margin: 0, fontSize: '16px' }}>
+                                                        ✓ Quote request sent successfully! We'll get back to you within 1-2 business days.
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            {/* Error Message */}
+                                            {emailStatus.error && (
+                                                <div style={{
+                                                    marginTop: '24px',
+                                                    padding: '20px',
+                                                    backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                                                    border: '1px solid #f44336',
+                                                    borderRadius: '8px',
+                                                    textAlign: 'center'
+                                                }}>
+                                                    <p style={{ color: '#c62828', margin: 0, fontSize: '16px' }}>
+                                                        ✗ {emailStatus.error}
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </form>
                                     </div>
                                 </div>
                             </div>

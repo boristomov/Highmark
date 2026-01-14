@@ -10,21 +10,28 @@ const Contactpage = () => {
                 <div className="row">
                     <div className="col col-lg-10 offset-lg-1">
                         <div className="office-info">
-                            <div className="row">
-                                <div className="col col-xl-4 col-lg-6 col-md-6 col-12">
+                            <div className="row align-items-stretch">
+                                <div className="col col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
                                     <div className="office-info-item">
                                         <div className="office-info-icon">
                                             <div className="icon">
-                                                <i className="fi flaticon-maps-and-flags"></i>
+                                                <i className="ti-sharethis"></i>
                                             </div>
                                         </div>
                                         <div className="office-info-text">
-                                            <h2>Address</h2>
-                                            <p>123 Market St, San Jose, CA</p>
+                                            <h2>Social Media</h2>
+                                            <div className="social-icons-contact">
+                                                <a href="https://www.instagram.com/highmarkeventrentals/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                                                    <i className="ti-instagram"></i>
+                                                </a>
+                                                <a href="https://www.linkedin.com/in/marc-quiachon/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                                                    <i className="ti-linkedin"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col col-xl-4 col-lg-6 col-md-6 col-12">
+                                <div className="col col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
                                     <div className="office-info-item">
                                         <div className="office-info-icon">
                                             <div className="icon">
@@ -33,12 +40,11 @@ const Contactpage = () => {
                                         </div>
                                         <div className="office-info-text">
                                             <h2>Email Us</h2>
-                                            <p>highmarkrentals@gmail.com</p>
-                                            <p>highmarkrentals@gmail.com</p>
+                                            <p>info@highmarkeventrentals.com</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col col-xl-4 col-lg-6 col-md-6 col-12">
+                                <div className="col col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
                                     <div className="office-info-item">
                                         <div className="office-info-icon">
                                             <div className="icon">
@@ -47,8 +53,7 @@ const Contactpage = () => {
                                         </div>
                                         <div className="office-info-text">
                                             <h2>Call Now</h2>
-                                            <p>+1 800 123 456 789</p>
-                                            <p>+1 800 123 654 987</p>
+                                            <p>+1 925 856 5618</p>
                                         </div>
                                     </div>
                                 </div>

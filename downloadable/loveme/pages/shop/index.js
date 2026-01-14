@@ -119,7 +119,7 @@ const ShopPage = (props) => {
   return (
     <Fragment>
       <Navbar alwaysWhite withOffsetBand />
-      <PageTitle pageTitle={"Browse Our Rental Inventory"} pagesub={""} />
+      <PageTitle pageTitle={"Browse Our Rental Inventory"} pagesub={"Shop"} />
 
       <CategorySelector
         selectedCategory={selectedCategory}

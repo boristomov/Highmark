@@ -719,17 +719,27 @@
 		height: calc(100vh - var(--nav-offset-height, 100px) - 180px);
 		overflow-y: scroll;
 		width: 100%;
+		background: linear-gradient(180deg, 
+			rgba(245, 240, 230, 0.97) 0%, 
+			rgba(235, 228, 215, 0.98) 50%, 
+			rgba(225, 218, 205, 0.99) 100%);
+		backdrop-filter: blur(10px);
+		border-radius: 0 0 16px 16px;
 
 		&::-webkit-scrollbar {
 			width: 0;
+		}
+
+		p {
+			color: #3a3a3a;
 		}
 	}
 
 	.mini-cart-item {
 		padding: 12px;
 		margin-top: 12px;
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(180, 170, 155, 0.3);
+		background: rgba(255, 255, 255, 0.5);
 		border-radius: 8px;
 	}
 

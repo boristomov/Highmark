@@ -16,6 +16,17 @@ const About2 = (props) => {
                                 <div className="about-image-frame">
                                     <Image src={abimg} alt="Highmark Event Rentals" />
                                 </div>
+                                <div className="about-image-caption">
+                                    <div className="caption-person">
+                                        <span className="caption-name">Jenny Quiachon</span>
+                                    </div>
+                                    <div className="caption-person">
+                                        <span className="caption-name">Marc Quiachon</span>
+                                        <a href="https://www.linkedin.com/in/marc-quiachon/" target="_blank" rel="noopener noreferrer" className="caption-linkedin">
+                                            <i className="ti-linkedin"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

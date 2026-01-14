@@ -158,6 +158,54 @@ Modern About Section Styling
             box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
             transform: scale(1.0);
         }
+
+        .about-image-caption {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 16px;
+
+            .caption-person {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .caption-name {
+                font-size: 18px;
+                font-weight: 500;
+                color: #5a5a5a;
+                font-family: $heading-font;
+            }
+
+            .caption-linkedin {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: $white;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                transition: all 0.3s ease;
+
+                i {
+                    font-size: 16px;
+                    color: #0077b5;
+                    transition: color 0.3s ease;
+                }
+
+                &:hover {
+                    background: #0077b5;
+                    transform: scale(1.1);
+
+                    i {
+                        color: white;
+                    }
+                }
+            }
+        }
     }
 
     .about-text-modern {

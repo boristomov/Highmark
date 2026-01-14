@@ -2,6 +2,14 @@
 15. wpo-shop-single-page
 --------------------------------------------------------------*/
 .wpo-shop-single-section {
+	// Reduce top padding so product image is visible on load
+	&.section-padding {
+		padding-top: 50px;
+		
+		@media (max-width: 991px) {
+			padding-top: 40px;
+		}
+	}
 
 	/*** product slider ***/
 	.shop-single-slider {
