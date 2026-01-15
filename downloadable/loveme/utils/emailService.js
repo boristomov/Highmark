@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 // EmailJS Configuration - Public keys are safe to expose in frontend code
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_gnd1ale';
 const EMAILJS_TEMPLATE_INQUIRY = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_INQUIRY || 'template_owqef03';
-const EMAILJS_TEMPLATE_QUOTE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_QUOTE || 'template_og20mnb';
+const EMAILJS_TEMPLATE_QUOTE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_QUOTE || 'template_og20mn6';
 const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'kh9KkUPz8DXMeYtN0';
 
 // Initialize EmailJS (call this once in your app)
@@ -51,12 +51,12 @@ export const sendInquiryEmail = async (formData) => {
  */
 export const sendQuoteEmail = async (formData, cartItems, totals) => {
     // Format cart items as a readable list
-    const itemsList = cartItems.map(item => 
+    const itemsList = cartItems.map(item =>
         `• ${item.title} - Qty: ${item.qty} - $${(item.price * item.qty).toFixed(2)}`
     ).join('\n');
 
     // Create HTML version for prettier emails
-    const itemsHtml = cartItems.map(item => 
+    const itemsHtml = cartItems.map(item =>
         `<tr>
             <td style="padding: 8px; border-bottom: 1px solid #eee;">${item.title}</td>
             <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: center;">${item.qty}</td>
@@ -73,23 +73,23 @@ export const sendQuoteEmail = async (formData, cartItems, totals) => {
         city: formData.dristrict || '',
         post_code: formData.post_code || '',
         order_notes: formData.note || 'None',
-        
+
         // Event details
         event_date: formData.eventDate || 'Not specified',
         event_location: formData.eventLocation || formData.address || 'Not provided',
-        
+
         // Cart details (plain text)
         items_list: itemsList,
         items_count: cartItems.length,
-        
+
         // Cart details (HTML)
         items_html: itemsHtml,
-        
+
         // Totals
         subtotal: `$${totals.subtotal.toFixed(2)}`,
         tax: `$${totals.tax.toFixed(2)}`,
         total: `$${totals.total.toFixed(2)}`,
-        
+
         // Business email
         to_email: 'info@highmarkeventrentals.com',
     };
@@ -120,12 +120,12 @@ export const isEmailConfigured = () => {
         EMAILJS_TEMPLATE_INQUIRY !== 'YOUR_INQUIRY_TEMPLATE_ID' &&
         EMAILJS_TEMPLATE_QUOTE !== 'YOUR_QUOTE_TEMPLATE_ID'
     );
-    
+
     // Initialize EmailJS if configured
     if (isConfigured) {
         emailjs.init(EMAILJS_PUBLIC_KEY);
     }
-    
+
     return isConfigured;
 };
 
