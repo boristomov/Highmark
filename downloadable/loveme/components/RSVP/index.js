@@ -62,9 +62,8 @@ const RSVP = () => {
             return;
         }
 
-        // Check reCAPTCHA (only if site key is configured)
-        const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-        if (recaptchaSiteKey && !captchaToken) {
+        // Check reCAPTCHA
+        if (!captchaToken) {
             setErrors(prev => ({ ...prev, captcha: 'Please complete the reCAPTCHA verification' }));
             return;
         }
@@ -240,18 +239,14 @@ const RSVP = () => {
                                     </div>
                                 </div>
                                 
-                                {/* reCAPTCHA */}
+                                {/* reCAPTCHA - Site key is safe to be public, it's designed for frontend use */}
                                 <div className="form-field-col form-field-full" style={{ marginTop: '20px', marginBottom: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
-                                        <ReCAPTCHA
-                                            ref={recaptchaRef}
-                                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                                            onChange={onCaptchaChange}
-                                            theme="light"
-                                        />
-                                    ) : (
-                                        <p style={{ color: '#999', fontSize: '12px' }}>reCAPTCHA not configured</p>
-                                    )}
+                                    <ReCAPTCHA
+                                        ref={recaptchaRef}
+                                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6Lchi0osAAAAAE90R42vzIpTI7AJaEI4o8DwnY-A"}
+                                        onChange={onCaptchaChange}
+                                        theme="light"
+                                    />
                                     {errors.captcha && (
                                         <p className="error-text" style={{ marginTop: '8px', color: '#f44336', textAlign: 'center' }}>
                                             {errors.captcha}

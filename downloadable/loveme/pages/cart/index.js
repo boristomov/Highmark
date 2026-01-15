@@ -82,9 +82,8 @@ const CartPage = (props) => {
             return;
         }
 
-        // Check reCAPTCHA (only if site key is configured)
-        const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-        if (recaptchaSiteKey && !captchaToken) {
+        // Check reCAPTCHA
+        if (!captchaToken) {
             setEmailStatus({
                 sending: false,
                 success: false,
@@ -400,17 +399,15 @@ const CartPage = (props) => {
                                                     ></textarea>
                                                 </div>
                                                 
-                                                {/* reCAPTCHA */}
-                                                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-                                                    <div className="col-12" style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
-                                                        <ReCAPTCHA
-                                                            ref={recaptchaRef}
-                                                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                                                            onChange={onCaptchaChange}
-                                                            theme="light"
-                                                        />
-                                                    </div>
-                                                )}
+                                                {/* reCAPTCHA - Site key is safe to be public, it's designed for frontend use */}
+                                                <div className="col-12" style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
+                                                    <ReCAPTCHA
+                                                        ref={recaptchaRef}
+                                                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6Lchi0osAAAAAE90R42vzIpTI7AJaEI4o8DwnY-A"}
+                                                        onChange={onCaptchaChange}
+                                                        theme="light"
+                                                    />
+                                                </div>
                                                 
                                                 <div className="col-12" style={{ textAlign: 'center' }}>
                                                     <button
