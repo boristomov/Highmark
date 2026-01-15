@@ -1,11 +1,10 @@
 import emailjs from '@emailjs/browser';
 
-// EmailJS Configuration
-// You need to set these values in your environment or replace them directly
-const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_INQUIRY = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_INQUIRY || 'YOUR_INQUIRY_TEMPLATE_ID';
-const EMAILJS_TEMPLATE_QUOTE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_QUOTE || 'YOUR_QUOTE_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+// EmailJS Configuration - Public keys are safe to expose in frontend code
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_gnd1ale';
+const EMAILJS_TEMPLATE_INQUIRY = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_INQUIRY || 'template_ovqel89';
+const EMAILJS_TEMPLATE_QUOTE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_QUOTE || 'template_vq2emn8';
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'kh9KkUPz8DXMeYtN0';
 
 // Initialize EmailJS (call this once in your app)
 export const initEmailJS = () => {
