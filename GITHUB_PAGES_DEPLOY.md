@@ -13,17 +13,34 @@ This repo contains a Next.js site in `downloadable/loveme/`. GitHub Pages can on
 ### Required GitHub Secrets
 In your GitHub repo: **Settings → Secrets and variables → Actions → Secrets**
 
+**Supabase (Required):**
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
-These are required because the static build imports the Supabase client.
+**EmailJS (Required for Contact Form & Quote Requests):**
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_INQUIRY`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_QUOTE`
+- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+
+*(Get these values from your local `EMAILJS_CONFIG.txt` file - gitignored for security)*
+
+**reCAPTCHA (Optional but Recommended - Prevents Spam):**
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
+
+*(Get from Google reCAPTCHA - See `RECAPTCHA_SETUP.md` for setup)*
 
 ### Email / Quote Requests
-GitHub Pages cannot run the `/api/send-quote-email` endpoint.
+✅ **EmailJS Integration Active!**
 
-Current behavior:
-- If `NEXT_PUBLIC_QUOTE_ENDPOINT` is **not** set, the Cart "Request Quote" button opens a **mailto:** draft to `highmarkrentals@gmail.com`.
-- If you later deploy a backend, set `NEXT_PUBLIC_QUOTE_ENDPOINT` to your server URL and it will POST the quote payload there.
+The contact form and quote requests now use EmailJS to send emails directly from the browser (no backend needed).
+
+**Setup Required:**
+1. Add the EmailJS secrets listed above to GitHub Actions
+2. Make sure your EmailJS templates are configured in your EmailJS dashboard
+3. See `EMAILJS_CONFIG.txt` and `EMAILJS_SETUP_GUIDE.md` for detailed setup
+
+All quote requests and contact form submissions will be sent to `info@highmarkeventrentals.com`.
 
 ### Deploy
 This repo includes a GitHub Actions workflow:
