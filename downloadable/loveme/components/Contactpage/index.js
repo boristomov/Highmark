@@ -24,7 +24,7 @@ const Contactpage = () => {
                                                 <a href="https://www.instagram.com/highmarkeventrentals/" target="_blank" rel="noopener noreferrer" title="Instagram">
                                                     <i className="ti-instagram"></i>
                                                 </a>
-                                                <a href="https://www.linkedin.com/in/marc-quiachon/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                                                <a href="https://www.linkedin.com/company/highmarkeventrentals/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                                                     <i className="ti-linkedin"></i>
                                                 </a>
                                             </div>

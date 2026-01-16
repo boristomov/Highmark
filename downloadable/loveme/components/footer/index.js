@@ -22,7 +22,7 @@ const Footer = (props) => {
                                 <p>Care and Craft in Every Detail.</p>
                                 <ul>
                                     <li>
-                                        <a href="https://www.linkedin.com/in/marc-quiachon/" target="_blank" rel="noopener noreferrer">
+                                        <a href="https://www.linkedin.com/company/highmarkeventrentals/" target="_blank" rel="noopener noreferrer">
                                             <i className="ti-linkedin"></i>
                                         </a>
                                     </li>
@@ -58,7 +58,7 @@ const Footer = (props) => {
                                     <ul>
                                         <li><i className="fi flaticon-email"></i>info@highmarkeventrentals.com</li>
                                         <li><i className="fi flaticon-phone-call"></i>+1 925 856 5618</li>
-                                        <li><i className="fi flaticon-maps-and-flags"></i>Bay Area</li>
+                                        <li><i className="fi flaticon-maps-and-flags"></i>Danville, CA 94526</li>
                                     </ul>
                                 </div>
                             </div>
