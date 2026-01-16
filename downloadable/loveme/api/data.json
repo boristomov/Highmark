@@ -152,5 +152,60 @@
     "delPrice": "585.00",
     "brand": "Gucci",
     "size": "L"
+  },
+  {
+    "id": 15,
+    "slug": "10x10-Canopy-Tent",
+    "proImg": "/images/boris/rental_equipment/tent/tnt-1010c-w.png",
+    "psImg": "/images/boris/rental_equipment/tent/tnt-1010c-w.png",
+    "title": "10'x10' Canopy Tent",
+    "price": "80.00",
+    "delPrice": "100.00",
+    "brand": "Tent",
+    "size": "10x10"
+  },
+  {
+    "id": 16,
+    "slug": "10x20-Frame-Tent",
+    "proImg": "/images/boris/rental_equipment/tent/tnt-1020f-w.png",
+    "psImg": "/images/boris/rental_equipment/tent/tnt-1020f-w.png",
+    "title": "10'x20' Frame Tent",
+    "price": "375.00",
+    "delPrice": "425.00",
+    "brand": "Tent",
+    "size": "10x20"
+  },
+  {
+    "id": 17,
+    "slug": "15x15-Frame-Tent",
+    "proImg": "/images/boris/rental_equipment/tent/tnt-1515f-w.png",
+    "psImg": "/images/boris/rental_equipment/tent/tnt-1515f-w.png",
+    "title": "15'x15' Frame Tent",
+    "price": "350.00",
+    "delPrice": "400.00",
+    "brand": "Tent",
+    "size": "15x15"
+  },
+  {
+    "id": 18,
+    "slug": "20x20-Frame-Tent",
+    "proImg": "/images/boris/rental_equipment/tent/tnt-2020f-w.png",
+    "psImg": "/images/boris/rental_equipment/tent/tnt-2020f-w.png",
+    "title": "20'x20' Frame Tent",
+    "price": "550.00",
+    "delPrice": "625.00",
+    "brand": "Tent",
+    "size": "20x20"
+  },
+  {
+    "id": 19,
+    "slug": "20x40-Frame-Tent",
+    "proImg": "/images/boris/rental_equipment/tent/tnt-2040f-w.png",
+    "psImg": "/images/boris/rental_equipment/tent/tnt-2040f-w.png",
+    "title": "20'x40' Frame Tent",
+    "price": "975.00",
+    "delPrice": "1100.00",
+    "brand": "Tent",
+    "size": "20x40"
   }
 ]
