@@ -44,54 +44,35 @@ export const sendInquiryEmail = async (formData) => {
 
 /**
  * Send a quote request email with cart items
+ * Customer-friendly template that BCCs the business
  * @param {Object} formData - Customer form data
  * @param {Array} cartItems - Array of cart items
  * @param {Object} totals - Subtotal, tax, and grand total
  * @returns {Promise} - EmailJS send promise
  */
 export const sendQuoteEmail = async (formData, cartItems, totals) => {
-    // Format cart items as a readable list
+    // Format cart items as a readable plain text list for the email
     const itemsList = cartItems.map(item =>
-        `• ${item.title} - Qty: ${item.qty} - $${(item.price * item.qty).toFixed(2)}`
+        `${item.title} (Qty: ${item.qty}) - $${(item.price * item.qty).toFixed(2)}`
     ).join('\n');
 
-    // Create HTML version for prettier emails
-    const itemsHtml = cartItems.map(item =>
-        `<tr>
-            <td style="padding: 8px; border-bottom: 1px solid #eee;">${item.title}</td>
-            <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: center;">${item.qty}</td>
-            <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: right;">$${(item.price * item.qty).toFixed(2)}</td>
-        </tr>`
-    ).join('');
-
     const templateParams = {
-        // Customer info
+        // Customer info (sent TO customer, BCC to business)
         from_name: `${formData.fname} ${formData.lname}`,
         from_email: formData.email,
         phone: formData.phone || 'Not provided',
-        address: formData.address || 'Not provided',
-        city: formData.dristrict || '',
-        post_code: formData.post_code || '',
-        order_notes: formData.note || 'None',
 
         // Event details
         event_date: formData.eventDate || 'Not specified',
         event_location: formData.eventLocation || formData.address || 'Not provided',
 
-        // Cart details (plain text)
-        items_list: itemsList,
+        // Cart summary
         items_count: cartItems.length,
-
-        // Cart details (HTML)
-        items_html: itemsHtml,
-
-        // Totals
-        subtotal: `$${totals.subtotal.toFixed(2)}`,
-        tax: `$${totals.tax.toFixed(2)}`,
+        items_list: itemsList,
         total: `$${totals.total.toFixed(2)}`,
 
-        // Business email
-        to_email: 'info@highmarkeventrentals.com',
+        // Additional notes
+        order_notes: formData.note || 'None',
     };
 
     try {
