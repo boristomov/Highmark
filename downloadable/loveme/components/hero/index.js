@@ -22,15 +22,15 @@ const Hero = () => {
                 <div className="swiper-wrapper">
                     <Slider {...settings}>
                         <div className="hero-slide">
-                            <div className="slide-inner slide-bg-video">
+                            <div className="slide-inner slide-bg-video" style={{ backgroundImage: `url(${withBasePath('/images/boris/background.avif')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                                 <video 
                                     autoPlay 
                                     muted 
                                     loop 
                                     playsInline
                                     className="hero-video-bg"
+                                    poster={withBasePath('/images/boris/background.avif')}
                                 >
-                                    <source src={withBasePath('/images/boris/iStock-1455282879.mov')} type="video/quicktime" />
                                     <source src={withBasePath('/images/boris/iStock-1455282879.mp4')} type="video/mp4" />
                                 </video>
                                 <div className="video-overlay"></div>
@@ -51,15 +51,15 @@ const Hero = () => {
                             </div>
                         </div>
                         <div className="hero-slide">
-                            <div className="slide-inner slide-bg-video">
+                            <div className="slide-inner slide-bg-video" style={{ backgroundImage: `url(${withBasePath('/images/boris/homepageServices/7.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                                 <video 
                                     autoPlay 
                                     muted 
                                     loop 
                                     playsInline
                                     className="hero-video-bg"
+                                    poster={withBasePath('/images/boris/homepageServices/7.jpg')}
                                 >
-                                    <source src={withBasePath('/images/boris/iStock-2207627637.mov')} type="video/quicktime" />
                                     <source src={withBasePath('/images/boris/iStock-2207627637.mp4')} type="video/mp4" />
                                 </video>
                                 <div className="video-overlay"></div>
