@@ -52,7 +52,7 @@ export const sendInquiryEmail = async (formData) => {
  */
 export const sendQuoteEmail = async (formData, cartItems, totals) => {
     const baseUrl = 'https://www.highmarkeventrentals.com';
-    
+
     // Format cart items as plain text list
     const itemsList = cartItems.map(item =>
         `• ${item.title} (Qty: ${item.qty}) - $${(item.price * item.qty).toFixed(2)}`
@@ -90,7 +90,7 @@ export const sendQuoteEmail = async (formData, cartItems, totals) => {
         items_count: cartItems.length,
         items_list: itemsList,
         items_html: itemsHtml,
-        
+
         // Totals
         subtotal: `$${totals.subtotal.toFixed(2)}`,
         tax: `$${totals.tax.toFixed(2)}`,

@@ -19,12 +19,12 @@
 	z-index: -2;
 	object-fit: cover;
 	object-position: center center;
-	
+
 	// On mobile/tablets - show more of the video by adjusting position
 	@media (max-width: 991px) {
 		object-position: center 40%;
 	}
-	
+
 	// On small mobile screens - position to show key content
 	@media (max-width: 575px) {
 		object-position: center 35%;
