@@ -292,12 +292,363 @@ Reply To: {{from_email}}
 </html>
 <!-- ========== END QUOTE TEMPLATE ========== -->
 
+<!--
+===========================================
+EMAILJS TEMPLATE 3: CUSTOMER INQUIRY CONFIRMATION (Auto-Reply)
+===========================================
+This is sent TO THE CUSTOMER after they submit an inquiry.
+Create a NEW template in EmailJS for this.
+
+Subject Line: Thank You for Reaching Out! - Highmark Event Rentals
+To Email: {{from_email}}
+From Name: Highmark Event Rentals
+-->
+
+<!-- ========== START INQUIRY CONFIRMATION TEMPLATE ========== -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You - Highmark Event Rentals</title>
+</head>
+
+<body
+  style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #F5F0E8;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #F5F0E8; padding: 40px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0"
+          style="background-color: #ffffff; box-shadow: 0 8px 32px rgba(27,27,27,0.12); overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td
+              style="background: linear-gradient(135deg, #E9E1D3 0%, #D4C9B8 100%); padding: 50px 40px; text-align: center; border-bottom: 2px solid rgba(27,27,27,0.1);">
+              <h1
+                style="margin: 0 0 10px 0; color: rgba(47, 47, 47, 0.9); font-size: 42px; font-weight: 200; letter-spacing: 3px; text-transform: uppercase;">
+                Highmark
+              </h1>
+              <p
+                style="margin: 0; color: rgba(47, 47, 47, 0.7); font-size: 13px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase;">
+                Care and Craft In Every Detail
+              </p>
+            </td>
+          </tr>
+
+          <!-- Thank You Message -->
+          <tr>
+            <td style="padding: 50px 40px 30px 40px; text-align: center;">
+              <h2 style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.9); font-size: 28px; font-weight: 300;">
+                Thank You, {{from_name}}! ✨
+              </h2>
+              <p style="margin: 0; color: rgba(47, 47, 47, 0.75); font-size: 16px; line-height: 1.8;">
+                We truly appreciate you reaching out to Highmark Event Rentals.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Body Content -->
+          <tr>
+            <td style="padding: 0 40px 40px 40px;">
+              <div style="background-color: #F5F0E8; border-left: 4px solid #D4C9B8; padding: 30px;">
+                <p style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
+                  Your message has been received, and we're excited to learn more about your upcoming event!
+                </p>
+                <p style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
+                  Our team will carefully review your inquiry and get back to you within <strong>24-48 hours</strong>.
+                  We're here to help make your event truly special.
+                </p>
+                <p style="margin: 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
+                  In the meantime, feel free to browse our <a href="https://boristomov.github.io/Highmark/shop/"
+                    style="color: #2f2f2f; font-weight: 500;">rental collection</a>
+                  or check out our <a href="https://boristomov.github.io/Highmark/portfolio-grid/"
+                    style="color: #2f2f2f; font-weight: 500;">inspiration gallery</a> for ideas.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- What's Next -->
+          <tr>
+            <td style="padding: 0 40px 40px 40px;">
+              <h3 style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.85); font-size: 18px; font-weight: 400;">
+                What Happens Next?
+              </h3>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding: 12px 0; color: rgba(47, 47, 47, 0.75); font-size: 15px; line-height: 1.6;">
+                    <span
+                      style="display: inline-block; width: 28px; height: 28px; background-color: #E9E1D3; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 12px; font-weight: 500;">1</span>
+                    We'll review your inquiry and event details
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; color: rgba(47, 47, 47, 0.75); font-size: 15px; line-height: 1.6;">
+                    <span
+                      style="display: inline-block; width: 28px; height: 28px; background-color: #E9E1D3; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 12px; font-weight: 500;">2</span>
+                    A team member will reach out personally
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; color: rgba(47, 47, 47, 0.75); font-size: 15px; line-height: 1.6;">
+                    <span
+                      style="display: inline-block; width: 28px; height: 28px; background-color: #E9E1D3; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 12px; font-weight: 500;">3</span>
+                    We'll help craft the perfect rental package for you
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td
+              style="background: linear-gradient(to bottom, #F5F0E8 0%, #E9E1D3 100%); padding: 35px; text-align: center; border-top: 2px solid rgba(27,27,27,0.08);">
+              <p style="margin: 0 0 5px 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; font-weight: 300;">
+                Warmly,
+              </p>
+              <p
+                style="margin: 0 0 15px 0; color: rgba(47, 47, 47, 0.9); font-size: 20px; font-weight: 300; letter-spacing: 1px;">
+                The Highmark Team
+              </p>
+              <p style="margin: 0 0 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 13px;">
+                Danville, California
+              </p>
+              <p style="margin: 0; color: rgba(47, 47, 47, 0.6); font-size: 13px;">
+                <a href="mailto:info@highmarkeventrentals.com"
+                  style="color: rgba(47, 47, 47, 0.7);">info@highmarkeventrentals.com</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
+<!-- ========== END INQUIRY CONFIRMATION TEMPLATE ========== -->
+
+
+
+
+<!--
+===========================================
+EMAILJS TEMPLATE 4: CUSTOMER QUOTE CONFIRMATION (Auto-Reply)
+===========================================
+This is sent TO THE CUSTOMER after they submit a quote request.
+Create a NEW template in EmailJS for this.
+
+Subject Line: Your Quote Request Has Been Received! - Highmark Event Rentals
+To Email: {{from_email}}
+From Name: Highmark Event Rentals
+-->
+
+<!-- ========== START QUOTE CONFIRMATION TEMPLATE ========== -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Request Received - Highmark Event Rentals</title>
+</head>
+
+<body
+  style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #F5F0E8;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #F5F0E8; padding: 40px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0"
+          style="background-color: #ffffff; box-shadow: 0 8px 32px rgba(27,27,27,0.12); overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td
+              style="background: linear-gradient(135deg, #E9E1D3 0%, #D4C9B8 100%); padding: 50px 40px; text-align: center; border-bottom: 2px solid rgba(27,27,27,0.1);">
+              <h1
+                style="margin: 0 0 10px 0; color: rgba(47, 47, 47, 0.9); font-size: 42px; font-weight: 200; letter-spacing: 3px; text-transform: uppercase;">
+                Highmark
+              </h1>
+              <p
+                style="margin: 0; color: rgba(47, 47, 47, 0.7); font-size: 13px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase;">
+                Care and Craft In Every Detail
+              </p>
+            </td>
+          </tr>
+
+          <!-- Thank You Message -->
+          <tr>
+            <td style="padding: 50px 40px 30px 40px; text-align: center;">
+              <h2 style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.9); font-size: 28px; font-weight: 300;">
+                Thank You for Your Quote Request! 🎉
+              </h2>
+              <p style="margin: 0; color: rgba(47, 47, 47, 0.75); font-size: 16px; line-height: 1.8;">
+                Hi {{from_name}}, we're thrilled you're considering Highmark for your event!
+              </p>
+            </td>
+          </tr>
+
+          <!-- Body Content -->
+          <tr>
+            <td style="padding: 0 40px 30px 40px;">
+              <div style="background-color: #F5F0E8; border-left: 4px solid #D4C9B8; padding: 30px;">
+                <p style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
+                  We've received your quote request and are excited to help bring your vision to life!
+                </p>
+                <p style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
+                  Our team is reviewing your selections and will prepare a detailed quote tailored to your event.
+                  You can expect to hear from us within <strong>24-48 hours</strong>.
+                </p>
+                <p style="margin: 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
+                  We put care and craft into every detail — and that starts with getting your quote just right.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Order Summary -->
+          <tr>
+            <td style="padding: 0 40px 30px 40px;">
+              <h3
+                style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.85); font-size: 18px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid #E9E1D3; padding-bottom: 15px;">
+                Your Request Summary
+              </h3>
+              <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+                <tr>
+                  <td
+                    style="padding: 12px 0; color: rgba(47, 47, 47, 0.65); font-size: 14px; border-bottom: 1px solid #f0f0f0;">
+                    Items Requested:
+                  </td>
+                  <td
+                    style="padding: 12px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; text-align: right; border-bottom: 1px solid #f0f0f0; font-weight: 500;">
+                    {{items_count}} items
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="padding: 12px 0; color: rgba(47, 47, 47, 0.65); font-size: 14px; border-bottom: 1px solid #f0f0f0;">
+                    Event Date:
+                  </td>
+                  <td
+                    style="padding: 12px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; text-align: right; border-bottom: 1px solid #f0f0f0; font-weight: 500;">
+                    {{event_date}}
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="padding: 12px 0; color: rgba(47, 47, 47, 0.65); font-size: 14px; border-bottom: 1px solid #f0f0f0;">
+                    Event Location:
+                  </td>
+                  <td
+                    style="padding: 12px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; text-align: right; border-bottom: 1px solid #f0f0f0; font-weight: 500;">
+                    {{event_location}}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 15px 0 0 0; color: rgba(47, 47, 47, 0.65); font-size: 14px;">
+                    Estimated Total:
+                  </td>
+                  <td
+                    style="padding: 15px 0 0 0; color: rgba(47, 47, 47, 0.9); font-size: 18px; text-align: right; font-weight: 500;">
+                    {{total}}*
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: 15px 0 0 0; color: rgba(47, 47, 47, 0.5); font-size: 12px; font-style: italic;">
+                *Final quote may vary based on delivery distance and availability. Delivery fees will be included in
+                your personalized quote.
+              </p>
+            </td>
+          </tr>
+
+          <!-- What's Next -->
+          <tr>
+            <td style="padding: 0 40px 40px 40px;">
+              <h3 style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.85); font-size: 18px; font-weight: 400;">
+                What Happens Next?
+              </h3>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding: 12px 0; color: rgba(47, 47, 47, 0.75); font-size: 15px; line-height: 1.6;">
+                    <span
+                      style="display: inline-block; width: 28px; height: 28px; background-color: #E9E1D3; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 12px; font-weight: 500;">1</span>
+                    We'll review your request and check availability
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; color: rgba(47, 47, 47, 0.75); font-size: 15px; line-height: 1.6;">
+                    <span
+                      style="display: inline-block; width: 28px; height: 28px; background-color: #E9E1D3; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 12px; font-weight: 500;">2</span>
+                    We'll send you a personalized quote with delivery details
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; color: rgba(47, 47, 47, 0.75); font-size: 15px; line-height: 1.6;">
+                    <span
+                      style="display: inline-block; width: 28px; height: 28px; background-color: #E9E1D3; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 12px; font-weight: 500;">3</span>
+                    Once confirmed, we'll handle the rest — delivery, setup & pickup!
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td
+              style="background: linear-gradient(to bottom, #F5F0E8 0%, #E9E1D3 100%); padding: 35px; text-align: center; border-top: 2px solid rgba(27,27,27,0.08);">
+              <p style="margin: 0 0 5px 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; font-weight: 300;">
+                Warmly,
+              </p>
+              <p
+                style="margin: 0 0 15px 0; color: rgba(47, 47, 47, 0.9); font-size: 20px; font-weight: 300; letter-spacing: 1px;">
+                The Highmark Team
+              </p>
+              <p style="margin: 0 0 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 13px;">
+                Danville, California
+              </p>
+              <p style="margin: 0; color: rgba(47, 47, 47, 0.6); font-size: 13px;">
+                <a href="mailto:info@highmarkeventrentals.com"
+                  style="color: rgba(47, 47, 47, 0.7);">info@highmarkeventrentals.com</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
+<!-- ========== END QUOTE CONFIRMATION TEMPLATE ========== -->
+
+
+
+
 <!-- =================================================================
 EMAILJS TEMPLATES ONLY - NO KEYS HERE
 =================================================================
 
 This file contains ONLY the email template HTML for copy-pasting 
 into your EmailJS dashboard.
+
+TEMPLATES IN THIS FILE:
+1. Contact Inquiry (sent to you) - template_owqef03
+2. Quote Request (sent to you) - template_og20mn6
+3. Inquiry Confirmation (auto-reply to customer) - CREATE NEW
+4. Quote Confirmation (auto-reply to customer) - CREATE NEW
+
+TO SET UP AUTO-REPLIES:
+1. Go to EmailJS Dashboard → Email Templates → Create New Template
+2. Copy the HTML for template 3 or 4 above
+3. Set "To Email" to {{from_email}} (customer's email)
+4. Note the new Template ID
+5. Update emailService.js to send both emails
 
 ⚠️  DO NOT add your keys to this file - it will be pushed to GitHub!
 
