@@ -23,10 +23,10 @@ const Hero = () => {
                     <Slider {...settings}>
                         <div className="hero-slide">
                             <div className="slide-inner slide-bg-video" style={{ backgroundImage: `url(${withBasePath('/images/boris/background.avif')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                                <video 
-                                    autoPlay 
-                                    muted 
-                                    loop 
+                                <video
+                                    autoPlay
+                                    muted
+                                    loop
                                     playsInline
                                     className="hero-video-bg"
                                     poster={withBasePath('/images/boris/background.avif')}
@@ -52,10 +52,10 @@ const Hero = () => {
                         </div>
                         <div className="hero-slide">
                             <div className="slide-inner slide-bg-video" style={{ backgroundImage: `url(${withBasePath('/images/boris/homepageServices/7.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                                <video 
-                                    autoPlay 
-                                    muted 
-                                    loop 
+                                <video
+                                    autoPlay
+                                    muted
+                                    loop
                                     playsInline
                                     className="hero-video-bg"
                                     poster={withBasePath('/images/boris/homepageServices/7.jpg')}

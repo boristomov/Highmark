@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
-// Base path for GitHub Pages - fallback to /Highmark for production
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/Highmark';
+// Base path - empty for custom domain, or set via env var
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export default class MyDocument extends Document {
   render() {

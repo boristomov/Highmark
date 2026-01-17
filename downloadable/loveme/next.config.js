@@ -34,6 +34,8 @@ const nextConfig = {
             '/cart': { page: '/cart' },
             '/contact': { page: '/contact' },
             '/portfolio-grid': { page: '/portfolio-grid' },
+            '/privacy-policy': { page: '/privacy-policy' },
+            '/terms-and-conditions': { page: '/terms-and-conditions' },
             '/404': { page: '/404' },
         }
     },

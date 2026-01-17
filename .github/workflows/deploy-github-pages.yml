@@ -44,8 +44,8 @@ jobs:
           NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
           # reCAPTCHA for spam prevention (optional)
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-          # Build for GitHub Pages project site under /<repo-name>
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # For custom domain: leave empty. For GitHub Pages project site: use /${{ github.event.repository.name }}
+          NEXT_PUBLIC_BASE_PATH: ""
         run: |
           if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
             echo "::error::Missing required GitHub Actions secrets. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in Settings → Secrets and variables → Actions."
