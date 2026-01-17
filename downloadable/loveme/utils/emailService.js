@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 // EmailJS Configuration - Public keys are safe to expose in frontend code
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_gnd1ale';
 const EMAILJS_TEMPLATE_INQUIRY = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_INQUIRY || 'template_owqef03';
-const EMAILJS_TEMPLATE_QUOTE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_QUOTE || 'template_og20mnb';
+const EMAILJS_TEMPLATE_QUOTE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_QUOTE || 'template_og20mn6';
 const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'kh9KkUPz8DXMeYtN0';
 
 // Initialize EmailJS (call this once in your app)
