@@ -51,10 +51,30 @@ export const sendInquiryEmail = async (formData) => {
  * @returns {Promise} - EmailJS send promise
  */
 export const sendQuoteEmail = async (formData, cartItems, totals) => {
-    // Format cart items as a readable plain text list for the email
+    const baseUrl = 'https://www.highmarkeventrentals.com';
+    
+    // Format cart items as plain text list
     const itemsList = cartItems.map(item =>
-        `${item.title} (Qty: ${item.qty}) - $${(item.price * item.qty).toFixed(2)}`
+        `• ${item.title} (Qty: ${item.qty}) - $${(item.price * item.qty).toFixed(2)}`
     ).join('\n');
+
+    // Format cart items as HTML with images
+    const itemsHtml = cartItems.map(item => {
+        const imageUrl = item.proImg ? `${baseUrl}${item.proImg}` : `${baseUrl}/images/boris/placeholder.jpg`;
+        return `
+        <tr style="border-bottom: 1px solid #E9E1D3;">
+            <td style="padding: 15px; width: 80px;">
+                <img src="${imageUrl}" alt="${item.title}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 4px;" />
+            </td>
+            <td style="padding: 15px;">
+                <p style="margin: 0 0 5px 0; font-weight: 500; color: rgba(47,47,47,0.9);">${item.title}</p>
+                <p style="margin: 0; color: rgba(47,47,47,0.6); font-size: 13px;">Qty: ${item.qty}</p>
+            </td>
+            <td style="padding: 15px; text-align: right; font-weight: 500; color: rgba(47,47,47,0.85);">
+                $${(item.price * item.qty).toFixed(2)}
+            </td>
+        </tr>`;
+    }).join('');
 
     const templateParams = {
         // Customer info (sent TO customer, BCC to business)
@@ -69,6 +89,11 @@ export const sendQuoteEmail = async (formData, cartItems, totals) => {
         // Cart summary
         items_count: cartItems.length,
         items_list: itemsList,
+        items_html: itemsHtml,
+        
+        // Totals
+        subtotal: `$${totals.subtotal.toFixed(2)}`,
+        tax: `$${totals.tax.toFixed(2)}`,
         total: `$${totals.total.toFixed(2)}`,
 
         // Additional notes
