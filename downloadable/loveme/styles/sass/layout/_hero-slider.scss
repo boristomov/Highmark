@@ -315,27 +315,27 @@
 		}
 
 		&.slide-title-slogan h2 {
-			font-size: 90px;
-			line-height: 1.15;
+			font-size: 65px;
+			line-height: 1.2;
 			font-weight: 300;
 			text-transform: none;
-			letter-spacing: 3px;
+			letter-spacing: 2px;
 
 			@include media-query(1199px) {
-				font-size: 65px;
+				font-size: 48px;
 			}
 
 			@include media-query(991px) {
-				font-size: 48px;
-				line-height: 1.25;
+				font-size: 36px;
+				line-height: 1.3;
 			}
 
 			@include media-query(767px) {
-				font-size: 36px;
+				font-size: 26px;
 			}
 
 			@include media-query(575px) {
-				font-size: 28px;
+				font-size: 20px;
 			}
 		}
 	}
