@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import Link from 'next/link'
 import Image from "next/image";
 import { withBasePath } from '../../utils/basePath';
-import { withBasePath } from '../../utils/basePath';
 
 
 const ServiceSection = (props) => {
