@@ -260,12 +260,15 @@ Modern About Section Styling
                 }
 
                 &.about-intro {
-                    font-size: 20px;
-                    color: rgba(47, 47, 47, 0.9);
-                    font-style: italic;
+                    font-size: 18px;
+                    line-height: 1.9;
+                    color: rgba(47, 47, 47, 0.85);
+                    font-style: normal;
+                    font-weight: 300;
 
                     @media (max-width: 767px) {
-                        font-size: 18px;
+                        font-size: 16px;
+                        line-height: 1.8;
                     }
                 }
 
@@ -291,6 +294,17 @@ Modern About Section Styling
             font-size: 22px;
             color: $white;
             font-weight: 600;
+        }
+
+        .about-sep-h-logo {
+            display: inline-block;
+            height: 28px;
+            width: auto;
+            opacity: 0.8;
+
+            @media (max-width: 575px) {
+                height: 22px;
+            }
         }
 
         &::before,

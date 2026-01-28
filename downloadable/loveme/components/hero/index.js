@@ -36,15 +36,13 @@ const Hero = () => {
                                 <div className="video-overlay"></div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
-                                        <div className="slide-title">
-                                            <h2>Highmark</h2>
-                                        </div>
-                                        <div className="slide-text">
-                                            <p>Care and Craft In Every Detail</p>
+                                        <div className="slide-title slide-title-slogan">
+                                            <h2>Care and Craft in Every Detail</h2>
                                         </div>
                                         <div className="clearfix"></div>
                                         <div className="slide-btns">
-                                            <Link href="/contact" className="theme-btn">Contact Us</Link>
+                                            <Link href="/shop" className="theme-btn">Shop Rentals</Link>
+                                            <Link href="/contact" className="theme-btn theme-btn-s2">Let's Connect</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -65,15 +63,13 @@ const Hero = () => {
                                 <div className="video-overlay"></div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
-                                        <div className="slide-title">
-                                            <h2>Highmark</h2>
-                                        </div>
-                                        <div className="slide-text">
-                                            <p>Care and Craft In Every Detail</p>
+                                        <div className="slide-title slide-title-slogan">
+                                            <h2>Care and Craft in Every Detail</h2>
                                         </div>
                                         <div className="clearfix"></div>
                                         <div className="slide-btns">
-                                            <Link href="/contact" className="theme-btn">Contact Us</Link>
+                                            <Link href="/shop" className="theme-btn">Shop Rentals</Link>
+                                            <Link href="/contact" className="theme-btn theme-btn-s2">Let's Connect</Link>
                                         </div>
                                     </div>
                                 </div>

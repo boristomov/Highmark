@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import SectionTitle from '../../components/SectionTitle';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import styles from './CaliforniaMap.module.scss';
+import { withBasePath } from '../../utils/basePath';
 
 const TOPO_COUNTIES_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 const CALIFORNIA_PREFIX = '06';
@@ -86,12 +87,9 @@ const CaliforniaMap = () => {
                 <div className={styles.headerWrap}>
                     <div className={styles.headerInner}>
                         <div className="wpo-section-title">
-                            <span style={{ display: 'inline-block' }}>
-                                FIND US!
-                            </span>
-                            <h2>Where You Can Find Our Services</h2>
+                            <h2>Where We Serve</h2>
                             <div className="section-title-img">
-                                <span className="section-title-initials">HM</span>
+                                <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
                             </div>
                         </div>
                     </div>

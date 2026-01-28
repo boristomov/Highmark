@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import abimg from '/public/images/boris/IMG_1631.jpeg'
+import { withBasePath } from '../../utils/basePath'
 
 const About2 = (props) => {
 
@@ -15,17 +16,6 @@ const About2 = (props) => {
                             <div className="about-image-modern">
                                 <div className="about-image-frame">
                                     <Image src={abimg} alt="Highmark Event Rentals" />
-                                </div>
-                                <div className="about-image-caption">
-                                    <div className="caption-person">
-                                        <span className="caption-name">Jenny Quiachon</span>
-                                    </div>
-                                    <div className="caption-person">
-                                        <span className="caption-name">Marc Quiachon</span>
-                                        <a href="https://www.linkedin.com/in/marc-quiachon/" target="_blank" rel="noopener noreferrer" className="caption-linkedin">
-                                            <i className="ti-linkedin"></i>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -44,18 +34,18 @@ const About2 = (props) => {
                                             coordinating events of all sizes, always focused on ensuring every detail comes
                                             together seamlessly. His greatest reward is seeing clients' visions come to life.
                                         </p>
-                                        <p className="about-story-p">
+                                        <p className="about-intro">
                                             Jenny's career in healthcare reflects her natural dedication to caring for others,
                                             a quality that shapes everything we do. Together, we've built Highmark on the simple
                                             belief that exceptional events start with genuine care and reliable service.
                                         </p>
-                                        <p className="about-story-p">
+                                        <p className="about-intro">
                                             From quality rentals to attentive communication, we take pride in making every
                                             experience smooth, stress-free, and memorable.
                                         </p>
                                     </div>
                                     <div className="about-sep">
-                                        <span className="about-sep-initials">HM</span>
+                                        <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="about-sep-h-logo" />
                                     </div>
                                 </div>
                             </div>

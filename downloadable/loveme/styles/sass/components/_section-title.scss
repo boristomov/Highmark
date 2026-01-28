@@ -59,6 +59,17 @@
 			color: rgba(47, 47, 47, 0.8);
 		}
 
+		.section-title-h-logo {
+			display: inline-block;
+			height: 28px;
+			width: auto;
+			opacity: 0.8;
+
+			@include media-query(575px) {
+				height: 22px;
+			}
+		}
+
 		&::before,
 		&::after {
 			position: absolute;

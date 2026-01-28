@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import Link from 'next/link'
 import Image from "next/image";
 import { withBasePath } from '../../utils/basePath';
+import { withBasePath } from '../../utils/basePath';
 
 
 const ServiceSection = (props) => {
@@ -94,7 +95,7 @@ const ServiceSection = (props) => {
                     <span>What We Offer</span>
                     <h2>Our Collections</h2>
                     <div className="section-title-img">
-                        <span className="section-title-initials">HM</span>
+                        <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
                     </div>
                 </div>
                 <div className="wpo-service-active owl-carousel">

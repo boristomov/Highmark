@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
+import { withBasePath } from '../../utils/basePath';
 
 const SectionTitle = (props) => {
     return (
@@ -8,7 +9,7 @@ const SectionTitle = (props) => {
                 <span>{props.topTitle}</span>
                 <h2>{props.MainTitle}</h2>
                 <div className="section-title-img">
-                    <span className="section-title-initials">HM</span>
+                    <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
                 </div>
             </div>
         </div>
