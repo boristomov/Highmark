@@ -61,12 +61,12 @@
 
 		.section-title-h-logo {
 			display: inline-block;
-			height: 28px;
+			height: 38px;
 			width: auto;
 			opacity: 0.8;
 
 			@include media-query(575px) {
-				height: 22px;
+				height: 28px;
 			}
 		}
 

@@ -261,6 +261,11 @@
 
 	// clean accent underline for the main label (no layout change)
 	.wpo-section-title {
+		span {
+			color: #fff;
+			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+		}
+
 		h2 {
 			display: block; // ensure it stays on its own line
 			position: relative;

@@ -39,7 +39,9 @@ const Hero = () => {
                                         <div className="slide-title slide-title-slogan">
                                             <h2>Care and Craft in Every Detail</h2>
                                         </div>
-                                        <div className="clearfix"></div>
+                                        <div className="hero-separator">
+                                            <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="hero-h-logo" />
+                                        </div>
                                         <div className="slide-btns">
                                             <Link href="/shop" className="theme-btn">Shop Rentals</Link>
                                             <Link href="/contact" className="theme-btn">Let's Connect</Link>
@@ -66,7 +68,9 @@ const Hero = () => {
                                         <div className="slide-title slide-title-slogan">
                                             <h2>Care and Craft in Every Detail</h2>
                                         </div>
-                                        <div className="clearfix"></div>
+                                        <div className="hero-separator">
+                                            <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="hero-h-logo" />
+                                        </div>
                                         <div className="slide-btns">
                                             <Link href="/shop" className="theme-btn">Shop Rentals</Link>
                                             <Link href="/contact" className="theme-btn">Let's Connect</Link>
