@@ -1814,6 +1814,16 @@
 	color: $text-color;
 }
 
+.showmenu .icon-bar {
+	background-color: $text-color !important;
+	width: 22px;
+	display: block;
+	height: 2px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	border-radius: 1px;
+}
+
 .mobileMenu {
 	display: none;
 }
@@ -1838,6 +1848,16 @@
 	}
 
 	.showmenu button span {
+		background-color: $text-color;
+		width: 22px;
+		display: block;
+		height: 2px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+		border-radius: 1px;
+	}
+
+	.showmenu .navbar-toggler .icon-bar {
 		background-color: $text-color;
 		width: 22px;
 		display: block;
