@@ -42,7 +42,7 @@ const Hero = () => {
                                         <div className="clearfix"></div>
                                         <div className="slide-btns">
                                             <Link href="/shop" className="theme-btn">Shop Rentals</Link>
-                                            <Link href="/contact" className="theme-btn theme-btn-s2">Let's Connect</Link>
+                                            <Link href="/contact" className="theme-btn">Let's Connect</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@ const Hero = () => {
                                         <div className="clearfix"></div>
                                         <div className="slide-btns">
                                             <Link href="/shop" className="theme-btn">Shop Rentals</Link>
-                                            <Link href="/contact" className="theme-btn theme-btn-s2">Let's Connect</Link>
+                                            <Link href="/contact" className="theme-btn">Let's Connect</Link>
                                         </div>
                                     </div>
                                 </div>
