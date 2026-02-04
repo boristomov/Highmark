@@ -6,6 +6,19 @@
     background: linear-gradient(to bottom, #E9E1D3 10%, rgba(233, 225, 211, 0.739) 100%);
     margin-bottom: 15vh;
 
+    @media (max-width: 1024px) {
+        height: auto;
+        min-height: auto;
+        margin-bottom: 8vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 640px) {
+        margin-bottom: 5vh;
+    }
+
     /* Top fade to visually transition from the hero into this section */
     &::before {
         content: "";
@@ -423,22 +436,62 @@
 @media (max-width: 1024px) {
     .content {
         grid-template-columns: 1fr;
-        height: min(88vh, 860px);
-        gap: 1.5rem;
-        transform: translateY(-6vh);
+        grid-template-rows: auto auto auto;
+        height: auto;
+        min-height: auto;
+        gap: 0;
+        transform: none;
+        padding: 40px 20px;
+        justify-items: center;
+        align-items: center;
     }
 
     .mapWrap {
-        height: min(65vh, 560px);
+        height: min(40vh, 320px);
+        width: 100%;
+        max-width: 500px;
+        margin-top: -50px;
+        order: 1;
+        justify-self: center;
+        transform: translateX(-25px);
+    }
+
+    .headerWrap {
+        order: 0;
+    }
+
+    .panelVisible {
+        order: 2;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .svg {
         transform: scale(1.5);
     }
 
+    .infoPanel {
+        margin-top: 60px;
+        margin-left: 0;
+        border-radius: 14px;
+        max-width: 420px;
+        padding: 24px 20px;
+        text-align: center;
+    }
+
+    .infoHeadline {
+        text-align: center;
+    }
+
+    .infoDesc {
+        text-align: center;
+    }
+
     .infoList {
         font-size: 15px;
         gap: 10px 16px;
+        justify-content: center;
 
         li {
             padding: 9px 18px;
@@ -447,19 +500,27 @@
 }
 
 @media (max-width: 640px) {
+    .content {
+        padding: 30px 16px 40px;
+    }
+
     .labelVisible {
         top: 4%;
     }
 
-    .infoPanel {
-        padding: 18px;
-        border-radius: 14px;
-        margin-top: -5vh;
-        margin-left: 0;
+    .mapWrap {
+        height: min(35vh, 280px);
+        max-width: 400px;
+        margin-top: -40px;
+        transform: translateX(-20px);
     }
 
-    .content {
-        transform: translateY(-4vh);
+    .infoPanel {
+        padding: 20px 16px;
+        border-radius: 12px;
+        margin-top: 50px;
+        max-width: 360px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
     }
 
     .svg {
@@ -467,11 +528,15 @@
     }
 
     .infoHeadline {
-        font-size: 32px;
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 12px;
     }
 
     .infoDesc {
-        font-size: 16px;
+        font-size: 14px;
+        text-align: center;
+        line-height: 1.5;
     }
 
     .infoList {

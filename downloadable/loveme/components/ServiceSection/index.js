@@ -63,26 +63,22 @@ const ServiceSection = (props) => {
             id: 'tent',
             title: 'Tents',
             image: '/images/boris/homepageServices/tent2.jpg',
-            fIcon1: 'flaticon-edit',
         },
         {
             id: 'chair',
             title: 'Chairs',
             image: '/images/boris/homepageServices/9.jpg',
-            fIcon1: 'flaticon-gallery',
         },
         {
             id: 'table',
             title: 'Tables',
             image: '/images/boris/homepageServices/french chairs pics 2.avif',
-            fIcon1: 'flaticon-serving-dish',
         },
         {
             // Linens live under "accessories" category in the database for now
             id: 'accessories',
             title: 'Linens',
             image: '/images/boris/homepageServices/4.jpg',
-            fIcon1: 'flaticon-wedding',
         },
     ];
 
@@ -91,7 +87,6 @@ const ServiceSection = (props) => {
         <section className={`wpo-service-section ${props.pbClass}`}>
             <div className="container-fluid">
                 <div className="wpo-section-title">
-                    <span>What We Offer</span>
                     <h2>Our Collections</h2>
                     <div className="section-title-img">
                         <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
@@ -105,7 +100,7 @@ const ServiceSection = (props) => {
                                     <Image src={withBasePath(category.image)} alt={category.title} width={1200} height={800} />
                                     <div className="wpo-service-text">
                                         <div className="s-icon">
-                                            <i className={`fi  ${category.fIcon1}`}></i>
+                                            <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="H" className="s-icon-h-logo" />
                                         </div>
                                         <Link onClick={ClickHandler} href={`/shop?category=${category.id}`}>{category.title}</Link>
                                     </div>

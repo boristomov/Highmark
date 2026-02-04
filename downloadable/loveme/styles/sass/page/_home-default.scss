@@ -99,19 +99,17 @@
 
 					&:before,
 					&:after {
-						position: absolute;
-						left: -60px;
-						top: 50%;
-						transform: translateY(-50%);
-						width: 40px;
-						height: 2px;
-						background: rgba(47, 47, 47, 0.8);
-						content: "";
+						display: none;
 					}
 
-					&:after {
-						left: auto;
-						right: -60px;
+					.s-icon-h-logo {
+						height: 36px;
+						width: auto;
+						opacity: 0.85;
+
+						@media(max-width:767px) {
+							height: 30px;
+						}
 					}
 
 					.fi {
@@ -735,6 +733,21 @@
 	.wpo-section-title {
 		display: none;
 	}
+
+	/* Inspiration grid: images only (no hover dark overlay/text) */
+	.wpo-portfolio-section {
+		.grid {
+			.img-holder {
+				&:before {
+					display: none !important;
+				}
+
+				.hover-content {
+					display: none !important;
+				}
+			}
+		}
+	}
 }
 
 
@@ -1314,25 +1327,24 @@
 
 		.wpo-contact-form-area {
 			padding: 60px 40px;
-			// border: 30px solid #cde0ef;
 			position: relative;
 			z-index: 99;
-			background: url(/images/boris/squarespacebackground.avif) no-repeat center center;
-			background-size: cover;
+			// Beige gradient background
+			background: linear-gradient(145deg, #D4C9B8 0%, #E9E1D3 50%, #C9BBA8 100%);
 
-			// liquid glass overlay for readability
+			// Lighter beige overlay - inner content frame
 			&:before {
 				content: "";
 				position: absolute;
-				left: 30px; // match border width to keep overlay inside
+				left: 30px;
 				right: 30px;
 				top: 30px;
 				bottom: 30px;
-				background: rgba(47, 47, 47, 0.3);
-				backdrop-filter: blur(6px);
-				-webkit-backdrop-filter: blur(6px);
+				background: rgba(255, 255, 255, 0.75);
+				backdrop-filter: blur(4px);
+				-webkit-backdrop-filter: blur(4px);
 				z-index: 0;
-				border-radius: 2px;
+				border-radius: 4px;
 			}
 
 			>* {
@@ -1340,24 +1352,72 @@
 				z-index: 1;
 			}
 
-			// improve contrast for inputs on dark overlay
+			// Form content needs padding to sit inside the white frame
+			.form {
+				padding: 0 20px;
+				
+				@media(max-width:767px) {
+					padding: 0 10px;
+				}
+			}
+
+			// Gray text for inputs on beige background
 			.form-control {
-				color: #fff;
-				border-bottom-color: rgba(255, 255, 255, 0.6);
+				color: #4a4a4a;
+				border-bottom-color: rgba(74, 74, 74, 0.3);
+				background: rgba(255, 255, 255, 0.4);
 			}
 
 			.form-control::placeholder {
-				color: rgba(255, 255, 255, 0.85);
+				color: rgba(74, 74, 74, 0.65);
 			}
 
+			// Gray text for section title
+			.wpo-section-title {
+				h2 {
+					color: #3a3a3a;
+				}
+				span {
+					color: #5a5a5a;
+				}
+			}
+
+			// Gray button text
+			.theme-btn-s3 {
+				background: #4a4a4a;
+				color: #E9E1D3;
+				
+				&:hover {
+					background: #3a3a3a;
+					color: #fff;
+				}
+			}
+
+			// Error text gray
+			.error-text {
+				color: #c44 !important;
+			}
 
 			@media(max-width:1200px) {
-				padding: 40px 20px;
+				padding: 50px 30px;
+				
+				&:before {
+					left: 20px;
+					right: 20px;
+					top: 20px;
+					bottom: 20px;
+				}
 			}
 
 			@media(max-width:575px) {
-				border-width: 10px;
-				padding: 20px 10px;
+				padding: 40px 20px;
+				
+				&:before {
+					left: 10px;
+					right: 10px;
+					top: 10px;
+					bottom: 10px;
+				}
 			}
 
 			.form {
@@ -1390,14 +1450,15 @@
 				height: 50px;
 				margin-bottom: 0;
 				border: 0;
-				border-bottom: 1px solid #E9E1D3;
-				background: transparent;
+				border-bottom: 1px solid rgba(74, 74, 74, 0.3);
+				background: rgba(255, 255, 255, 0.4);
 				border-radius: 0;
-				color: $theme-primary-color-s2;
+				color: #4a4a4a;
 
 				&:focus {
 					outline: none;
 					box-shadow: none;
+					border-bottom-color: rgba(74, 74, 74, 0.5);
 				}
 			}
 
@@ -1410,22 +1471,22 @@
 
 			.form {
 				p {
-					color: red;
+					color: #c44;
 				}
 			}
 
 			.form-control::-webkit-input-placeholder {
 				/* Edge */
-				color: $theme-primary-color-s2;
+				color: rgba(74, 74, 74, 0.65);
 			}
 
 			.form-control:-ms-input-placeholder {
 				/* Internet Explorer 10-11 */
-				color: $theme-primary-color-s2;
+				color: rgba(74, 74, 74, 0.65);
 			}
 
 			.form-control::placeholder {
-				color: $theme-primary-color-s2;
+				color: rgba(74, 74, 74, 0.65);
 			}
 
 

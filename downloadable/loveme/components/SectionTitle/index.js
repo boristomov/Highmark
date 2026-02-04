@@ -6,8 +6,8 @@ const SectionTitle = (props) => {
     return (
         <div className="row">
             <div className="wpo-section-title">
-                <span>{props.topTitle}</span>
-                <h2>{props.MainTitle}</h2>
+                {props.topTitle ? <span>{props.topTitle}</span> : null}
+                {props.MainTitle ? <h2>{props.MainTitle}</h2> : null}
                 <div className="section-title-img">
                     <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
                 </div>

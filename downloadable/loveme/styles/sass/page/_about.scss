@@ -309,12 +309,7 @@ Modern About Section Styling
 
         &::before,
         &::after {
-            content: "";
-            flex: 1 1 0;
-            max-width: 120px;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(229, 231, 235, 0) 0%, #e5e7eb 50%, rgba(229, 231, 235, 0) 100%);
-            opacity: 0.9;
+            display: none;
         }
     }
 

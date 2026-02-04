@@ -27,7 +27,7 @@ const REGION_META = {
     },
     napa: {
         title: 'NAPA VALLEY',
-        desc: 'Premium delivery to Napa Valley venues, including wineries and estates. White-glove setup and strike available.'
+        desc: 'Premium delivery to Napa Valley venues, including wineries and estates.'
     },
     sonoma: {
         title: 'SONOMA',

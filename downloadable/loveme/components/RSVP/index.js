@@ -124,8 +124,8 @@ const RSVP = () => {
         <section className="wpo-contact-section section-padding" id="RSVP">
             <div className="container">
                 <div className="wpo-contact-section-wrapper">
-                    <div className="wpo-contact-form-area" style={{ backgroundImage: `url(${withBasePath('/images/boris/squarespacebackground.avif')})` }}>
-                        <SectionTitle topTitle={"Let's Meet"} MainTitle={'Make an inquiry'} />
+                    <div className="wpo-contact-form-area">
+                        <SectionTitle MainTitle={"Let's Plan Your Event"} />
                         
                         {/* Success Message */}
                         {submitStatus === 'success' && (

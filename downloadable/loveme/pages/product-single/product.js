@@ -272,13 +272,39 @@ const ImageLightbox = ({ isOpen, onClose, imageUrl, imgBase, item, specification
 
 const Product = ({ item, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
+  const [quantityText, setQuantityText] = useState('1');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   
   // Parse product details/specifications (stored in short_description field)
   const specifications = useMemo(() => parseDetails(item.short_description), [item.short_description]);
 
   const handleQuantityChange = (delta) => {
-    setQuantity(prev => Math.max(1, prev + delta));
+    setQuantity(prev => {
+      const next = Math.max(1, prev + delta);
+      setQuantityText(String(next));
+      return next;
+    });
+  };
+
+  const handleQuantityInputChange = (e) => {
+    const value = e.target.value;
+    setQuantityText(value);
+    if (value === '') return;
+    const parsed = parseInt(value, 10);
+    if (!isNaN(parsed) && parsed > 0) {
+      setQuantity(parsed);
+    }
+  };
+
+  const handleQuantityInputBlur = () => {
+    const parsed = parseInt(quantityText, 10);
+    if (isNaN(parsed) || parsed < 1) {
+      setQuantity(1);
+      setQuantityText('1');
+      return;
+    }
+    setQuantity(parsed);
+    setQuantityText(String(parsed));
   };
 
   const handleAddToCart = () => {
@@ -524,15 +550,26 @@ const Product = ({ item, addToCart }) => {
               >
                 −
               </button>
-              <span style={{
-                width: '60px',
-                textAlign: 'center',
-                fontSize: '18px',
-                fontWeight: '500',
-                color: '#1B1B1B'
-              }}>
-                {quantity}
-              </span>
+              <input
+                value={quantityText}
+                type="number"
+                inputMode="numeric"
+                min="1"
+                onChange={handleQuantityInputChange}
+                onBlur={handleQuantityInputBlur}
+                aria-label="Quantity"
+                style={{
+                  width: '70px',
+                  height: '48px',
+                  textAlign: 'center',
+                  fontSize: '18px',
+                  fontWeight: '500',
+                  color: '#1B1B1B',
+                  border: 'none',
+                  outline: 'none',
+                  background: 'transparent',
+                }}
+              />
               <button
                 onClick={() => handleQuantityChange(1)}
                 style={{

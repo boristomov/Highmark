@@ -306,17 +306,13 @@
 }
 
 @media (max-width: 991px) {
-	.wpo-site-header {
-		/* class for show hide navigation */
-	}
-
 	.wpo-site-header .container {
 		width: 100%;
 		max-width: 100%;
 	}
 
 	.wpo-site-header .header-right {
-		right: -10px;
+		right: 0;
 	}
 
 	.wpo-site-header .navbar-header button span {
@@ -462,6 +458,10 @@
 	float: left;
 	position: relative;
 	margin-right: 8px;
+	
+	@media (max-width: 991px) {
+		margin-right: 0;
+	}
 }
 
 .wpo-site-header .header-right {
@@ -479,11 +479,11 @@
 
 @media (max-width: 450px) {
 	.wpo-site-header .header-right>div {
-		margin-right: 10px;
+		margin-right: 5px;
 	}
 
 	.wpo-site-header .header-right {
-		right: -30px;
+		right: 0;
 	}
 }
 
@@ -507,8 +507,9 @@
 	font-size: 18px;
 }
 
-.wpo-site-header .header-right .cart-toggle-btn {
-	@media(max-width:450px) {
+// On mobile: show cart, hide search
+.wpo-site-header .header-right .header-search-form-wrapper {
+	@media(max-width:991px) {
 		display: none;
 	}
 }
@@ -1444,12 +1445,33 @@
 
 
 
-// Mobile responsive logo sizing
+// Mobile responsive logo sizing and centering
 @media(max-width: 991px) {
 	.wpo-site-header .navbar-header .navbar-brand {
 		img {
 			max-width: 110px !important;
 		}
+	}
+	
+	// Position navigation as relative container
+	.wpo-site-header .navigation {
+		position: relative;
+	}
+	
+	// Absolutely center the navbar-header (logo) in the navigation
+	.wpo-site-header .navbar-header {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 10;
+		text-align: center;
+	}
+	
+	// Keep header-right within the glass
+	.wpo-site-header .header-right {
+		right: 0;
+		margin-right: 0;
 	}
 }
 

@@ -9,7 +9,6 @@ const VideoSection = (props) => {
             <div className="container">
                 <div className="row">
                     <div className="wpo-section-title">
-                        <span>About Us</span>
                         <h2>We Are Highmark</h2>
                         <div className="section-title-img">
                             <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />

@@ -311,6 +311,9 @@ const CartPage = (props) => {
                                             </li>
                                         </ul>
                                     </div>
+                                    <p className="cart-pricing-note">
+                                        Each quote is tailored to your event. Quoted pricing will reflect applicable tax, labor, and delivery, with full details provided via email after your request is reviewed.
+                                    </p>
 
                                     {/* Quote Request Form */}
                                     <div className="quote-request-section" style={{ marginTop: '60px', padding: '40px', background: 'linear-gradient(135deg, rgba(233, 225, 211, 0.4) 0%, rgba(212, 201, 184, 0.3) 100%)', borderRadius: '12px' }}>
