@@ -4,7 +4,7 @@ const Projects = [
         // Keep slug field for backwards compatibility (no longer linked from Inspiration)
         slug: 'classic-seaside-wedding',
         title: 'Classic Seaside Wedding',
-        pimg1: '/images/boris/homepageServices/1.jpg',
+        pimg1: '/images/boris/homepageServices/3.jpg',
         blurb: 'A crisp coastal palette with airy textures—keep it timeless with light linens, natural woods, and a clean ceremony layout.',
         items: [
             'Crossback Chair - Natural',
@@ -17,7 +17,7 @@ const Projects = [
         id: '2',
         slug: 'garden-party-greenery',
         title: 'Garden Party Greenery',
-        pimg1: '/images/boris/homepageServices/10.jpg',
+        pimg1: '/images/boris/homepageServices/6.jpg',
         blurb: 'Lean into lush greens and soft neutrals—mix warm wood seating with simple tables and let florals do the talking.',
         items: [
             'Crossback Chair - Mahogany',
@@ -95,7 +95,33 @@ const Projects = [
         id: '8',
         slug: 'clean-clear-contemporary',
         title: 'Clean & Contemporary (Clear Acrylic)',
-        pimg1: '/images/boris/homepageServices/11marc.jpg',
+        pimg1: '/images/boris/homepageServices/8.jpg',
+        blurb: 'Let the space shine—transparent seating keeps everything feeling open while still reading “luxury” in photos.',
+        items: [
+            'Ghost Chair - Clear',
+            'Napoleon Chair - Clear',
+            '60" Round Tables',
+            'Crisp linens + minimal place settings (Linens)'
+        ]
+    },
+    {
+        id: '8',
+        slug: 'clean-clear-contemporary',
+        title: 'Clean & Contemporary (Clear Acrylic)',
+        pimg1: '/images/boris/homepageServices/5.jpg',
+        blurb: 'Let the space shine—transparent seating keeps everything feeling open while still reading “luxury” in photos.',
+        items: [
+            'Ghost Chair - Clear',
+            'Napoleon Chair - Clear',
+            '60" Round Tables',
+            'Crisp linens + minimal place settings (Linens)'
+        ]
+    },
+    {
+        id: '8',
+        slug: 'clean-clear-contemporary',
+        title: 'Clean & Contemporary (Clear Acrylic)',
+        pimg1: '/images/boris/homepageServices/4.jpg',
         blurb: 'Let the space shine—transparent seating keeps everything feeling open while still reading “luxury” in photos.',
         items: [
             'Ghost Chair - Clear',

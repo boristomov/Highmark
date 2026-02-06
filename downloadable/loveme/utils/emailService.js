@@ -93,8 +93,7 @@ export const sendQuoteEmail = async (formData, cartItems, totals) => {
 
         // Totals
         subtotal: `$${totals.subtotal.toFixed(2)}`,
-        tax: `$${totals.tax.toFixed(2)}`,
-        total: `$${totals.total.toFixed(2)}`,
+        total: `$${totals.subtotal.toFixed(2)}`,
 
         // Additional notes
         order_notes: formData.note || 'None',

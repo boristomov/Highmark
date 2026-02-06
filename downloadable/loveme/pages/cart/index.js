@@ -28,9 +28,6 @@ const CartPage = (props) => {
 
     // Pricing calculations
     const subTotal = totalPrice(carts);
-    const taxRate = 0.0725;
-    const taxAmount = +(subTotal * taxRate).toFixed(2);
-    const grandTotal = +(subTotal + taxAmount).toFixed(2);
 
     // Quote form state
     const [quoteForm, setQuoteForm] = React.useState({
@@ -101,7 +98,7 @@ const CartPage = (props) => {
                 const result = await sendQuoteEmail(
                     quoteForm,
                     carts,
-                    { subtotal: subTotal, tax: taxAmount, total: grandTotal }
+                    { subtotal: subTotal }
                 );
 
                 if (result.success) {
@@ -137,9 +134,7 @@ const CartPage = (props) => {
                     lines.push(`- ${it.title} x ${it.qty} @ $${it.price}/ea = $${(it.qty * it.price).toFixed(2)}`);
                 });
                 lines.push('');
-                lines.push(`Subtotal: $${subTotal.toFixed(2)}`);
-                lines.push(`Tax (7.25%): $${taxAmount.toFixed(2)}`);
-                lines.push(`Total: $${grandTotal.toFixed(2)}`);
+                lines.push(`Total: $${subTotal.toFixed(2)}`);
 
                 const subject = encodeURIComponent('Highmark Rentals Quote Request');
                 const body = encodeURIComponent(lines.join('\n'));
@@ -297,22 +292,13 @@ const CartPage = (props) => {
                                             <li>
                                                 Total product<span>( {carts.length} )</span>
                                             </li>
-                                            <li>
-                                                Price<span>${subTotal}</span>
-                                            </li>
-                                            <li>
-                                                Tax (7.25%)<span>${taxAmount}</span>
-                                            </li>
-                                            <li>
-                                                Delivery<span>TBD - available in return email upon sending a quote request</span>
-                                            </li>
                                             <li className="cart-b">
-                                                <strong>Total Price (excluding Delivery)</strong><span><strong>${grandTotal}</strong></span>
+                                                <strong>Total Price</strong><span><strong>${subTotal}</strong></span>
                                             </li>
                                         </ul>
                                     </div>
                                     <p className="cart-pricing-note">
-                                        Each quote is tailored to your event. Quoted pricing will reflect applicable tax, labor, and delivery, with full details provided via email after your request is reviewed.
+                                        Each quote is tailored to your event. Quoted pricing will reflect applicable tax, labor, delivery, with full details provided via email after your request is reviewed.
                                     </p>
 
                                     {/* Quote Request Form */}

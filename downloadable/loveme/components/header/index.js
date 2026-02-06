@@ -154,13 +154,16 @@ class Header extends Component {
                         className={`mini-cart-content ${isCartShow ? "mini-cart-content-toggle" : ""
                           }`}
                       >
-                        <button
-                          onClick={this.cartHandler}
-                          className="mini-cart-close"
-                          title="Hide cart"
-                        >
-                          {/* <i className="ti-close"></i> */}
-                        </button>
+                        <div className="mini-cart-header">
+                          <span className="mini-cart-title">Your Cart</span>
+                          <button
+                            onClick={this.cartHandler}
+                            className="mini-cart-close"
+                            title="Close cart"
+                          >
+                            <i className="ti-close"></i>
+                          </button>
+                        </div>
                         <div className="mini-cart-items">
                           {carts &&
                             carts.length > 0 &&
@@ -190,24 +193,13 @@ class Header extends Component {
                               </div>
                             ))}
                         </div>
-                        <div className="mini-cart-action clearfix">
+                        <div className="mini-cart-action">
                           <span className="mini-checkout-price">
                             Total: ${totalPrice(carts)}
                           </span>
                           <div className="mini-btn">
-                            <Link onClick={ClickHandler} href="/cart" className="view-cart-btn">View Cart</Link>
+                            <Link onClick={ClickHandler} href="/cart" className="checkout-btn">Checkout</Link>
                           </div>
-                          <button
-                            type="button"
-                            className={`mini-cart-bottom-close ${this.state.isCartClosingAnim ? 'spinning' : ''}`}
-                            onClick={this.closeCartWithSpin}
-                            title="Close cart"
-                          >
-                            <i className="ti-close"></i>
-                          </button>
-                        </div>
-                        <div className="visible-icon">
-                          <img src={withBasePath('/images/love.png')} alt="icon" />
                         </div>
                       </div>
                     </div>
