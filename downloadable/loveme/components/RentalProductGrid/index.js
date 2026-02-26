@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './RentalProductGrid.module.scss';
 import { withBasePath } from '../../utils/basePath';
 
-const RentalProductGrid = ({ products, addToCartProduct, loading }) => {
+const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery }) => {
     if (loading) {
         return (
             <section className={styles.productSection}>
@@ -21,8 +21,16 @@ const RentalProductGrid = ({ products, addToCartProduct, loading }) => {
             <section className={styles.productSection}>
                 <div className="container">
                     <div className={styles.noProducts}>
-                        <h3>No products found in this category</h3>
-                        <p>Please check back later or select a different category.</p>
+                        <h3>
+                            {searchQuery
+                                ? `No products match "${searchQuery}"`
+                                : "No products found in this category"}
+                        </h3>
+                        <p>
+                            {searchQuery
+                                ? "Try a different search term or clear the search to browse all items."
+                                : "Please check back later or select a different category."}
+                        </p>
                     </div>
                 </div>
             </section>

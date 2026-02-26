@@ -1818,10 +1818,49 @@
 	cursor: pointer;
 }
 
+.mobile-menu-search {
+	padding: 16px 20px 20px;
+	form {
+		display: flex;
+		align-items: center;
+		gap: 0;
+		background: #fff;
+		border: 1.5px solid #D4C9B8;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 2px 8px rgba(27, 27, 27, 0.04);
+	}
+	input {
+		flex: 1;
+		border: none;
+		padding: 14px 18px;
+		font-size: 15px;
+		background: transparent;
+		&::placeholder {
+			color: rgba(47, 47, 47, 0.45);
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+	button {
+		padding: 14px 18px;
+		background: transparent;
+		border: none;
+		border-left: 1px solid rgba(212, 201, 184, 0.5);
+		color: rgba(47, 47, 47, 0.7);
+		font-size: 18px;
+		cursor: pointer;
+		&:active {
+			opacity: 0.8;
+		}
+	}
+}
+
 .responsivemenu {
 	list-style: none;
 	padding-left: 0;
-	padding-top: 30px;
+	padding-top: 16px;
 }
 
 .responsivemenu li a,

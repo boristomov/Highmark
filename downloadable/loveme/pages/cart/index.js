@@ -205,7 +205,6 @@ const CartPage = (props) => {
                                                     <th className="product-2">Product Name</th>
                                                     <th className="pr">Quantity</th>
                                                     <th className="ptice">Price</th>
-                                                    <th className="stock">Total Price</th>
                                                     <th className="remove remove-b">Action</th>
                                                 </tr>
                                             </thead>
@@ -222,8 +221,6 @@ const CartPage = (props) => {
                                                                     <li className="first-cart">
                                                                         {catItem.title}
                                                                     </li>
-                                                                    <li>Brand : {catItem.brand}</li>
-                                                                    <li>Size : {catItem.size}</li>
                                                                 </ul>
                                                             </td>
                                                             <td className="stock">
@@ -256,7 +253,6 @@ const CartPage = (props) => {
                                                                 </div>
                                                             </td>
                                                             <td className="ptice">${catItem.qty * catItem.price}</td>
-                                                            <td className="stock">${catItem.qty * catItem.price}</td>
                                                             <td className="action">
                                                                 <ul>
                                                                     <li
@@ -293,11 +289,11 @@ const CartPage = (props) => {
                                                 Total product<span>( {carts.length} )</span>
                                             </li>
                                             <li className="cart-b">
-                                                <strong>Total Price</strong><span><strong>${subTotal}</strong></span>
+                                                <strong>Price</strong><span><strong>${subTotal}</strong></span>
                                             </li>
                                         </ul>
                                     </div>
-                                    <p className="cart-pricing-note">
+                                    <p className="cart-pricing-note" style={{ fontSize: '16px', fontWeight: '700' }}>
                                         Each quote is tailored to your event. Quoted pricing will reflect applicable tax, labor, delivery, with full details provided via email after your request is reviewed.
                                     </p>
 

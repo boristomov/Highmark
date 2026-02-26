@@ -34,9 +34,12 @@ const ShopPage = (props) => {
     }
   }, [router.isReady, router.query?.category]);
 
-  // Auto-scroll to items grid when a category is selected
+  // Search term from URL (?search=...)
+  const searchQuery = (router.query?.search || "").toString().trim();
+
+  // Auto-scroll to items grid when a category is selected or search is applied
   useEffect(() => {
-    if (!selectedCategory) return;
+    if (!selectedCategory && !searchQuery) return;
     if (loading) return;
     // wait for layout/paint
     requestAnimationFrame(() => {
@@ -45,19 +48,63 @@ const ShopPage = (props) => {
       const top = el.getBoundingClientRect().top + window.scrollY - scrollOffset;
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
     });
-  }, [selectedCategory, loading]);
+  }, [selectedCategory, searchQuery, loading]);
 
-  // Filter products when category changes
+  // Filter products when category or search changes (regex match on search)
   useEffect(() => {
+    let filtered = products;
+
+    // Category filter
     if (selectedCategory) {
-      const filtered = products.filter(
-        (product) => product.category === selectedCategory
-      );
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(products);
+      filtered = filtered.filter((p) => p.category === selectedCategory);
     }
-  }, [selectedCategory, products]);
+
+    // Search filter: regex match + relevance sort (better fits first)
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase().trim();
+      const categoryMap = { chair: "chair", chairs: "chair", table: "table", tables: "table", tent: "tent", tents: "tent", accessory: "accessories", accessories: "accessories", linen: "accessories", linens: "accessories" };
+      const exactCategory = categoryMap[q] || (["chair", "table", "tent", "accessories"].includes(q) ? q : null);
+      // When search is exactly a category name (e.g. "table"), only show that category
+      if (exactCategory) {
+        filtered = filtered.filter((p) => (p.category || "").toLowerCase() === exactCategory);
+      } else {
+        const escaped = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(escaped, "i");
+        const wordRegex = new RegExp(`\\b${escaped}\\b`, "i");
+
+        const scoreProduct = (p) => {
+          const name = (p.name || "").toString();
+          const desc = (p.description || "").toString();
+          const shortDesc = (p.short_description || "").toString();
+          const sku = (p.sku || "").toString();
+          const cat = (p.category || "").toString();
+          const tags = Array.isArray(p.tags) ? p.tags : [];
+
+          let score = 0;
+          if (regex.test(name)) {
+            score += 100;
+            if (name.toLowerCase().startsWith(q)) score += 30;
+            else if (wordRegex.test(name)) score += 15;
+          }
+          if (regex.test(sku)) score += 90;
+          if (regex.test(cat)) score += 70;
+          if (tags.some((t) => regex.test(String(t)))) score += 60;
+          if (regex.test(shortDesc)) score += 40;
+          if (regex.test(desc)) score += 20;
+
+          return score;
+        };
+
+        const withScores = filtered.map((p) => ({ p, score: scoreProduct(p) }));
+        filtered = withScores
+          .filter(({ score }) => score > 0)
+          .sort((a, b) => b.score - a.score)
+          .map(({ p }) => p);
+      }
+    }
+
+    setFilteredProducts(filtered);
+  }, [selectedCategory, products, searchQuery]);
 
   const fetchProducts = async () => {
     try {
@@ -116,6 +163,12 @@ const ShopPage = (props) => {
     router.replace({ pathname: "/shop", query: nextQuery }, undefined, { shallow: true });
   };
 
+  const clearSearch = () => {
+    const nextQuery = { ...router.query };
+    delete nextQuery.search;
+    router.replace({ pathname: "/shop", query: nextQuery }, undefined, { shallow: true });
+  };
+
   return (
     <Fragment>
       <Navbar alwaysWhite withOffsetBand />
@@ -126,11 +179,33 @@ const ShopPage = (props) => {
         onCategorySelect={handleCategorySelect}
       />
 
+      {searchQuery && (
+        <div style={{
+          maxWidth: 1200, margin: "0 auto 20px", padding: "0 20px",
+          display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap"
+        }}>
+          <span style={{ color: "rgba(47,47,47,0.8)", fontSize: 15 }}>
+            Search results for &ldquo;{searchQuery}&rdquo; ({filteredProducts.length} item{filteredProducts.length !== 1 ? "s" : ""})
+          </span>
+          <button
+            type="button"
+            onClick={clearSearch}
+            style={{
+              padding: "6px 14px", fontSize: 13, background: "#E9E1D3", border: "1px solid #D4C9B8",
+              borderRadius: 4, cursor: "pointer", color: "#1B1B1B"
+            }}
+          >
+            Clear search
+          </button>
+        </div>
+      )}
+
       <div ref={productGridRef}>
         <RentalProductGrid
           products={filteredProducts}
           addToCartProduct={addToCartProduct}
           loading={loading}
+          searchQuery={searchQuery}
         />
       </div>
 

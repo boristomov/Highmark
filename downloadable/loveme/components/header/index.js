@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Link from "next/link";
+import Router from "next/router";
 import MobileMenu from "../../components/MobileMenu";
 import { removeFromCart } from "../../store/actions/action";
 import { totalPrice } from "../../utils";
@@ -13,6 +14,8 @@ class Header extends Component {
     isCartShow: false,
     isCartClosingAnim: false,
   }
+
+  searchInputRef = React.createRef();
 
   searchHandler = () => {
     this.setState({
@@ -40,7 +43,12 @@ class Header extends Component {
     const { isSearchShow, isCartShow } = this.state;
 
     const SubmitHandler = (e) => {
-      e.preventDefault()
+      e.preventDefault();
+      const term = this.searchInputRef.current?.value?.trim() || "";
+      this.setState({ isSearchShow: false });
+      const query = term ? { search: term } : {};
+      Router.push({ pathname: "/shop", query }, undefined, { shallow: false });
+      if (this.searchInputRef.current) this.searchInputRef.current.value = "";
     }
 
     const ClickHandler = () => {
@@ -132,8 +140,13 @@ class Header extends Component {
                         <div className={`header-search-form ${isSearchShow ? 'header-search-content-toggle' : ''}`}>
                           <form onSubmit={SubmitHandler}>
                             <div>
-                              <input type="text" className="form-control"
-                                placeholder="Search here..." />
+                              <input
+                                ref={this.searchInputRef}
+                                type="text"
+                                className="form-control"
+                                placeholder="Search shop..."
+                                aria-label="Search products"
+                              />
                               <button type="submit"><i
                                 className="fi flaticon-search"></i></button>
                             </div>

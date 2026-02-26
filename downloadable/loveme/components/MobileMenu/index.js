@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Collapse, CardBody, Card } from 'reactstrap';
-import  Link  from 'next/link'
+import Link from 'next/link';
+import Router from 'next/router';
 
 const menus = [
     {
@@ -38,6 +39,8 @@ export default class MobileMenu extends Component {
         isOpen: 0,
     }
 
+    searchInputRef = React.createRef();
+
     menuHandler = () => {
         this.setState({
             isMenuShow: !this.state.isMenuShow
@@ -54,15 +57,39 @@ export default class MobileMenu extends Component {
 
         const { isMenuShow, isOpen } = this.state;
 
-        const ClickHandler = () =>{
+        const ClickHandler = () => {
             window.scrollTo(10, 0);
-         }
+        };
+
+        const handleSearchSubmit = (e) => {
+            e.preventDefault();
+            const term = this.searchInputRef.current?.value?.trim() || "";
+            this.menuHandler();
+            if (term) {
+                Router.push({ pathname: "/shop", query: { search: term } }, undefined, { shallow: false });
+            }
+            if (this.searchInputRef.current) this.searchInputRef.current.value = "";
+        };
 
         return (
             <div>
                 <div className={`mobileMenu ${isMenuShow ? 'show' : ''}`}>
                     <div className="menu-close">
                          <div className="clox" onClick={this.menuHandler}><i className="ti-close"></i></div>
+                    </div>
+
+                    <div className="mobile-menu-search">
+                        <form onSubmit={handleSearchSubmit}>
+                            <input
+                                ref={this.searchInputRef}
+                                type="text"
+                                placeholder="Search shop..."
+                                aria-label="Search products"
+                            />
+                            <button type="submit" aria-label="Search">
+                                <i className="ti-search"></i>
+                            </button>
+                        </form>
                     </div>
 
                     <ul className="responsivemenu">

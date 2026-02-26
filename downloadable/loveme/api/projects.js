@@ -129,6 +129,62 @@ const Projects = [
             '60" Round Tables',
             'Crisp linens + minimal place settings (Linens)'
         ]
+    },
+    {
+        id: '9',
+        slug: 'chiavari-brown',
+        title: 'Chiavari Chair - Brown',
+        pimg1: '/images/boris/homepageServices/chiavari chairs pics - brown.avif',
+        blurb: 'Warm wood tones bring classic elegance to any event—pair with natural linens and greenery for a timeless look.',
+        items: ['Chiavari Chair - Brown', '60" Round Tables', 'Natural linens']
+    },
+    {
+        id: '10',
+        slug: 'chiavari-gold',
+        title: 'Chiavari Chair - Gold',
+        pimg1: '/images/boris/homepageServices/chiavari chairs pics - gold.avif',
+        blurb: 'Metallic gold adds a touch of luxury—ideal for formal receptions and evening celebrations.',
+        items: ['Chiavari Chair - Gold', '60" Round Tables', 'Champagne linens']
+    },
+    {
+        id: '11',
+        slug: 'chiavari-gold-alt',
+        title: 'Chiavari Chair - Gold (Alt)',
+        pimg1: '/images/boris/homepageServices/chiavari chairs pics - gold (1).avif',
+        blurb: 'Another angle on our popular gold chiavari—elevate your tablescape with warm metallic accents.',
+        items: ['Chiavari Chair - Gold', '72" Round Tables', 'Ivory linens']
+    },
+    {
+        id: '12',
+        slug: 'chiavari-gold-2',
+        title: 'Chiavari Chair - Gold Style 2',
+        pimg1: '/images/boris/homepageServices/chiavari chairs pics - gold 2.avif',
+        blurb: 'Rich gold chiavari styling for black-tie and formal events.',
+        items: ['Chiavari Chair - Gold', 'Cocktail Tables', 'Layered linens']
+    },
+    {
+        id: '13',
+        slug: 'french-chairs',
+        title: 'French Chairs',
+        pimg1: '/images/boris/homepageServices/french chairs pics.avif',
+        blurb: 'Classic French-style chairs bring romance and sophistication to ceremonies and receptions.',
+        items: ['French Chair', '6\' Rectangular Tables', 'Lace or linen runners']
+    },
+    {
+        id: '14',
+        slug: 'resin-folding-white',
+        title: 'Resin Folding Chair - White',
+        pimg1: '/images/boris/homepageServices/resin folding chair pics - white.avif',
+        blurb: 'Clean white resin chairs—weather-resistant and versatile for indoor or outdoor seating.',
+        items: ['Resin Folding Chair - White', 'Ceremony seating', 'Outdoor events']
+    },
+    {
+        id: '15',
+        slug: 'resin-folding-white-2',
+        title: 'Resin Folding Chair - White (Alt)',
+        pimg1: '/images/boris/homepageServices/resin folding chair pics - white 2.avif',
+        blurb: 'Another look at our white resin folding chairs—practical elegance for any venue.',
+        items: ['Resin Folding Chair - White', 'Banquet seating', 'Simple table settings']
     }
 ]
 export default Projects;
