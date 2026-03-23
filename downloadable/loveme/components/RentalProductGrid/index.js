@@ -27,22 +27,12 @@ const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery, s
                 <section className={styles.productSection}>
                     <div className="container">
                         <div className={styles.linensPartner}>
-                            <h3>Linens &amp; fabric swatches</h3>
+                            <h3>Linen &amp; fabric collection</h3>
                             <p className={styles.linensLead}>
-                                We partner with{' '}
-                                <a
-                                    href={BRIDAL_LINENS_URL}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.linensLink}
-                                >
-                                    Bridal Linens
-                                </a>
-                                —browse their full range of fabrics, colors, and patterns to choose what fits your event.
+                                Explore our linen collection, thoughtfully selected to complement a range of event styles, fabrics, and color palettes.
                             </p>
                             <p className={styles.linensNote}>
-                                When you submit a quote request from your cart, please list your fabric names, colors, and any style preferences in the{' '}
-                                <strong>additional notes</strong> field. Our team will confirm availability and follow up with tailored pricing.
+                                When submitting a quote request from your cart, please include your preferred fabric names, colors, and any styling details in the additional notes. Our team will confirm availability and provide tailored pricing.
                             </p>
                             <a
                                 href={BRIDAL_LINENS_URL}
@@ -50,7 +40,7 @@ const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery, s
                                 rel="noopener noreferrer"
                                 className={styles.linensCta}
                             >
-                                Browse Bridal Linens
+                                Explore our linens collection
                             </a>
                         </div>
                     </div>

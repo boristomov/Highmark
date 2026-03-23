@@ -428,6 +428,10 @@
 	z-index: 1;
 	overflow-x: clip;
 
+	.container {
+		position: relative;
+	}
+
 	&::before {
 		background: linear-gradient(180deg, #f5f0e8 0%, #ebe4d8 40%, #e9e1d3 100%);
 		background-image: none;
@@ -438,18 +442,24 @@
 		background: linear-gradient(to bottom, #e9e1d3 0%, rgba(245, 240, 232, 0) 100%);
 	}
 
-	/* Full-viewport-width fade under the photo (container is narrow; bleed to both edges) */
+	/* Subtle beige fade under photo into blurb (full viewport width) */
 	.container::after {
+		display: block;
+		content: "";
+		position: absolute;
 		left: 50%;
 		margin-left: -50vw;
+		bottom: 0;
 		width: 100vw;
 		max-width: none;
-		height: 240px;
+		height: 140px;
+		pointer-events: none;
+		z-index: 1;
 		background: linear-gradient(
 			to top,
-			#f5f0e8 0%,
-			rgba(245, 240, 232, 0.92) 35%,
-			rgba(245, 240, 232, 0.45) 70%,
+			#e9e1d3 0%,
+			rgba(233, 225, 211, 0.75) 40%,
+			rgba(245, 240, 232, 0.35) 75%,
 			rgba(245, 240, 232, 0) 100%
 		);
 	}
@@ -472,7 +482,12 @@
 		}
 	}
 
-	/* Stable layout: width from %, height from width×aspect — capped with svh (not vh) to limit mobile URL-bar jump */
+	/* No blue video overlay on light “We Are Highmark” block */
+	.wpo-video-img::before {
+		display: none;
+	}
+
+	/* Stable layout: keep true 3:4 — when max-height would bind, shrink width so the frame never goes “too wide” (beige strip on the right) */
 	.wpo-video-img--portrait {
 		display: flex;
 		justify-content: center;
@@ -481,50 +496,62 @@
 		min-height: 0;
 	}
 
+	/*
+	 * Explicit width + height (no aspect-ratio): some engines keep a too-wide box when
+	 * aspect-ratio + width fight max-height, which shows #e9e1d3 on the sides.
+	 * --wm / --hm cap size; used width is always ≤ height×3/4 for true 3:4 portrait.
+	 */
 	.who-we-are-photo-frame {
+		--hm: min(82vh, 880px);
+		--wm: min(75%, 520px, 94vw);
 		position: relative;
-		width: min(75%, 520px);
+		/* Fallback sizing if nested min(var)/calc is ignored (photo frame collapses to 0) */
+		width: min(75%, 520px, 94vw);
+		height: #{"calc(min(75%, 520px, 94vw) * 1.3333333333)"};
+		/* Precise 3:4 with viewport height cap (overrides fallback when supported) */
+		width: #{"min(var(--wm), calc(var(--hm) * 0.75))"};
+		height: #{"calc(min(var(--wm), calc(var(--hm) * 0.75)) * 1.3333333333)"};
 		max-width: min(94vw, 520px);
 		margin-inline: auto;
 		box-sizing: border-box;
 		border: 2px solid #d4c9b8;
 		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 245, 240, 0.98) 100%);
+		background: #e9e1d3;
 		overflow: hidden;
-		aspect-ratio: 3 / 4;
-		max-height: min(82vh, 880px);
-
-		/* Next/Image fill: span fills the frame */
-		> span {
-			display: block !important;
-			position: absolute !important;
-			inset: 0 !important;
-			width: 100% !important;
-			height: 100% !important;
-			margin: 0 !important;
-		}
+		line-height: 0;
+		flex-shrink: 0;
 	}
 
 	.who-we-are-photo-img {
+		position: absolute;
+		/* Slight overscan kills 1px/subpixel beige at edges after transforms */
+		left: -3%;
+		top: -2%;
+		width: 106%;
+		height: 104%;
 		object-fit: cover;
-		object-position: center 22%;
+		object-position: center 20%;
+		z-index: 0;
+		transform: scale(1.08);
+		transform-origin: center 24%;
 	}
 
 	@media (max-width: 767px) {
 		.who-we-are-photo-img {
 			object-position: center top;
+			transform: scale(1.04);
+			transform-origin: center 12%;
 		}
 
 		.who-we-are-photo-frame {
-			width: min(88%, 520px);
-			max-width: min(94vw, 520px);
+			--wm: min(88%, 520px, 94vw);
 		}
 	}
 }
 
 @supports (height: 1svh) {
 	.wpo-video-section.wpo-video-section--light .who-we-are-photo-frame {
-		max-height: min(82svh, 880px);
+		--hm: min(82svh, 880px);
 	}
 }
 

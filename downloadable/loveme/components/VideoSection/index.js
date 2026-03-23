@@ -1,9 +1,14 @@
 import React from 'react'
-import marJennyPic from '../../public/images/boris/marc-jenny-homepage-pic.jpeg'
-import Image from 'next/image'
-import { withBasePath } from '../../utils/basePath'
+import { useRouter } from 'next/router'
+
+/** Path under `public/` (leading slash). Prefix with router.basePath so URLs match Next dev + static export + GitHub Pages. */
+const MARC_JENNY_PHOTO = '/images/boris/marc-jenny-homepage-pic.jpeg'
+const H_LOGO = '/images/boris/highmark-h-logo.png'
 
 const VideoSection = (props) => {
+    const { basePath = '' } = useRouter()
+    const asset = (path) => `${basePath}${path}`
+
     return (
         <section className="wpo-video-section wpo-video-section--light section-padding">
             <div className="container">
@@ -11,21 +16,19 @@ const VideoSection = (props) => {
                     <div className="wpo-section-title">
                         <h2>We Are Highmark</h2>
                         <div className="section-title-img">
-                            <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
+                            <img src={asset(H_LOGO)} alt="Highmark" className="section-title-h-logo" />
                         </div>
                     </div>
                 </div>
                 <div className="wpo-video-item">
                     <div className="wpo-video-img wpo-video-img--portrait">
-                        {/* Fixed aspect + explicit box avoids vh jump when mobile chrome shows/hides */}
+                        {/* Native img fills aspect-ratio box cleanly (no Next/Image fill wrapper bezel) */}
                         <div className="who-we-are-photo-frame">
-                            <Image
-                                src={marJennyPic}
+                            <img
+                                src={asset(MARC_JENNY_PHOTO)}
                                 alt="Marc and Jenny, founders of Highmark Event Rentals"
-                                fill
-                                sizes="(max-width: 576px) 94vw, (max-width: 992px) 75vw, 520px"
                                 className="who-we-are-photo-img"
-                                priority
+                                decoding="async"
                             />
                         </div>
                     </div>
