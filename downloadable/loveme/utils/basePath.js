@@ -1,4 +1,4 @@
-// Get the base path for static assets (used for GitHub Pages deployment)
+// In dev, next.config.js `env` forces this to "" so localhost works even if .env.local has /RepoName for CI parity.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export default basePath;

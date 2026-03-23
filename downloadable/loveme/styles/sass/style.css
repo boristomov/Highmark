@@ -6286,20 +6286,12 @@ static-hero-s4
   min-height: 0;
 }
 .wpo-video-section.wpo-video-section--light {
-  /*
-   * Explicit width + height (no aspect-ratio): some engines keep a too-wide box when
-   * aspect-ratio + width fight max-height, which shows #e9e1d3 on the sides.
-   * --wm / --hm cap size; used width is always ≤ height×3/4 for true 3:4 portrait.
-   */
+  /* Desktop: wider cropped frame so the couple fills more of the viewport. Aspect kept at 4:5 (wide portrait). */
 }
 .wpo-video-section.wpo-video-section--light .who-we-are-photo-frame {
-  --hm: min(82vh, 880px);
-  --wm: min(75%, 520px, 94vw);
   position: relative;
-  /* Pass through as literal CSS — Sass otherwise “simplifies” calc() inside min() and breaks sizing */
-  width: min(var(--wm), calc(var(--hm) * 0.75));
-  height: calc(min(var(--wm), calc(var(--hm) * 0.75)) * 1.3333333333);
-  max-width: min(94vw, 520px);
+  width: min(62%, 660px);
+  max-width: 94vw;
   margin-inline: auto;
   box-sizing: border-box;
   border: 2px solid #d4c9b8;
@@ -6307,37 +6299,58 @@ static-hero-s4
   background: #e9e1d3;
   overflow: hidden;
   line-height: 0;
-  flex-shrink: 0;
+  aspect-ratio: 4/5;
 }
 .wpo-video-section.wpo-video-section--light .who-we-are-photo-img {
   position: absolute;
-  /* Slight overscan kills 1px/subpixel beige at edges after transforms */
-  left: -3%;
-  top: -2%;
-  width: 106%;
-  height: 104%;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  border-radius: 0 !important;
+  display: block;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 18%;
   z-index: 0;
-  transform: scale(1.08);
-  transform-origin: center 24%;
+  transform: scale(1.06);
+  transform-origin: center 22%;
+}
+.wpo-video-section.wpo-video-section--light {
+  /* Tablet */
+}
+@media (max-width: 991px) {
+  .wpo-video-section.wpo-video-section--light .who-we-are-photo-frame {
+    width: min(72%, 580px);
+  }
+}
+.wpo-video-section.wpo-video-section--light {
+  /* Mobile */
 }
 @media (max-width: 767px) {
+  .wpo-video-section.wpo-video-section--light .who-we-are-photo-frame {
+    width: min(88%, 520px);
+    aspect-ratio: 3/4;
+  }
   .wpo-video-section.wpo-video-section--light .who-we-are-photo-img {
     object-position: center top;
-    transform: scale(1.04);
-    transform-origin: center 12%;
+    transform: scale(1.03);
+    transform-origin: center 14%;
   }
+}
+.wpo-video-section.wpo-video-section--light {
+  /* Small phones */
+}
+@media (max-width: 480px) {
   .wpo-video-section.wpo-video-section--light .who-we-are-photo-frame {
-    --wm: min(88%, 520px, 94vw);
+    width: min(94vw, 440px);
   }
 }
 
-@supports (height: 1svh) {
-  .wpo-video-section.wpo-video-section--light .who-we-are-photo-frame {
-    --hm: min(82svh, 880px);
-  }
-}
 /* Pull “We Are Highmark” + family blurb full width like California map (undo wpo-box-style gutters) */
 .wpo-box-style > section.wpo-video-section.wpo-video-section--light,
 .wpo-box-style > section.wpo-family-story-section {

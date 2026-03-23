@@ -1,14 +1,14 @@
 import React from 'react'
-import { useRouter } from 'next/router'
+import { withBasePath } from '../../utils/basePath'
+// Bundled URL picks up Next basePath/assetPrefix on export (public/ path alone can 404 on GitHub Pages).
+import marJennyPic from '../../public/images/boris/marc-jenny-homepage-pic.jpeg'
 
-/** Path under `public/` (leading slash). Prefix with router.basePath so URLs match Next dev + static export + GitHub Pages. */
-const MARC_JENNY_PHOTO = '/images/boris/marc-jenny-homepage-pic.jpeg'
 const H_LOGO = '/images/boris/highmark-h-logo.png'
 
-const VideoSection = (props) => {
-    const { basePath = '' } = useRouter()
-    const asset = (path) => `${basePath}${path}`
+const couplePhotoSrc =
+    typeof marJennyPic === 'object' && marJennyPic?.src != null ? marJennyPic.src : marJennyPic
 
+const VideoSection = (props) => {
     return (
         <section className="wpo-video-section wpo-video-section--light section-padding">
             <div className="container">
@@ -16,7 +16,7 @@ const VideoSection = (props) => {
                     <div className="wpo-section-title">
                         <h2>We Are Highmark</h2>
                         <div className="section-title-img">
-                            <img src={asset(H_LOGO)} alt="Highmark" className="section-title-h-logo" />
+                            <img src={withBasePath(H_LOGO)} alt="Highmark" className="section-title-h-logo" />
                         </div>
                     </div>
                 </div>
@@ -25,9 +25,11 @@ const VideoSection = (props) => {
                         {/* Native img fills aspect-ratio box cleanly (no Next/Image fill wrapper bezel) */}
                         <div className="who-we-are-photo-frame">
                             <img
-                                src={asset(MARC_JENNY_PHOTO)}
+                                src={couplePhotoSrc}
                                 alt="Marc and Jenny, founders of Highmark Event Rentals"
                                 className="who-we-are-photo-img"
+                                width={typeof marJennyPic === 'object' ? marJennyPic.width : undefined}
+                                height={typeof marJennyPic === 'object' ? marJennyPic.height : undefined}
                                 decoding="async"
                             />
                         </div>

@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <div>
       <Head>
-        <title>Highmark Rentals — Modern Event Furnishings</title>
+        <title>Highmark Event Rentals - Chairs, Tables, Linens &amp; Tenting</title>
       </Head>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

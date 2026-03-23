@@ -1,6 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const Reveal = ({ children, as: Tag = 'div', className = '', variant = 'fade-up', threshold = 0.2, delay = 0 }) => {
+const Reveal = ({
+    children,
+    as: Tag = 'div',
+    className = '',
+    variant = 'fade-up',
+    threshold = 0.01,
+    delay = 0,
+    rootMargin = '0px 0px 160px 0px',
+}) => {
     const ref = useRef(null)
     const [visible, setVisible] = useState(false)
 
@@ -18,14 +26,14 @@ const Reveal = ({ children, as: Tag = 'div', className = '', variant = 'fade-up'
                         }
                     })
                 },
-                { root: null, rootMargin: '0px', threshold }
+                { root: null, rootMargin, threshold }
             )
             obs.observe(el)
             return () => obs && obs.disconnect()
         } else {
             setVisible(true)
         }
-    }, [threshold, delay])
+    }, [threshold, delay, rootMargin])
 
     const classes = `${className} reveal ${variant} ${visible ? 'is-visible' : ''}`.trim()
     return (

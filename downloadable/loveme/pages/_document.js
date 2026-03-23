@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
-// Base path - empty for custom domain, or set via env var
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+// Do not import from @/utils here — Next can mis-bundle _document. Same value as utils/basePath (next.config env clears this in dev).
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default class MyDocument extends Document {
   render() {

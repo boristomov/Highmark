@@ -3,12 +3,23 @@ const nextConfig = {
     reactStrictMode: true,
     // GitHub Pages requires fully static output. We use `next export` (Next 13.0.x).
     trailingSlash: true,
-    // For GitHub Pages project sites, the app is served under /<repo>/.
-    // Set NEXT_PUBLIC_BASE_PATH to "/<repo>" in CI; keep empty for local dev.
-    basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-    assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
+    // For GitHub Pages project sites, CI sets NEXT_PUBLIC_BASE_PATH to "/<repo>".
+    // During `next dev`, force root so localhost:3000/ opens the app (env var may still be set from .env.local).
+    ...(() => {
+        const isDev = process.env.NODE_ENV === 'development'
+        const bp = isDev ? '' : (process.env.NEXT_PUBLIC_BASE_PATH || '')
+        return {
+            basePath: bp,
+            assetPrefix: isDev ? undefined : (process.env.NEXT_PUBLIC_BASE_PATH || undefined),
+        }
+    })(),
     // Explicitly expose NEXT_PUBLIC_ env vars for static export
     env: {
+        // Dev: always root. Prod/export: GitHub Pages uses /repo from CI env (see workflow).
+        NEXT_PUBLIC_BASE_PATH:
+            process.env.NODE_ENV === 'development'
+                ? ''
+                : (process.env.NEXT_PUBLIC_BASE_PATH || ''),
         NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
         NEXT_PUBLIC_EMAILJS_SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         NEXT_PUBLIC_EMAILJS_TEMPLATE_INQUIRY: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_INQUIRY,
