@@ -148,8 +148,15 @@ Modern About Section Styling
         .about-image-frame img {
             display: block;
             width: 100%;
-            height: 50vh;
+            max-width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+            /* Match home “We Are Highmark” photo framing */
+            height: min(88vh, 960px);
+            max-height: min(88vh, 960px);
+            min-height: 420px;
             object-fit: cover;
+            object-position: center 20%;
             border-radius: 0;
             border: 2px solid transparent;
             background:
@@ -157,6 +164,14 @@ Modern About Section Styling
                 linear-gradient(135deg, $white, #D4C9B8, $theme-primary-color-s2) border-box;
             box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
             transform: scale(1.0);
+
+            @media (max-width: 767px) {
+                max-width: 100%;
+                height: min(82vh, 880px);
+                max-height: min(82vh, 880px);
+                min-height: 380px;
+                object-position: center top;
+            }
         }
 
         .about-image-caption {

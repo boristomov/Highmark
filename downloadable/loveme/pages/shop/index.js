@@ -206,6 +206,7 @@ const ShopPage = (props) => {
           addToCartProduct={addToCartProduct}
           loading={loading}
           searchQuery={searchQuery}
+          selectedCategory={selectedCategory}
         />
       </div>
 

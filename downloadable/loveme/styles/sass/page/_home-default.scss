@@ -423,6 +423,122 @@
 	}
 }
 
+/* We Are Highmark — light section (no dark backdrop), gray title, portrait couple photo */
+.wpo-video-section.wpo-video-section--light {
+	&::before {
+		background: linear-gradient(180deg, #f5f0e8 0%, #ebe4d8 40%, #e9e1d3 100%);
+		background-image: none;
+		height: 100%;
+	}
+
+	&::after {
+		background: linear-gradient(to bottom, #e9e1d3 0%, rgba(245, 240, 232, 0) 100%);
+	}
+
+	/* Full-viewport-width fade under the photo (container is narrow; bleed to both edges) */
+	.container::after {
+		left: 50%;
+		margin-left: -50vw;
+		width: 100vw;
+		max-width: none;
+		height: 240px;
+		background: linear-gradient(
+			to top,
+			#f5f0e8 0%,
+			rgba(245, 240, 232, 0.92) 35%,
+			rgba(245, 240, 232, 0.45) 70%,
+			rgba(245, 240, 232, 0) 100%
+		);
+	}
+
+	.wpo-section-title {
+		span {
+			color: #5a5a5a;
+			text-shadow: none;
+		}
+
+		h2 {
+			color: #3a3a3a;
+			font-weight: 600;
+			-webkit-text-stroke: 0;
+			text-shadow: none;
+
+			&::after {
+				background: linear-gradient(90deg, rgba(90, 90, 90, 0), rgba(90, 90, 90, 0.45) 50%, rgba(90, 90, 90, 0));
+			}
+		}
+	}
+
+	.wpo-video-img--portrait {
+		span {
+			display: block !important;
+			max-width: min(600px, 94vw);
+			margin: 0 auto;
+		}
+
+		img {
+			max-width: 75% !important;
+			width: 100%;
+			/* Taller frame: show more of the photo below (less cut at bottom); top stays aligned */
+			height: min(88vh, 960px);
+			max-height: min(88vh, 960px);
+			min-height: 420px;
+			object-fit: cover;
+			object-position: center 20%;
+			padding: 10px;
+			border: 2px solid #d4c9b8;
+			box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+			/* Cream-tinted “mat” so white doesn’t clash with page beige beside narrower image */
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 245, 240, 0.98) 100%);
+
+			@media (max-width: 767px) {
+				height: min(82vh, 880px);
+				max-height: min(82vh, 880px);
+				min-height: 380px;
+				object-position: center top;
+			}
+		}
+	}
+}
+
+/* Pull “We Are Highmark” + family blurb full width like California map (undo wpo-box-style gutters) */
+.wpo-box-style > section.wpo-video-section.wpo-video-section--light,
+.wpo-box-style > section.wpo-family-story-section {
+	margin-left: -60px;
+	margin-right: -60px;
+	width: calc(100% + 120px);
+	max-width: none;
+	box-sizing: border-box;
+
+	@media (max-width: 991px) {
+		margin-left: -30px;
+		margin-right: -30px;
+		width: calc(100% + 60px);
+	}
+
+	@media (max-width: 575px) {
+		margin-left: 0;
+		margin-right: 0;
+		width: 100%;
+	}
+}
+
+/* Tighter gap below California map; minimal gap above family blurb */
+.wpo-video-section.wpo-video-section--light.section-padding {
+	padding-top: 48px;
+	padding-bottom: 20px;
+
+	@include media-query(991px) {
+		padding-top: 36px;
+		padding-bottom: 16px;
+	}
+
+	@include media-query(767px) {
+		padding-top: 28px;
+		padding-bottom: 12px;
+	}
+}
+
 /* 3.5 wpo-fun-fact-section */
 
 .wpo-fun-fact-section,
@@ -1516,6 +1632,14 @@
 					margin-top: 5px;
 					margin-bottom: 0;
 				}
+			}
+
+			.form-field-label {
+				display: block;
+				margin-bottom: 8px;
+				font-size: 14px;
+				font-weight: 500;
+				color: rgba(58, 58, 58, 0.85);
 			}
 		}
 	}

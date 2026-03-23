@@ -4,19 +4,19 @@
     border-top: 1px solid grey;
     width: 100%;
     background: linear-gradient(to bottom, #E9E1D3 10%, rgba(233, 225, 211, 0.739) 100%);
-    margin-bottom: 15vh;
+    margin-bottom: 2vh;
 
     @media (max-width: 1024px) {
         height: auto;
         min-height: auto;
-        margin-bottom: 8vh;
+        margin-bottom: 1.5vh;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     @media (max-width: 640px) {
-        margin-bottom: 5vh;
+        margin-bottom: 12px;
     }
 
     /* Top fade to visually transition from the hero into this section */

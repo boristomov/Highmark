@@ -202,15 +202,17 @@ const RSVP = () => {
                                 </div>
                                 <div className="form-field-col">
                                     <div className="form-field">
-                                        <input 
-                                            onChange={changeHandler} 
-                                            value={formData.eventDate} 
-                                            type={formData.eventDate ? 'date' : 'text'} 
-                                            className="form-control" 
-                                            name="eventDate" 
-                                            placeholder="Event Date" 
-                                            onFocus={(e) => { e.target.type = 'date'; }} 
-                                            onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }} 
+                                        <label htmlFor="rsvp-event-date" className="form-field-label">
+                                            Event date
+                                        </label>
+                                        <input
+                                            id="rsvp-event-date"
+                                            onChange={changeHandler}
+                                            value={formData.eventDate}
+                                            type="date"
+                                            className="form-control"
+                                            name="eventDate"
+                                            aria-label="Event date"
                                         />
                                     </div>
                                 </div>

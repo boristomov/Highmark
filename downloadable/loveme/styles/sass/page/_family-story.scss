@@ -3,31 +3,79 @@ Family Story Section
 ===========================================*/
 
 .wpo-family-story-section {
+    position: relative;
+    z-index: 0;
+    /* Blend from video section cream into main beige (aligns with ~75% wide photo gutters) */
     background: $theme-primary-color;
-    padding-top: 0px;
+    padding-top: 0;
+
+    /* Tight to photo: small padding above blurb */
+    &.section-padding {
+        padding-top: 20px;
+
+        @media (max-width: 991px) {
+            padding-top: 16px;
+        }
+
+        @media (max-width: 767px) {
+            padding-top: 12px;
+        }
+    }
+
+    &::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 56px;
+        background: linear-gradient(
+            180deg,
+            rgba(245, 240, 232, 1) 0%,
+            rgba(245, 240, 232, 0.5) 55%,
+            $theme-primary-color 100%
+        );
+        pointer-events: none;
+    }
 
     @media (max-width: 767px) {
-        padding-top: 30px;
+        padding-top: 0;
+
+        &::before {
+            height: 44px;
+        }
     }
 
     .family-story-wrapper {
         max-width: 100%;
+        position: relative;
+        z-index: 1;
+        margin-top: -1px; // avoid hairline gap with gradient
     }
 
     .family-story-content {
         text-align: center;
+        max-width: min(880px, 92vw);
+        margin: 0 auto;
+        padding-top: 8px;
 
         p {
             font-size: 19px;
             line-height: 1.9;
             color: $body-color;
-            margin-bottom: 40px;
+            margin-bottom: 28px;
             font-weight: 300;
+
+            &:last-of-type {
+                margin-bottom: 36px;
+            }
 
             @media (max-width: 767px) {
                 font-size: 15px;
                 line-height: 1.8;
-                margin-bottom: 30px;
+                margin-bottom: 22px;
+
+                &:last-of-type {
+                    margin-bottom: 28px;
+                }
             }
         }
 

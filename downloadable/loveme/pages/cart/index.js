@@ -349,15 +349,17 @@ const CartPage = (props) => {
                                                     />
                                                 </div>
                                                 <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <label htmlFor="quote-event-date" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: 'rgba(47,47,47,0.75)', fontWeight: 500 }}>
+                                                        Event date
+                                                    </label>
                                                     <input
+                                                        id="quote-event-date"
                                                         onChange={handleQuoteChange}
                                                         value={quoteForm.eventDate}
-                                                        type={quoteForm.eventDate ? 'date' : 'text'}
+                                                        type="date"
                                                         className="form-control"
                                                         name="eventDate"
-                                                        placeholder="Event Date"
-                                                        onFocus={(e) => { e.target.type = 'date'; }}
-                                                        onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }}
+                                                        aria-label="Event date"
                                                         style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
                                                     />
                                                 </div>

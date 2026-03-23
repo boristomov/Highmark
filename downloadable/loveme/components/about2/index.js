@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import abimg from '/public/images/boris/IMG_1631.jpeg'
+import abimg from '/public/images/boris/marc-jenny-homepage-pic.jpeg'
 import { withBasePath } from '../../utils/basePath'
 
 const About2 = (props) => {
@@ -15,7 +15,7 @@ const About2 = (props) => {
                         <div className="col-12">
                             <div className="about-image-modern">
                                 <div className="about-image-frame">
-                                    <Image src={abimg} alt="Highmark Event Rentals" />
+                                    <Image src={abimg} alt="Marc and Jenny, founders of Highmark Event Rentals" />
                                 </div>
                             </div>
                         </div>

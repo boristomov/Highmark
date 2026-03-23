@@ -3,7 +3,9 @@ import Link from 'next/link';
 import styles from './RentalProductGrid.module.scss';
 import { withBasePath } from '../../utils/basePath';
 
-const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery }) => {
+const BRIDAL_LINENS_URL = 'https://bridallinens.com/';
+
+const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery, selectedCategory }) => {
     if (loading) {
         return (
             <section className={styles.productSection}>
@@ -17,6 +19,45 @@ const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery })
     }
 
     if (!products || products.length === 0) {
+        const showLinensPartner =
+            selectedCategory === 'accessories' && !searchQuery;
+
+        if (showLinensPartner) {
+            return (
+                <section className={styles.productSection}>
+                    <div className="container">
+                        <div className={styles.linensPartner}>
+                            <h3>Linens &amp; fabric swatches</h3>
+                            <p className={styles.linensLead}>
+                                We partner with{' '}
+                                <a
+                                    href={BRIDAL_LINENS_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.linensLink}
+                                >
+                                    Bridal Linens
+                                </a>
+                                —browse their full range of fabrics, colors, and patterns to choose what fits your event.
+                            </p>
+                            <p className={styles.linensNote}>
+                                When you submit a quote request from your cart, please list your fabric names, colors, and any style preferences in the{' '}
+                                <strong>additional notes</strong> field. Our team will confirm availability and follow up with tailored pricing.
+                            </p>
+                            <a
+                                href={BRIDAL_LINENS_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.linensCta}
+                            >
+                                Browse Bridal Linens
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
         return (
             <section className={styles.productSection}>
                 <div className="container">

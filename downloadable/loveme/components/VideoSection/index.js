@@ -1,11 +1,11 @@
 import React from 'react'
-import vimg from '../../public/images/boris/IMG_1631.jpeg'
+import marJennyPic from '../../public/images/boris/marc-jenny-homepage-pic.jpeg'
 import Image from 'next/image'
 import { withBasePath } from '../../utils/basePath'
 
 const VideoSection = (props) => {
     return (
-        <section className="wpo-video-section section-padding">
+        <section className="wpo-video-section wpo-video-section--light section-padding">
             <div className="container">
                 <div className="row">
                     <div className="wpo-section-title">
@@ -16,8 +16,12 @@ const VideoSection = (props) => {
                     </div>
                 </div>
                 <div className="wpo-video-item">
-                    <div className="wpo-video-img">
-                        <Image src={vimg} alt="Highmark Event Rentals" />
+                    <div className="wpo-video-img wpo-video-img--portrait">
+                        <Image
+                            src={marJennyPic}
+                            alt="Marc and Jenny, founders of Highmark Event Rentals"
+                            priority
+                        />
                     </div>
                 </div>
             </div>
