@@ -17,11 +17,17 @@ const VideoSection = (props) => {
                 </div>
                 <div className="wpo-video-item">
                     <div className="wpo-video-img wpo-video-img--portrait">
-                        <Image
-                            src={marJennyPic}
-                            alt="Marc and Jenny, founders of Highmark Event Rentals"
-                            priority
-                        />
+                        {/* Fixed aspect + explicit box avoids vh jump when mobile chrome shows/hides */}
+                        <div className="who-we-are-photo-frame">
+                            <Image
+                                src={marJennyPic}
+                                alt="Marc and Jenny, founders of Highmark Event Rentals"
+                                fill
+                                sizes="(max-width: 576px) 94vw, (max-width: 992px) 75vw, 520px"
+                                className="who-we-are-photo-img"
+                                priority
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

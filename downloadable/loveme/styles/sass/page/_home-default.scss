@@ -425,6 +425,9 @@
 
 /* We Are Highmark — light section (no dark backdrop), gray title, portrait couple photo */
 .wpo-video-section.wpo-video-section--light {
+	z-index: 1;
+	overflow-x: clip;
+
 	&::before {
 		background: linear-gradient(180deg, #f5f0e8 0%, #ebe4d8 40%, #e9e1d3 100%);
 		background-image: none;
@@ -469,35 +472,59 @@
 		}
 	}
 
+	/* Stable layout: width from %, height from width×aspect — capped with svh (not vh) to limit mobile URL-bar jump */
 	.wpo-video-img--portrait {
-		span {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		width: 100%;
+		min-height: 0;
+	}
+
+	.who-we-are-photo-frame {
+		position: relative;
+		width: min(75%, 520px);
+		max-width: min(94vw, 520px);
+		margin-inline: auto;
+		box-sizing: border-box;
+		border: 2px solid #d4c9b8;
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 245, 240, 0.98) 100%);
+		overflow: hidden;
+		aspect-ratio: 3 / 4;
+		max-height: min(82vh, 880px);
+
+		/* Next/Image fill: span fills the frame */
+		> span {
 			display: block !important;
-			max-width: min(600px, 94vw);
-			margin: 0 auto;
+			position: absolute !important;
+			inset: 0 !important;
+			width: 100% !important;
+			height: 100% !important;
+			margin: 0 !important;
+		}
+	}
+
+	.who-we-are-photo-img {
+		object-fit: cover;
+		object-position: center 22%;
+	}
+
+	@media (max-width: 767px) {
+		.who-we-are-photo-img {
+			object-position: center top;
 		}
 
-		img {
-			max-width: 75% !important;
-			width: 100%;
-			/* Taller frame: show more of the photo below (less cut at bottom); top stays aligned */
-			height: min(88vh, 960px);
-			max-height: min(88vh, 960px);
-			min-height: 420px;
-			object-fit: cover;
-			object-position: center 20%;
-			padding: 10px;
-			border: 2px solid #d4c9b8;
-			box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-			/* Cream-tinted “mat” so white doesn’t clash with page beige beside narrower image */
-			background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 245, 240, 0.98) 100%);
-
-			@media (max-width: 767px) {
-				height: min(82vh, 880px);
-				max-height: min(82vh, 880px);
-				min-height: 380px;
-				object-position: center top;
-			}
+		.who-we-are-photo-frame {
+			width: min(88%, 520px);
+			max-width: min(94vw, 520px);
 		}
+	}
+}
+
+@supports (height: 1svh) {
+	.wpo-video-section.wpo-video-section--light .who-we-are-photo-frame {
+		max-height: min(82svh, 880px);
 	}
 }
 

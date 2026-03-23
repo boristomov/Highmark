@@ -46,8 +46,8 @@ const HomePage = (props) => {
             <div className="wpo-box-style">
                 {/* <PartnerSection /> */}
 
-                <Reveal variant="fade-up" delay={140}><VideoSection /></Reveal>
-                <Reveal variant="fade-up" delay={180}><FamilyStory /></Reveal>
+                <Reveal variant="fade-in" delay={140}><VideoSection /></Reveal>
+                <Reveal variant="fade-in" delay={180}><FamilyStory /></Reveal>
                 <Reveal variant="fade-up" delay={220}><ServiceSection /></Reveal>
                 {/* <Reveal variant="fade-up" delay={260}><FunFact /></Reveal> */}
                 {/* <Reveal variant="fade-up" delay={300}><ProjectSection /></Reveal> */}
