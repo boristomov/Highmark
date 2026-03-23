@@ -44,9 +44,9 @@ jobs:
           NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
           # reCAPTCHA for spam prevention (optional)
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
-          # GitHub Pages *project* sites are served at https://<user>.github.io/<repo>/ — assets must use base path /repo (not /).
-          # If this site is only ever served from a custom domain at the domain root, change this to "".
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Custom domain (www.highmarkeventrentals.com) serves at root — base path must be empty.
+          # Only set to /${{ github.event.repository.name }} if using github.io/<repo>/ without a custom domain.
+          NEXT_PUBLIC_BASE_PATH: ""
         run: |
           if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
             echo "::error::Missing required GitHub Actions secrets. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in Settings → Secrets and variables → Actions."
