@@ -156,10 +156,10 @@ const ImageLightbox = ({ isOpen, onClose, imageUrl, imgBase, item, specification
               borderRadius: '4px'
             }}
             onError={(e) => {
-              const exts = ["png", "jpg", "jpeg", "webp", "avif"];
+              const exts = ["png", "jpg", "jpeg", "webp", "avif", "svg"];
               const img = e.currentTarget;
               const base = img.getAttribute("data-img-base");
-              const placeholderUrl = withBasePath("/images/placeholder-product.jpg");
+              const placeholderUrl = withBasePath("/images/placeholder-product.svg");
               if (!base) {
                 if (img.src.indexOf("placeholder-product.jpg") === -1) {
                   img.src = placeholderUrl;
@@ -389,10 +389,10 @@ const Product = ({ item, addToCart }) => {
                     objectFit: 'contain',
                   }}
                   onError={(e) => {
-                    const exts = ["png", "jpg", "jpeg", "webp", "avif"];
+                    const exts = ["png", "jpg", "jpeg", "webp", "avif", "svg"];
                     const img = e.currentTarget;
                     const base = img.getAttribute("data-img-base");
-                    const placeholderUrl = withBasePath("/images/placeholder-product.jpg");
+                    const placeholderUrl = withBasePath("/images/placeholder-product.svg");
                     if (!base) {
                       if (img.src.indexOf("placeholder-product.jpg") === -1) {
                         img.src = placeholderUrl;

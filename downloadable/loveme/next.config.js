@@ -1,3 +1,42 @@
+async function getProductExportPaths() {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+        return {}
+    }
+
+    try {
+        const response = await fetch(`${supabaseUrl}/rest/v1/products?select=slug&active=eq.true`, {
+            headers: {
+                apikey: supabaseAnonKey,
+                Authorization: `Bearer ${supabaseAnonKey}`,
+            },
+        })
+
+        if (!response.ok) {
+            console.warn(`Could not load product routes for export: ${response.status}`)
+            return {}
+        }
+
+        const products = await response.json()
+
+        return (products || []).reduce((paths, product) => {
+            if (!product?.slug) return paths
+
+            paths[`/product-single/${product.slug}`] = {
+                page: '/product-single/[slug]',
+                query: { slug: product.slug },
+            }
+
+            return paths
+        }, {})
+    } catch (error) {
+        console.warn(`Could not load product routes for export: ${error.message}`)
+        return {}
+    }
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
@@ -38,6 +77,8 @@ const nextConfig = {
     // Only export the routes we actually use right now.
     // This avoids export errors from unused dynamic routes (e.g. /product-single/[slug]).
     async exportPathMap() {
+        const productPaths = await getProductExportPaths()
+
         return {
             '/': { page: '/' },
             '/about': { page: '/about' },
@@ -48,6 +89,7 @@ const nextConfig = {
             '/privacy-policy': { page: '/privacy-policy' },
             '/terms-and-conditions': { page: '/terms-and-conditions' },
             '/404': { page: '/404' },
+            ...productPaths,
         }
     },
 }

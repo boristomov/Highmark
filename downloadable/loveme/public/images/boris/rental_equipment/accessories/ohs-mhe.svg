@@ -1,0 +1,14 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Mushroom Heater">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f6f1"/>
+      <stop offset="0.52" stop-color="#eee8dd"/>
+      <stop offset="1" stop-color="#dfd4c4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect x="76" y="76" width="1048" height="748" fill="none" stroke="#d4c9b8" stroke-width="4"/>
+  <text x="600" y="388" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="#b8aa96" letter-spacing="2">HIGHMARK</text>
+  <text x="600" y="470" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="42" fill="#2f2f2f">Mushroom Heater</text>
+  <text x="600" y="530" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#8f806d" letter-spacing="3">Temporary catalogue image</text>
+</svg>

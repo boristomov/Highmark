@@ -13,7 +13,7 @@ import { supabase } from '../../lib/supabaseClient';
 
 const ProductSinglePage = (props) => {
     const router = useRouter()
-    const { slug } = router.query;
+    const slug = router.query?.slug || props.initialSlug;
 
     const { addToCart } = props;
     const [product, setProduct] = useState(null);
@@ -103,6 +103,12 @@ const mapStateToProps = state => {
     return {
         products: state.data.products,
     }
+};
+
+ProductSinglePage.getInitialProps = ({ query }) => {
+    return {
+        initialSlug: query?.slug || null,
+    };
 };
 
 export default connect(mapStateToProps, { addToCart })(ProductSinglePage);

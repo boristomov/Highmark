@@ -84,10 +84,10 @@ const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery, s
                                                 data-img-base={product.imgBase ? withBasePath(product.imgBase) : ""}
                                                 data-ext-index="0"
                                                 onError={(e) => {
-                                                    const exts = ["png", "jpg", "jpeg", "webp", "avif"];
+                                                    const exts = ["png", "jpg", "jpeg", "webp", "avif", "svg"];
                                                     const img = e.currentTarget;
                                                     const base = img.getAttribute("data-img-base");
-                                                    const placeholderUrl = withBasePath("/images/placeholder-product.jpg");
+                                                    const placeholderUrl = withBasePath("/images/placeholder-product.svg");
                                                     // If no base, fallback to placeholder once
                                                     if (!base) {
                                                         if (img.src.indexOf("placeholder-product.jpg") === -1) {
