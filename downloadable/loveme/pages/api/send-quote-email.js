@@ -6,6 +6,17 @@ export default async function handler(req, res) {
     }
 
     const { formData, cartItems, totals } = req.body;
+    const formatWindow = (window) => `${window?.date || 'No date'} | ${window?.startTime || 'No start time'} - ${window?.endTime || 'No end time'}`;
+    const scheduling = formData.scheduling || {};
+    const eventWindow = scheduling.event || {};
+    const deliveryWindows = scheduling.deliveryWindows || [];
+    const pickupWindows = scheduling.pickupWindows || [];
+    const schedulingSummary = [
+        `Event: ${formatWindow(eventWindow)}`,
+        ...deliveryWindows.map((window, index) => `Preferred delivery window ${index + 1}: ${formatWindow(window)}`),
+        ...pickupWindows.map((window, index) => `Preferred pickup window ${index + 1}: ${formatWindow(window)}`),
+    ].join('\n');
+    const hasScheduling = Boolean(eventWindow.date || deliveryWindows.length || pickupWindows.length);
 
     try {
         // Check if email credentials are configured
@@ -49,7 +60,7 @@ export default async function handler(req, res) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quote Request Received - Highmark Rentals</title>
+  <title>Quote Request Received - Highmark Event Rentals</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -85,7 +96,7 @@ export default async function handler(req, res) {
                 Hello ${formData.name},
               </h2>
               <p style="margin: 0 0 18px 0; color: rgba(47, 47, 47, 0.75); font-size: 16px; line-height: 1.8; font-weight: 300;">
-                Thank you for inquiring about our rental services! We're absolutely thrilled that you're considering Highmark Rentals to help make your special event unforgettable.
+                Thank you for inquiring about our rental services! We're absolutely thrilled that you're considering Highmark Event Rentals to help make your special event unforgettable.
               </p>
               <p style="margin: 0; color: rgba(47, 47, 47, 0.75); font-size: 16px; line-height: 1.8; font-weight: 300;">
                 We would love to help you turn your event into a wonderful memory that you and your guests will cherish for years to come.
@@ -98,9 +109,9 @@ export default async function handler(req, res) {
             <td style="padding: 0 40px 35px 40px;">
               <div style="background-color: #F5F0E8; border-left: 3px solid #D4C9B8; padding: 25px 30px; border-radius: 0px;">
                 <h3 style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.85); font-size: 18px; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; font-family: 'Urbanist', sans-serif;">Your Event Details</h3>
-                ${formData.eventDate ? `
+                ${hasScheduling ? `
                   <p style="margin: 0 0 12px 0; color: rgba(47, 47, 47, 0.75); font-size: 15px; font-weight: 300; line-height: 1.6;">
-                    <strong style="font-weight: 400;">Event Date:</strong> ${new Date(formData.eventDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    <strong style="font-weight: 400;">Scheduling Preferences:</strong><br/>${schedulingSummary.replace(/\n/g, '<br/>')}
                   </p>
                 ` : ''}
                 ${formData.address ? `
@@ -210,13 +221,13 @@ export default async function handler(req, res) {
           <tr>
             <td style="background: linear-gradient(to bottom, #F5F0E8 0%, #E9E1D3 100%); padding: 40px 30px; text-align: center; border-top: 2px solid rgba(27,27,27,0.08);">
               <p style="margin: 0 0 8px 0; color: rgba(47, 47, 47, 0.9); font-size: 24px; font-weight: 200; letter-spacing: 2px; text-transform: uppercase; font-family: 'Urbanist', sans-serif;">
-                Highmark Rentals
+                Highmark Event Rentals
               </p>
               <p style="margin: 0 0 18px 0; color: rgba(47, 47, 47, 0.65); font-size: 12px; font-weight: 300; letter-spacing: 1.5px; text-transform: uppercase;">
                 Care and Craft In Every Detail
               </p>
               <p style="margin: 0; color: rgba(47, 47, 47, 0.55); font-size: 11px; font-weight: 300;">
-                © ${new Date().getFullYear()} Highmark Rentals. All rights reserved.
+                © ${new Date().getFullYear()} Highmark Event Rentals. All rights reserved.
               </p>
             </td>
           </tr>
@@ -233,10 +244,10 @@ export default async function handler(req, res) {
         const textVersion = `
 Hello ${formData.name}!
 
-Thank you for inquiring about our rental services! We're absolutely thrilled that you're considering Highmark Rentals to help make your special event unforgettable.
+Thank you for inquiring about our rental services! We're absolutely thrilled that you're considering Highmark Event Rentals to help make your special event unforgettable.
 
 YOUR EVENT DETAILS:
-${formData.eventDate ? `Event Date: ${new Date(formData.eventDate).toLocaleDateString()}` : ''}
+${hasScheduling ? `Scheduling Preferences:\n${schedulingSummary}` : ''}
 ${formData.address ? `Event Address: ${formData.address}` : ''}
 ${formData.phone ? `Phone: ${formData.phone}` : ''}
 ${formData.message ? `\nYour Message: ${formData.message}` : ''}
@@ -261,18 +272,18 @@ Email: boristomov2002@gmail.com
 ${formData.phone ? `Phone: ${formData.phone}` : ''}
 
 Best regards,
-Highmark Rentals Team
+Highmark Event Rentals Team
 Making Your Events Memorable
     `;
 
         // Send email to customer
         await transporter.sendMail({
             from: {
-                name: 'Highmark Rentals',
+                name: 'Highmark Event Rentals',
                 address: process.env.EMAIL_USER || 'boristomov2002@gmail.com',
             },
             to: formData.email,
-            subject: '✨ Quote Request Received - Highmark Rentals',
+            subject: 'Quote Request Received - Highmark Event Rentals',
             text: textVersion,
             html: htmlTemplate,
         });
@@ -280,7 +291,7 @@ Making Your Events Memorable
         // Optionally send a notification to yourself
         await transporter.sendMail({
             from: {
-                name: 'Highmark Rentals Website',
+                name: 'Highmark Event Rentals Website',
                 address: process.env.EMAIL_USER || 'boristomov2002@gmail.com',
             },
             to: process.env.EMAIL_USER || 'boristomov2002@gmail.com',
@@ -291,7 +302,7 @@ Making Your Events Memorable
         <p><strong>Customer:</strong> ${formData.name}</p>
         <p><strong>Email:</strong> ${formData.email}</p>
         <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
-        <p><strong>Event Date:</strong> ${formData.eventDate || 'Not provided'}</p>
+        <p><strong>Scheduling Preferences:</strong><br/>${hasScheduling ? schedulingSummary.replace(/\n/g, '<br/>') : 'Not provided'}</p>
         <p><strong>Event Address:</strong> ${formData.address || 'Not provided'}</p>
         <p><strong>Message:</strong> ${formData.message || 'None'}</p>
         <hr/>

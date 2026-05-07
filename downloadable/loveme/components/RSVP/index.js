@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import SectionTitle from '../../components/SectionTitle'
-import { withBasePath } from '../../utils/basePath'
 import { sendInquiryEmail, isEmailConfigured } from '../../utils/emailService'
+import RentalDateRange, { createDefaultScheduling, validateScheduling } from '../RentalDateRange'
 
 const RSVP = () => {
     const recaptchaRef = useRef(null);
@@ -11,7 +11,7 @@ const RSVP = () => {
         email: '',
         phone: '',
         address: '',
-        eventDate: '',
+        scheduling: createDefaultScheduling(),
         message: '',
     });
     const [errors, setErrors] = useState({});
@@ -41,6 +41,10 @@ const RSVP = () => {
         }
         if (!formData.phone.trim()) {
             newErrors.phone = "Please enter your phone number";
+        }
+        const schedulingValidation = validateScheduling(formData.scheduling);
+        if (!schedulingValidation.valid) {
+            newErrors.scheduling = schedulingValidation.errors;
         }
         
         setErrors(newErrors);
@@ -82,7 +86,7 @@ const RSVP = () => {
                     email: '',
                     phone: '',
                     address: '',
-                    eventDate: '',
+                    scheduling: createDefaultScheduling(),
                     message: '',
                 });
                 setCaptchaToken(null);
@@ -102,7 +106,7 @@ const RSVP = () => {
                     email: '',
                     phone: '',
                     address: '',
-                    eventDate: '',
+                    scheduling: createDefaultScheduling(),
                     message: '',
                 });
                 setCaptchaToken(null);
@@ -200,21 +204,21 @@ const RSVP = () => {
                                         <p className="error-text">{errors.phone || ''}</p>
                                     </div>
                                 </div>
-                                <div className="form-field-col">
-                                    <div className="form-field">
-                                        <label htmlFor="rsvp-event-date" className="form-field-label">
-                                            Event date
-                                        </label>
-                                        <input
-                                            id="rsvp-event-date"
-                                            onChange={changeHandler}
-                                            value={formData.eventDate}
-                                            type="date"
-                                            className="form-control"
-                                            name="eventDate"
-                                            aria-label="Event date"
-                                        />
-                                    </div>
+                                <div className="form-field-col form-field-full">
+                                    <RentalDateRange
+                                        idPrefix="inquiry-rental-period"
+                                        value={formData.scheduling}
+                                        onChange={(scheduling) => {
+                                            setFormData(prev => ({
+                                                ...prev,
+                                                scheduling,
+                                            }));
+                                            if (errors.scheduling) {
+                                                setErrors(prev => ({ ...prev, scheduling: null }));
+                                            }
+                                        }}
+                                        errors={errors.scheduling || {}}
+                                    />
                                 </div>
                                 <div className="form-field-col form-field-full">
                                     <div className="form-field">

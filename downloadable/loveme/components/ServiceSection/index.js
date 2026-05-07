@@ -87,7 +87,7 @@ const ServiceSection = (props) => {
         <section className={`wpo-service-section ${props.pbClass}`}>
             <div className="container-fluid">
                 <div className="wpo-section-title">
-                    <h2>Our Collections</h2>
+                    <h2>Event &amp; Party Rentals</h2>
                     <div className="section-title-img">
                         <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
                     </div>

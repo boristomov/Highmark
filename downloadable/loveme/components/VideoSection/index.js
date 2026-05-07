@@ -1,7 +1,7 @@
 import React from 'react'
 import { withBasePath } from '../../utils/basePath'
 // Bundled URL picks up Next basePath/assetPrefix on export (public/ path alone can 404 on GitHub Pages).
-import marJennyPic from '../../public/images/boris/marc-jenny-homepage-pic.jpeg'
+import marJennyPic from '../../public/images/boris/IMG_1631.jpeg'
 
 const H_LOGO = '/images/boris/highmark-h-logo.png'
 

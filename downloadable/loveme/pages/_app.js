@@ -17,6 +17,8 @@ import { useEffect } from "react";
 import basePath from "../utils/basePath";
 
 function MyApp({ Component, pageProps }) {
+  const siteTitle = "Highmark Event Rentals - Chairs, Tables, Linens & Tenting";
+
   // Set CSS variable for base path so SCSS can use it for background images
   useEffect(() => {
     document.documentElement.style.setProperty('--base-path', `"${basePath}"`);
@@ -25,7 +27,15 @@ function MyApp({ Component, pageProps }) {
   return (
     <div>
       <Head>
-        <title>Highmark Event Rentals - Chairs, Tables, Linens &amp; Tenting</title>
+        <title>{siteTitle}</title>
+        <meta name="application-name" content={siteTitle} />
+        <meta name="apple-mobile-web-app-title" content="Highmark Event Rentals" />
+        <meta name="description" content="Highmark Event Rentals provides chairs, tables, linens, tenting, and event rental support across the Bay Area and beyond." />
+        <meta property="og:site_name" content="Highmark Event Rentals" />
+        <meta property="og:title" content={siteTitle} />
+        <meta property="og:description" content="Chairs, tables, linens, tenting, and event rentals for weddings, corporate events, private parties, and celebrations." />
+        <meta name="twitter:title" content={siteTitle} />
+        <meta name="twitter:description" content="Chairs, tables, linens, tenting, and event rentals for weddings, corporate events, private parties, and celebrations." />
       </Head>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

@@ -16,7 +16,7 @@ const menus = [
     },
     {
         id: 3,
-        title: 'Shop',
+        title: 'Rentals',
         link: '/shop',
     },
     {
@@ -83,7 +83,7 @@ export default class MobileMenu extends Component {
                             <input
                                 ref={this.searchInputRef}
                                 type="text"
-                                placeholder="Search shop..."
+                                placeholder="Search rentals..."
                                 aria-label="Search products"
                             />
                             <button type="submit" aria-label="Search">

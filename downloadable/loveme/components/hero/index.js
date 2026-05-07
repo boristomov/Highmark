@@ -121,17 +121,20 @@ const Hero = () => {
                                     <source src={withBasePath('/images/boris/FirstCarousel.mp4')} type="video/mp4" />
                                 </video>
                                 <div className="video-overlay"></div>
+                                <div className="slide-text hero-rental-types">
+                                    <p>Weddings, Corporate Events, Private Parties &amp; Celebrations</p>
+                                </div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
                                         <div className="slide-title slide-title-slogan">
-                                            <h2>Care and Craft in Every Detail</h2>
+                                            <h2>Care and Craft In Every Detail</h2>
                                         </div>
                                         <div className="hero-separator">
                                             <img src={withBasePath('/images/boris/beige_H.png')} alt="Highmark" className="hero-h-logo" />
                                         </div>
                                         <div className="slide-btns">
                                             <Link href="/shop" className="theme-btn">Shop Rentals</Link>
-                                            <Link href="/contact" className="theme-btn">Let's Connect</Link>
+                                            <Link href="/contact" className="theme-btn">Get a Quote</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -156,17 +159,20 @@ const Hero = () => {
                                     <source src={withBasePath('/images/boris/iStock-2207627637.mp4')} type="video/mp4" />
                                 </video>
                                 <div className="video-overlay"></div>
+                                <div className="slide-text hero-rental-types">
+                                    <p>Weddings, Corporate Events, Private Parties &amp; Celebrations</p>
+                                </div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
                                         <div className="slide-title slide-title-slogan">
-                                            <h2>Care and Craft in Every Detail</h2>
+                                            <h2>Care and Craft In Every Detail</h2>
                                         </div>
                                         <div className="hero-separator">
                                             <img src={withBasePath('/images/boris/beige_H.png')} alt="Highmark" className="hero-h-logo" />
                                         </div>
                                         <div className="slide-btns">
                                             <Link href="/shop" className="theme-btn">Shop Rentals</Link>
-                                            <Link href="/contact" className="theme-btn">Let's Connect</Link>
+                                            <Link href="/contact" className="theme-btn">Get a Quote</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -191,17 +197,20 @@ const Hero = () => {
                                     <source src={withBasePath('/images/boris/iStock-1455282879.mp4')} type="video/mp4" />
                                 </video>
                                 <div className="video-overlay"></div>
+                                <div className="slide-text hero-rental-types">
+                                    <p>Weddings, Corporate Events, Private Parties &amp; Celebrations</p>
+                                </div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
                                         <div className="slide-title slide-title-slogan">
-                                            <h2>Care and Craft in Every Detail</h2>
+                                            <h2>Care and Craft In Every Detail</h2>
                                         </div>
                                         <div className="hero-separator">
                                             <img src={withBasePath('/images/boris/beige_H.png')} alt="Highmark" className="hero-h-logo" />
                                         </div>
                                         <div className="slide-btns">
                                             <Link href="/shop" className="theme-btn">Shop Rentals</Link>
-                                            <Link href="/contact" className="theme-btn">Let's Connect</Link>
+                                            <Link href="/contact" className="theme-btn">Get a Quote</Link>
                                         </div>
                                     </div>
                                 </div>

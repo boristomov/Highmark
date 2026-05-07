@@ -1,4 +1,5 @@
 import emailjs from '@emailjs/browser';
+import { formatSchedulingForEmail } from '../components/RentalDateRange';
 
 // EmailJS Configuration - Public keys are safe to expose in frontend code
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_gnd1ale';
@@ -13,16 +14,33 @@ export const initEmailJS = () => {
 
 /**
  * Send a contact/inquiry form submission
- * @param {Object} formData - Form data with name, email, phone, address, eventDate, message
+ * @param {Object} formData - Form data with name, email, phone, address, scheduling, message
  * @returns {Promise} - EmailJS send promise
  */
 export const sendInquiryEmail = async (formData) => {
+    const scheduling = formatSchedulingForEmail(formData.scheduling);
+    const firstDelivery = formData.scheduling?.deliveryWindows?.[0] || {};
+    const firstPickup = formData.scheduling?.pickupWindows?.[0] || {};
+    const eventWindow = formData.scheduling?.event || {};
+
     const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone || 'Not provided',
         event_address: formData.address || 'Not provided',
-        event_date: formData.eventDate || 'Not provided',
+        event_date: eventWindow.date || 'Not provided',
+        event_start_time: eventWindow.startTime || 'Not provided',
+        event_end_time: eventWindow.endTime || 'Not provided',
+        delivery_setup_date: firstDelivery.date || 'Not provided',
+        delivery_start_time: firstDelivery.startTime || 'Not provided',
+        delivery_end_time: firstDelivery.endTime || 'Not provided',
+        pickup_date: firstPickup.date || 'Not provided',
+        pickup_start_time: firstPickup.startTime || 'Not provided',
+        pickup_end_time: firstPickup.endTime || 'Not provided',
+        delivery_windows: scheduling.deliveryWindows.join('\n'),
+        pickup_windows: scheduling.pickupWindows.join('\n'),
+        scheduling_summary: scheduling.summary,
+        rental_period: firstDelivery.date && firstPickup.date ? `${firstDelivery.date} - ${firstPickup.date}` : 'Not provided',
         message: formData.message || 'No message provided',
         to_email: 'info@highmarkeventrentals.com',
     };
@@ -52,6 +70,10 @@ export const sendInquiryEmail = async (formData) => {
  */
 export const sendQuoteEmail = async (formData, cartItems, totals) => {
     const baseUrl = 'https://www.highmarkeventrentals.com';
+    const scheduling = formatSchedulingForEmail(formData.scheduling);
+    const firstDelivery = formData.scheduling?.deliveryWindows?.[0] || {};
+    const firstPickup = formData.scheduling?.pickupWindows?.[0] || {};
+    const eventWindow = formData.scheduling?.event || {};
 
     // Format cart items as plain text list
     const itemsList = cartItems.map(item =>
@@ -83,7 +105,19 @@ export const sendQuoteEmail = async (formData, cartItems, totals) => {
         phone: formData.phone || 'Not provided',
 
         // Event details
-        event_date: formData.eventDate || 'Not specified',
+        event_date: eventWindow.date || 'Not specified',
+        event_start_time: eventWindow.startTime || 'Not specified',
+        event_end_time: eventWindow.endTime || 'Not specified',
+        delivery_setup_date: firstDelivery.date || 'Not specified',
+        delivery_start_time: firstDelivery.startTime || 'Not specified',
+        delivery_end_time: firstDelivery.endTime || 'Not specified',
+        pickup_date: firstPickup.date || 'Not specified',
+        pickup_start_time: firstPickup.startTime || 'Not specified',
+        pickup_end_time: firstPickup.endTime || 'Not specified',
+        delivery_windows: scheduling.deliveryWindows.join('\n'),
+        pickup_windows: scheduling.pickupWindows.join('\n'),
+        scheduling_summary: scheduling.summary,
+        rental_period: firstDelivery.date && firstPickup.date ? `${firstDelivery.date} - ${firstPickup.date}` : 'Not specified',
         event_location: formData.eventLocation || formData.address || 'Not provided',
 
         // Cart summary

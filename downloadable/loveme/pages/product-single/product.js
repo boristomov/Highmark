@@ -20,6 +20,22 @@ const parseDetails = (detailsString) => {
     .filter(item => item.label && item.value);
 };
 
+const SECONDARY_IMAGE_PREFIX = 'secondary_image:';
+
+const getProductImages = (item) => {
+  if (!item) return [];
+
+  const tags = Array.isArray(item.tags) ? item.tags : [];
+  const secondaryImages = tags
+    .filter((tag) => typeof tag === 'string' && tag.startsWith(SECONDARY_IMAGE_PREFIX))
+    .map((tag) => tag.slice(SECONDARY_IMAGE_PREFIX.length).trim())
+    .filter(Boolean);
+
+  return [item.image_url, ...secondaryImages]
+    .filter(Boolean)
+    .filter((image, index, images) => images.indexOf(image) === index);
+};
+
 // Custom fullscreen image viewer with specs overlay
 const ImageLightbox = ({ isOpen, onClose, imageUrl, imgBase, item, specifications }) => {
   const [mounted, setMounted] = useState(false);
@@ -274,9 +290,16 @@ const Product = ({ item, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [quantityText, setQuantityText] = useState('1');
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   
   // Parse product details/specifications (stored in short_description field)
   const specifications = useMemo(() => parseDetails(item.short_description), [item.short_description]);
+  const productImages = useMemo(() => getProductImages(item), [item]);
+  const selectedImage = productImages[selectedImageIndex] || item.image_url;
+
+  useEffect(() => {
+    setSelectedImageIndex(0);
+  }, [item.id]);
 
   const handleQuantityChange = (delta) => {
     setQuantity(prev => {
@@ -311,13 +334,23 @@ const Product = ({ item, addToCart }) => {
     addToCart(item, quantity);
   };
 
+  const showPreviousImage = (e) => {
+    e.stopPropagation();
+    setSelectedImageIndex((index) => (index === 0 ? productImages.length - 1 : index - 1));
+  };
+
+  const showNextImage = (e) => {
+    e.stopPropagation();
+    setSelectedImageIndex((index) => (index + 1) % productImages.length);
+  };
+
   return (
     <>
       {/* Custom Lightbox */}
       <ImageLightbox
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        imageUrl={item.image_url}
+        imageUrl={selectedImage}
         imgBase={item.imgBase}
         item={item}
         specifications={specifications}
@@ -327,7 +360,7 @@ const Product = ({ item, addToCart }) => {
         {/* Product Image */}
         <div className="col col-lg-6 col-12">
           <div 
-            onClick={() => item.image_url && setLightboxOpen(true)}
+            onClick={() => selectedImage && setLightboxOpen(true)}
             style={{
               background: 'linear-gradient(145deg, #f8f6f3 0%, #ebe7e0 100%)',
               borderRadius: '4px',
@@ -336,17 +369,17 @@ const Product = ({ item, addToCart }) => {
               alignItems: 'center',
               justifyContent: 'center',
               minHeight: '500px',
-              cursor: item.image_url ? 'zoom-in' : 'default',
+              cursor: selectedImage ? 'zoom-in' : 'default',
               position: 'relative',
               transition: 'transform 0.2s ease'
             }}
-            onMouseOver={(e) => item.image_url && (e.currentTarget.style.transform = 'scale(1.01)')}
+            onMouseOver={(e) => selectedImage && (e.currentTarget.style.transform = 'scale(1.01)')}
             onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
-            {item.image_url ? (
+            {selectedImage ? (
               <>
                 <img
-                  src={withBasePath(item.image_url)}
+                  src={withBasePath(selectedImage)}
                   alt={item.name}
                   data-img-base={item.imgBase ? withBasePath(item.imgBase) : ''}
                   data-ext-index="0"
@@ -376,6 +409,74 @@ const Product = ({ item, addToCart }) => {
                     }
                   }}
                 />
+                {productImages.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      aria-label="Previous product image"
+                      onClick={showPreviousImage}
+                      style={{
+                        position: 'absolute',
+                        left: '18px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '50%',
+                        border: '1px solid rgba(47, 47, 47, 0.12)',
+                        background: 'rgba(245, 240, 232, 0.92)',
+                        color: '#2F2F2F',
+                        fontSize: '24px',
+                        lineHeight: 1,
+                        cursor: 'pointer',
+                        zIndex: 2,
+                        boxShadow: '0 8px 22px rgba(47, 47, 47, 0.14)'
+                      }}
+                    >
+                      ‹
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Next product image"
+                      onClick={showNextImage}
+                      style={{
+                        position: 'absolute',
+                        right: '18px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '50%',
+                        border: '1px solid rgba(47, 47, 47, 0.12)',
+                        background: 'rgba(245, 240, 232, 0.92)',
+                        color: '#2F2F2F',
+                        fontSize: '24px',
+                        lineHeight: 1,
+                        cursor: 'pointer',
+                        zIndex: 2,
+                        boxShadow: '0 8px 22px rgba(47, 47, 47, 0.14)'
+                      }}
+                    >
+                      ›
+                    </button>
+                    <div style={{
+                      position: 'absolute',
+                      left: '50%',
+                      bottom: '18px',
+                      transform: 'translateX(-50%)',
+                      padding: '6px 12px',
+                      background: 'rgba(245, 240, 232, 0.9)',
+                      color: 'rgba(47, 47, 47, 0.72)',
+                      borderRadius: '999px',
+                      fontSize: '12px',
+                      fontWeight: '600',
+                      letterSpacing: '0.4px',
+                      zIndex: 2
+                    }}>
+                      {selectedImageIndex + 1} / {productImages.length}
+                    </div>
+                  </>
+                )}
                 {/* Zoom hint */}
                 <div style={{
                   position: 'absolute',
@@ -404,8 +505,8 @@ const Product = ({ item, addToCart }) => {
                 justifyContent: 'center',
                 color: 'rgba(27, 27, 27, 0.3)',
               }}>
-                <span style={{ fontSize: '80px', marginBottom: '15px' }}>📷</span>
-                <p style={{ fontSize: '14px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>Image Coming Soon</p>
+                <span style={{ fontSize: '80px', marginBottom: '15px', color: '#D4C9B8' }}>📷</span>
+                <p style={{ fontSize: '14px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', color: '#B8AA96' }}>Image Coming Soon</p>
               </div>
             )}
           </div>

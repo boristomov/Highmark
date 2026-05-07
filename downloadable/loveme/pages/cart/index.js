@@ -15,6 +15,7 @@ import {
 } from "../../store/actions/action";
 import Scrollbar from '../../components/scrollbar';
 import { sendQuoteEmail, isEmailConfigured } from '../../utils/emailService';
+import RentalDateRange, { createDefaultScheduling, formatSchedulingForEmail, validateScheduling } from '../../components/RentalDateRange';
 
 
 const CartPage = (props) => {
@@ -35,7 +36,7 @@ const CartPage = (props) => {
         lname: '',
         email: '',
         phone: '',
-        eventDate: '',
+        scheduling: createDefaultScheduling(),
         eventLocation: '',
         note: '',
     });
@@ -47,6 +48,7 @@ const CartPage = (props) => {
     });
 
     const [captchaToken, setCaptchaToken] = React.useState(null);
+    const [schedulingErrors, setSchedulingErrors] = React.useState({});
 
     const handleQuoteChange = (e) => {
         const { name, value } = e.target;
@@ -69,6 +71,18 @@ const CartPage = (props) => {
             });
             return;
         }
+
+        const schedulingValidation = validateScheduling(quoteForm.scheduling);
+        if (!schedulingValidation.valid) {
+            setSchedulingErrors(schedulingValidation.errors);
+            setEmailStatus({
+                sending: false,
+                success: false,
+                error: 'Please complete the event date, delivery window, and pickup window. End times cannot be earlier than start times.',
+            });
+            return;
+        }
+        setSchedulingErrors({});
 
         if (carts.length === 0) {
             setEmailStatus({
@@ -108,10 +122,11 @@ const CartPage = (props) => {
                         lname: '',
                         email: '',
                         phone: '',
-                        eventDate: '',
+                        scheduling: createDefaultScheduling(),
                         eventLocation: '',
                         note: '',
                     });
+                    setSchedulingErrors({});
                     setCaptchaToken(null);
                     if (recaptchaRef.current) {
                         recaptchaRef.current.reset();
@@ -125,7 +140,9 @@ const CartPage = (props) => {
                 lines.push(`Name: ${quoteForm.fname} ${quoteForm.lname}`);
                 lines.push(`Email: ${quoteForm.email}`);
                 if (quoteForm.phone) lines.push(`Phone: ${quoteForm.phone}`);
-                if (quoteForm.eventDate) lines.push(`Event Date: ${quoteForm.eventDate}`);
+                const schedulingSummary = formatSchedulingForEmail(quoteForm.scheduling);
+                lines.push('Scheduling Preferences:');
+                lines.push(schedulingSummary.summary);
                 if (quoteForm.eventLocation) lines.push(`Event Location: ${quoteForm.eventLocation}`);
                 if (quoteForm.note) lines.push(`Notes: ${quoteForm.note}`);
                 lines.push('');
@@ -136,7 +153,7 @@ const CartPage = (props) => {
                 lines.push('');
                 lines.push(`Total: $${subTotal.toFixed(2)}`);
 
-                const subject = encodeURIComponent('Highmark Rentals Quote Request');
+                const subject = encodeURIComponent('Highmark Event Rentals Quote Request');
                 const body = encodeURIComponent(lines.join('\n'));
                 window.open(`mailto:info@highmarkeventrentals.com?subject=${subject}&body=${body}`, '_blank');
 
@@ -146,10 +163,11 @@ const CartPage = (props) => {
                     lname: '',
                     email: '',
                     phone: '',
-                    eventDate: '',
+                    scheduling: createDefaultScheduling(),
                     eventLocation: '',
                     note: '',
                 });
+                setSchedulingErrors({});
                 setCaptchaToken(null);
                 if (recaptchaRef.current) {
                     recaptchaRef.current.reset();
@@ -278,7 +296,7 @@ const CartPage = (props) => {
                                                     href="/shop"
                                                     className="theme-btn-s3"
                                                 >
-                                                    Continue Shopping{" "}
+                                                    Continue Browsing Rentals{" "}
                                                 </Link>
                                             </li>
                                         </ul>
@@ -348,19 +366,21 @@ const CartPage = (props) => {
                                                         style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
                                                     />
                                                 </div>
-                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
-                                                    <label htmlFor="quote-event-date" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: 'rgba(47,47,47,0.75)', fontWeight: 500 }}>
-                                                        Event date
-                                                    </label>
-                                                    <input
-                                                        id="quote-event-date"
-                                                        onChange={handleQuoteChange}
-                                                        value={quoteForm.eventDate}
-                                                        type="date"
-                                                        className="form-control"
-                                                        name="eventDate"
-                                                        aria-label="Event date"
-                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
+                                                <div className="col-12" style={{ marginBottom: '20px' }}>
+                                                    <RentalDateRange
+                                                        idPrefix="quote-rental-period"
+                                                        value={quoteForm.scheduling}
+                                                        onChange={(scheduling) => {
+                                                            setQuoteForm(prev => ({
+                                                                ...prev,
+                                                                scheduling,
+                                                            }));
+                                                            setSchedulingErrors({});
+                                                            if (emailStatus.error) {
+                                                                setEmailStatus(prev => ({ ...prev, error: null }));
+                                                            }
+                                                        }}
+                                                        errors={schedulingErrors}
                                                     />
                                                 </div>
                                                 <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>

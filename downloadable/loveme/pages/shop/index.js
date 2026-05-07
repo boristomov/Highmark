@@ -78,7 +78,9 @@ const ShopPage = (props) => {
           const shortDesc = (p.short_description || "").toString();
           const sku = (p.sku || "").toString();
           const cat = (p.category || "").toString();
-          const tags = Array.isArray(p.tags) ? p.tags : [];
+          const tags = Array.isArray(p.tags)
+            ? p.tags.filter((tag) => !String(tag).startsWith("secondary_image:"))
+            : [];
 
           let score = 0;
           if (regex.test(name)) {
@@ -122,8 +124,8 @@ const ShopPage = (props) => {
           const safeCategory = (p.category || "").toString().trim().toLowerCase().replace(/\s+/g, "-");
           const safeSku = (p.sku || "").toString().trim().toLowerCase().replace(/\s+/g, "-");
           const imgBase = safeCategory && safeSku ? `/images/boris/rental_equipment/${safeCategory}/${safeSku}` : null;
-          // Start with .png; component will fallback to other extensions on error
-          const derivedUrl = imgBase ? `${imgBase}.png` : (p.image_url || "/images/placeholder-product.jpg");
+          // Prefer inventory-provided image paths; fallback to the legacy SKU-derived path.
+          const derivedUrl = p.image_url || (imgBase ? `${imgBase}.png` : "/images/placeholder-product.jpg");
           return {
             ...p,
             image_url: derivedUrl,
@@ -172,7 +174,7 @@ const ShopPage = (props) => {
   return (
     <Fragment>
       <Navbar alwaysWhite withOffsetBand />
-      <PageTitle pageTitle={"Browse Our Rental Inventory"} pagesub={"Shop"} />
+      <PageTitle pageTitle={"Browse Our Rental Inventory"} pagesub={"Rentals"} />
 
       <CategorySelector
         selectedCategory={selectedCategory}

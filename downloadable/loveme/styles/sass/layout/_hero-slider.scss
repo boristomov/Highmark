@@ -416,6 +416,34 @@
 		}
 	}
 
+	.hero-rental-types {
+		position: absolute;
+		top: clamp(112px, 16vh, 170px);
+		left: 50%;
+		transform: translateX(-50%);
+		width: min(92vw, 980px);
+		z-index: 2;
+		text-align: center;
+		pointer-events: none;
+
+		p {
+			font-size: 20px;
+			line-height: 1.5;
+			letter-spacing: 3px;
+			text-transform: uppercase;
+			font-weight: 500;
+			margin-bottom: 0;
+			color: rgba(255, 255, 255, 0.92);
+			text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+
+			@include media-query(767px) {
+				font-size: 13px;
+				letter-spacing: 1.6px;
+				line-height: 1.7;
+			}
+		}
+	}
+
 
 	.slide-btns {
 		@include media-query(991px) {

@@ -118,7 +118,7 @@ class Header extends Component {
 
                       </li>
                       <li>
-                        <Link onClick={ClickHandler} href="/shop">Shop</Link>
+                        <Link onClick={ClickHandler} href="/shop">Rentals</Link>
                       </li>
                       <li>
                         <Link href="/portfolio-grid">Inspiration</Link>
@@ -144,7 +144,7 @@ class Header extends Component {
                                 ref={this.searchInputRef}
                                 type="text"
                                 className="form-control"
-                                placeholder="Search shop..."
+                                placeholder="Search rentals..."
                                 aria-label="Search products"
                               />
                               <button type="submit"><i

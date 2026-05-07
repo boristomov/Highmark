@@ -1,586 +1,228 @@
 .section {
     position: relative;
-    height: 120vh;
-    border-top: 1px solid grey;
     width: 100%;
-    background: linear-gradient(to bottom, #E9E1D3 10%, rgba(233, 225, 211, 0.739) 100%);
-    margin-bottom: 2vh;
-
-    @media (max-width: 1024px) {
-        height: auto;
-        min-height: auto;
-        margin-bottom: 1.5vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    @media (max-width: 640px) {
-        margin-bottom: 12px;
-    }
-
-    /* Top fade to visually transition from the hero into this section */
-    &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100px;
-        pointer-events: none;
-        /* match lighter banner fade tone */
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
-        z-index: 3;
-    }
-
-    /* Theme variables scoped locally to avoid CSS Modules :root error */
-    --map-black: #0b0b0b;
-    --map-silver: #c0c0c0;
-    --map-silver-dim: #9aa0a6;
-    --map-bronze: #cd7f32;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    overflow: hidden;
-}
-
-.content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-items: start;
-    // column-gap: 1.5rem;
-    // row-gap: 1.5rem;
-    width: 100%;
-    height: 100vh;
-
-}
-
-.headerWrap {
-    grid-column: 1 / -1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-}
-
-.headerInner {
-    margin-left: 0;
-    text-align: center;
-    position: relative;
-    padding-bottom: 10px;
-    margin-bottom: 18px;
-
-    /* Remove prior plain separator; we'll use the HM separator underline */
-    &::after {
-        display: none;
-    }
-
-    /* Use the global section title markup but tune it locally */
-    :global(.wpo-section-title) {
-        margin-bottom: 8px;
-
-        h2 {
-            margin-bottom: 5rem;
-            position: relative;
-
-            /* Use the exact underline style from "Celebrating Your Special Day" */
-            &::after {
-                content: "";
-                display: block;
-                width: 45vw;
-                height: 2px;
-                margin: 12px auto 0;
-                background: linear-gradient(90deg, rgba(192, 192, 192, 0) 0%, rgba(47, 47, 47, 0.3) 50%, rgba(192, 192, 192, 0) 100%);
-                opacity: .9;
-                box-shadow: 15px 5px 30px 10px rgba(0, 0, 0, 0.08);
-            }
-        }
-
-        /* Hide HM separator here to use the same underline as the Celebrating section */
-        :global(.section-title-img) {
-            display: none;
-        }
-    }
-}
-
-.mapWrap {
-    position: relative;
-    justify-self: start;
-    width: 100%;
-    height: 100%;
-    filter: none;
-    animation: mapRise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-    margin-top: -8vh;
+    padding: clamp(22px, 4vw, 58px) 0 clamp(10px, 2vw, 26px);
+    background:
+        radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0) 26%),
+        radial-gradient(circle at 82% 74%, rgba(212, 201, 184, 0.55) 0%, rgba(212, 201, 184, 0) 34%),
+        linear-gradient(180deg, #e9e1d3 0%, #f5f0e8 38%, #e9e1d3 100%);
     overflow: hidden;
 
-    /* Dedicated map fade (beige only) at top and bottom */
     &::before,
     &::after {
         content: "";
         position: absolute;
         left: 0;
         right: 0;
-        width: 100%;
+        height: 140px;
         pointer-events: none;
-        z-index: 1;
+        z-index: 5;
     }
 
     &::before {
         top: 0;
-        height: min(16vh, 260px);
-        background: linear-gradient(to bottom,
-                rgba(233, 225, 211, 1) 0%,
-                rgba(233, 225, 211, 0.0) 100%);
+        height: 190px;
+        background: linear-gradient(to bottom, #e9e1d3 0%, rgba(233, 225, 211, 0.88) 36%, rgba(233, 225, 211, 0) 100%);
     }
 
     &::after {
         bottom: 0;
-        height: min(16vh, 260px);
-        background: linear-gradient(to top,
-                rgba(233, 225, 211, 1) 0%,
-                rgba(233, 225, 211, 0.0) 100%);
+        height: 220px;
+        background: linear-gradient(to top, #e9e1d3 0%, rgba(233, 225, 211, 0.72) 42%, rgba(233, 225, 211, 0) 100%);
     }
 }
 
-.svg {
+.videoFrame {
+    position: relative;
+    width: min(calc(100% - 48px), 1320px);
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.36), rgba(212, 201, 184, 0.18)),
+        #e9e1d3;
+    border: 1px solid rgba(212, 201, 184, 0.62);
+    border-radius: 0;
+    box-shadow:
+        0 34px 80px rgba(47, 47, 47, 0.13),
+        0 1px 0 rgba(255, 255, 255, 0.46) inset;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 34%;
+        pointer-events: none;
+        z-index: 3;
+    }
+
+    &::before {
+        top: 0;
+        height: 46%;
+        background: linear-gradient(to bottom, rgba(233, 225, 211, 0.9) 0%, rgba(233, 225, 211, 0.62) 38%, rgba(233, 225, 211, 0) 100%);
+    }
+
+    &::after {
+        bottom: 0;
+        background: linear-gradient(to top, rgba(233, 225, 211, 0.78), rgba(233, 225, 211, 0));
+    }
+
+    @media (max-width: 767px) {
+        width: min(calc(100% - 24px), 1320px);
+        border-radius: 0;
+    }
+}
+
+.video {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
     height: 100%;
-    transform: scale(1.6);
-    transform-origin: center center;
+    object-fit: contain;
+    object-position: center 60%;
+    background: #e9e1d3;
+    filter: saturate(0.88) contrast(0.96) brightness(1.03);
 }
 
-/* Theme colors */
-
-/* Geography theming via react-simple-maps inline styles uses these as reference in code */
-.countyStroke {
-    stroke: var(--map-silver);
-    stroke-width: 0.7;
-}
-
-.serviceable {
-    filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
-}
-
-.serviceable:hover {
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
-}
-
-/* Shimmer stroke animation for serviceable areas */
-@keyframes shimmerStroke {
-    0% {
-        stroke: var(--map-silver);
-    }
-
-    50% {
-        stroke: #e5e7eb;
-    }
-
-    100% {
-        stroke: var(--map-silver);
-    }
-}
-
-/* Bronze pulse on active */
-@keyframes bronzePulse {
-    0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 0 rgba(205, 127, 50, 0));
-    }
-
-    60% {
-        transform: scale(1.02);
-        filter: drop-shadow(0 6px 12px rgba(205, 127, 50, 0.35));
-    }
-
-    100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 0 rgba(205, 127, 50, 0));
-    }
-}
-
-@keyframes mapRise {
-    0% {
-        transform: translateY(18px) scale(0.985);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-}
-
-/* Accessibility: reduce motion */
-@media (prefers-reduced-motion: reduce) {
-    .mapWrap {
-        animation: none;
-    }
-}
-
-.state path {
-    fill: #f3f4f6;
-    /* light */
-    stroke: #9ca3af;
-    /* gray-400 */
-    stroke-width: 2;
-    filter: saturate(0.85);
-}
-
-.region circle {
-    fill: #4f46e5;
-    /* indigo-600 */
-    opacity: 0.75;
-    cursor: pointer;
-    transition: transform 220ms ease, opacity 220ms ease;
-    transform-origin: center;
-}
-
-.region:hover circle {
-    opacity: 1;
-    transform: scale(1.08);
-}
-
-.active circle:first-child {
-    fill: #7c3aed;
-    /* violet-600 */
-    opacity: 0.9;
-}
-
-.pulse {
-    fill: transparent;
-    stroke: #7c3aed;
-    stroke-width: 3;
-    opacity: 0.6;
-    animation: pulse 1.8s ease-out infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 0.7;
-    }
-
-    70% {
-        transform: scale(1.4);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1.4);
-        opacity: 0;
-    }
-}
-
-.labelHidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 180ms ease;
-}
-
-.labelVisible {
-    display: none;
-}
-
-.labelPill {
-    display: none;
-}
-
-.panelHidden {
-    opacity: 0;
-    transform: translateX(12px);
-    transition: opacity 220ms ease, transform 220ms ease;
-    pointer-events: none;
-}
-
-.panelVisible {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 220ms ease, transform 220ms ease;
-}
-
-.infoPanel {
-    background: linear-gradient(135deg, rgba(47, 47, 47, 0.8) 0%, rgba(47, 47, 47, 0.4) 60%, rgba(47, 47, 47, 0.4) 70%, transparent 100%);
-    // border: 1px solid rgba(233, 225, 211, 0.45);
-    border-radius: 0 14px 14px 0;
-    padding: 30px 20px;
-    max-width: 560px;
-    width: 100%;
-    color: rgba(47, 47, 47, 0.86);
-    display: flex;
-    flex-direction: column;
-    // align-items: center;
-    text-align: left;
-    margin-top: -14vh;
-    margin-left: 5%;
-    box-shadow: 10px 10px 40px 30px rgba(0, 0, 0, 0.2);
-    position: relative;
+.videoOverlay {
+    position: absolute;
+    inset: 0;
     z-index: 1;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 34%),
+        linear-gradient(180deg, rgba(233, 225, 211, 0.56) 0%, rgba(233, 225, 211, 0.32) 24%, rgba(47, 47, 47, 0.08) 44%, rgba(233, 225, 211, 0.2) 100%),
+        linear-gradient(90deg, rgba(233, 225, 211, 0.46) 0%, rgba(233, 225, 211, 0.04) 18%, rgba(233, 225, 211, 0.04) 82%, rgba(233, 225, 211, 0.46) 100%);
 
-    /* vertical separator between map (left) and text (right) on large screens */
-    @media (min-width: 1024px) {
-        &::before {
-            content: "";
-            position: absolute;
-            left: -24px;
-            top: 8%;
-            bottom: 8%;
-            width: 2px;
-            background: linear-gradient(180deg,
-                    rgba(192, 192, 192, 0) 0%,
-                    var(--map-silver) 15%,
-                    var(--map-silver) 85%,
-                    rgba(192, 192, 192, 0) 100%);
-            opacity: 0.9;
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        box-shadow: inset 0 0 120px rgba(233, 225, 211, 0.42);
+        pointer-events: none;
+    }
+}
+
+.videoText {
+    position: absolute;
+    top: clamp(28px, 6vw, 70px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    width: min(88%, 860px);
+    padding: 0 clamp(18px, 3vw, 34px);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow: 0 3px 14px rgba(47, 47, 47, 0.34);
+    pointer-events: none;
+
+    h2 {
+        margin: 0 0 10px;
+        font-size: clamp(28px, 4vw, 48px);
+        line-height: 1.1;
+        font-weight: 300;
+        letter-spacing: 0.7px;
+    }
+
+    img {
+        height: clamp(28px, 3.2vw, 40px);
+        width: auto;
+        opacity: 0.86;
+        filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.35));
+    }
+
+    @media (max-width: 767px) {
+        top: clamp(18px, 6vw, 34px);
+        width: min(86%, 520px);
+        padding: 0 18px;
+
+        h2 {
+            font-size: clamp(21px, 6.8vw, 31px);
+            letter-spacing: 0.5px;
+        }
+
+        img {
+            height: 24px;
         }
     }
 }
 
-.separator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 4px 0 8px 0;
-}
+.servicePanel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    padding: clamp(28px, 5vw, 58px) clamp(20px, 5vw, 72px) clamp(18px, 3vw, 34px);
+    color: rgba(47, 47, 47, 0.88);
+    background:
+        linear-gradient(to top, rgba(233, 225, 211, 0.96) 0%, rgba(233, 225, 211, 0.76) 54%, rgba(233, 225, 211, 0) 100%);
 
-.sepLine {
-    flex: 1 1 0;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(192, 192, 192, 0) 0%, var(--map-silver) 50%, rgba(192, 192, 192, 0) 100%);
-}
+    p {
+        margin: 0 0 12px;
+        font-size: clamp(12px, 1.3vw, 15px);
+        line-height: 1.2;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: rgba(47, 47, 47, 0.62);
+        text-align: center;
+    }
 
-.sepBadge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--map-black);
-    background: linear-gradient(180deg, var(--map-silver) 0%, #e5e7eb 100%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 999px;
-    padding: 4px 8px;
-    font-size: 12px;
-    min-width: 36px;
-}
-
-.sepSubtext {
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    margin-bottom: 8px;
-    color: #e5e7eb;
-}
-
-.infoHeadline {
-    margin: 0 0 25px 0;
-    text-align: right;
-    font-size: 42px;
-    letter-spacing: 1.2px;
-    color: #E9E1D3;
-    font-weight: 400;
-}
-
-.infoDesc {
-    margin: 0 0 16px 0;
-    font-size: 19px;
-    line-height: 1.6;
-    color: #E9E1D3;
-}
-
-.infoList {
-    margin: 0;
-    padding-left: 0;
-    list-style: none;
-    color: rgba(47, 47, 47, 0.8);
-    font-size: 17px;
-    line-height: 1.4;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 20px;
-    justify-content: center;
-    margin-top: 24px;
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 18px;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        max-width: 980px;
+    }
 
     li {
         position: relative;
-        padding: 10px 22px;
-        background: linear-gradient(135deg, rgba(233, 225, 211, 0.4) 0%, rgba(233, 225, 211, 0.2) 100%);
-        border: 1px solid rgba(233, 225, 211, 0.6);
-        border-radius: 30px;
-        font-weight: 300;
-        letter-spacing: 0.5px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        font-size: clamp(14px, 1.55vw, 18px);
+        line-height: 1.25;
+        font-weight: 600;
+        color: rgba(47, 47, 47, 0.82);
+        white-space: nowrap;
 
-        &::before {
-            content: '◆';
-            position: relative;
-            margin-right: 8px;
-            color: rgba(233, 225, 211, 0.9);
-            font-size: 10px;
-            top: -2px;
-        }
-
-        &:hover {
-            background: linear-gradient(135deg, rgba(233, 225, 211, 0.6) 0%, rgba(233, 225, 211, 0.4) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            border-color: rgba(233, 225, 211, 0.8);
+        &:not(:last-child)::after {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            margin-left: 18px;
+            vertical-align: middle;
+            border-radius: 999px;
+            background: rgba(47, 47, 47, 0.36);
         }
     }
-}
 
-@media (max-width: 1024px) {
-    .content {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        height: auto;
-        min-height: auto;
-        gap: 0;
-        transform: none;
-        padding: 40px 20px;
-        justify-items: center;
-        align-items: center;
-    }
+    @media (max-width: 767px) {
+        padding: 64px 14px 14px;
 
-    .mapWrap {
-        height: min(40vh, 320px);
-        width: 100%;
-        max-width: 500px;
-        margin-top: -50px;
-        order: 1;
-        justify-self: center;
-        transform: translateX(-25px);
-    }
+        p {
+            margin-bottom: 8px;
+            font-size: 11px;
+            letter-spacing: 1.3px;
+        }
 
-    .headerWrap {
-        order: 0;
-    }
-
-    .panelVisible {
-        order: 2;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .svg {
-        transform: scale(1.5);
-    }
-
-    .infoPanel {
-        margin-top: 60px;
-        margin-left: 0;
-        border-radius: 14px;
-        max-width: 420px;
-        padding: 24px 20px;
-        text-align: center;
-    }
-
-    .infoHeadline {
-        text-align: center;
-    }
-
-    .infoDesc {
-        text-align: center;
-    }
-
-    .infoList {
-        font-size: 15px;
-        gap: 10px 16px;
-        justify-content: center;
+        ul {
+            gap: 6px 12px;
+        }
 
         li {
-            padding: 9px 18px;
-        }
-    }
-}
+            font-size: 12px;
 
-@media (max-width: 640px) {
-    .content {
-        padding: 30px 16px 40px;
-    }
-
-    .labelVisible {
-        top: 4%;
-    }
-
-    .mapWrap {
-        height: min(35vh, 280px);
-        max-width: 400px;
-        margin-top: -40px;
-        transform: translateX(-20px);
-    }
-
-    .infoPanel {
-        padding: 20px 16px;
-        border-radius: 12px;
-        margin-top: 50px;
-        max-width: 360px;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    .svg {
-        transform: scale(1.4);
-    }
-
-    .infoHeadline {
-        font-size: 24px;
-        text-align: center;
-        margin-bottom: 12px;
-    }
-
-    .infoDesc {
-        font-size: 14px;
-        text-align: center;
-        line-height: 1.5;
-    }
-
-    .infoList {
-        font-size: 14px;
-        gap: 8px 12px;
-        margin-top: 16px;
-
-        li {
-            padding: 8px 16px;
-
-            &::before {
-                font-size: 8px;
-                margin-right: 6px;
+            &:not(:last-child)::after {
+                width: 3px;
+                height: 3px;
+                margin-left: 12px;
             }
         }
     }
-}
-
-.labelBg {
-    fill: rgba(17, 24, 39, 0.85);
-    /* gray-900 */
-    stroke: rgba(255, 255, 255, 0.15);
-    stroke-width: 1;
-}
-
-.labelText {
-    fill: #fff;
-    font-family: 'Futura PT', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
-    font-size: 14px;
-    letter-spacing: 0.3px;
-    font-weight: 600;
-}
-
-.bay circle:first-child {
-    fill: #10b981;
-    /* emerald */
-}
-
-.napa circle:first-child {
-    fill: #ef4444;
-    /* red */
-}
-
-.sonoma circle:first-child {
-    fill: #f59e0b;
-    /* amber */
 }

@@ -43,12 +43,14 @@ const HomePage = (props) => {
             <Reveal variant="fade-up" delay={120}>
                 <CaliforniaMap />
             </Reveal>
+            <Reveal variant="fade-up" delay={160}>
+                <ServiceSection pbClass="wpo-service-section--after-serving-video" />
+            </Reveal>
             <div className="wpo-box-style">
                 {/* <PartnerSection /> */}
 
                 <Reveal variant="fade-in" delay={140}><VideoSection /></Reveal>
                 <Reveal variant="fade-in" delay={180}><FamilyStory /></Reveal>
-                <Reveal variant="fade-up" delay={220}><ServiceSection /></Reveal>
                 {/* <Reveal variant="fade-up" delay={260}><FunFact /></Reveal> */}
                 {/* <Reveal variant="fade-up" delay={300}><ProjectSection /></Reveal> */}
                 {/* <Testimonial /> */}

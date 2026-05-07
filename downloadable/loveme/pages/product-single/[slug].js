@@ -41,7 +41,7 @@ const ProductSinglePage = (props) => {
                 const safeCategory = (data?.category || '').toString().trim().toLowerCase().replace(/\s+/g, '-');
                 const safeSku = (data?.sku || '').toString().trim().toLowerCase().replace(/\s+/g, '-');
                 const imgBase = safeCategory && safeSku ? `/images/boris/rental_equipment/${safeCategory}/${safeSku}` : null;
-                const derivedUrl = imgBase ? `${imgBase}.png` : (data?.image_url || '/images/placeholder-product.jpg');
+                const derivedUrl = data?.image_url || (imgBase ? `${imgBase}.png` : '/images/placeholder-product.jpg');
                 setProduct({
                     ...data,
                     image_url: derivedUrl,
