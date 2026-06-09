@@ -78,7 +78,7 @@ const CartPage = (props) => {
             setEmailStatus({
                 sending: false,
                 success: false,
-                error: 'Please complete the event date, delivery window, and pickup window. End times cannot be earlier than start times.',
+                error: 'Please add your event date and time. End times cannot be earlier than start times.',
             });
             return;
         }

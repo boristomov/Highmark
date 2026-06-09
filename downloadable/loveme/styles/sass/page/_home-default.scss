@@ -1923,6 +1923,84 @@
 		text-align: left;
 	}
 
+	&__optional {
+		margin-top: 18px;
+		padding-top: 18px;
+		border-top: 1px solid rgba(47, 47, 47, 0.08);
+	}
+
+	&__toggle {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+		width: 100%;
+		padding: 16px 18px;
+		border: 1px solid rgba(47, 47, 47, 0.14);
+		border-radius: 12px;
+		background: rgba(255, 255, 255, 0.62);
+		text-align: left;
+		cursor: pointer;
+		transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.88);
+			border-color: rgba(47, 47, 47, 0.24);
+		}
+
+		&:focus-visible {
+			outline: none;
+			border-color: rgba(47, 47, 47, 0.45);
+			box-shadow: 0 0 0 3px rgba(212, 201, 184, 0.55);
+		}
+
+		&.is-open {
+			border-color: rgba(47, 47, 47, 0.24);
+			background: rgba(255, 255, 255, 0.9);
+		}
+	}
+
+	&__toggle-text {
+		font-family: $base-font;
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 1.3;
+		color: rgba(47, 47, 47, 0.88);
+	}
+
+	&__toggle-arrow {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		color: rgba(47, 47, 47, 0.7);
+		transition: transform .25s ease;
+
+		.is-open & {
+			transform: rotate(180deg);
+		}
+	}
+
+	&__toggle-note {
+		margin: 10px 2px 0 !important;
+		font-size: 13.5px !important;
+		line-height: 1.55 !important;
+		color: rgba(47, 47, 47, 0.6) !important;
+
+		em {
+			font-style: italic;
+		}
+	}
+
+	&__collapsible {
+		margin-top: 6px;
+
+		.rental-schedule__section:first-child {
+			border-top: 0;
+			padding-top: 12px;
+		}
+	}
+
 	@media (max-width: 767px) {
 		padding: 14px;
 
@@ -1930,6 +2008,14 @@
 			h4 {
 				font-size: 16px;
 			}
+		}
+
+		&__toggle {
+			padding: 14px 15px;
+		}
+
+		&__toggle-text {
+			font-size: 15px;
 		}
 
 		&__section-title,

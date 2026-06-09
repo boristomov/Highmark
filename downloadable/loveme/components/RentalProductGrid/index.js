@@ -68,9 +68,27 @@ const RentalProductGrid = ({ products, addToCartProduct, loading, searchQuery, s
         );
     }
 
+    const showLinensBanner = selectedCategory === 'accessories' && !searchQuery;
+
     return (
         <section className={styles.productSection}>
             <div className="container">
+                {showLinensBanner && (
+                    <div className={styles.linensBanner}>
+                        <p>
+                            Looking for linens? Explore our full linen &amp; fabric collection, then add your
+                            preferred fabrics and colors to the notes when you request a quote.
+                        </p>
+                        <a
+                            href={BRIDAL_LINENS_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.linensBannerLink}
+                        >
+                            Explore our linens collection
+                        </a>
+                    </div>
+                )}
                 <div className={styles.productGrid}>
                     {products.map((product) => (
                         <div className={styles.productCard} key={product.id}>

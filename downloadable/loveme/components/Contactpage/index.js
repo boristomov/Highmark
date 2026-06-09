@@ -65,7 +65,7 @@ const Contactpage = () => {
             </div>
             <section className="wpo-contact-map-section">
                 <div className="wpo-contact-map">
-                    <iframe src="https://www.google.com/maps?q=37.3348,-121.8903&z=14&output=embed" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps?q=Danville,+CA&center=37.8216,-121.9999&z=13&output=embed" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </section>
         </section>

@@ -122,7 +122,7 @@ const Hero = () => {
                                 </video>
                                 <div className="video-overlay"></div>
                                 <div className="slide-text hero-rental-types">
-                                    <p>Weddings, Corporate Events, Private Parties &amp; Celebrations</p>
+                                    <p>Weddings, Corporate Events &amp; Celebrations</p>
                                 </div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
@@ -160,7 +160,7 @@ const Hero = () => {
                                 </video>
                                 <div className="video-overlay"></div>
                                 <div className="slide-text hero-rental-types">
-                                    <p>Weddings, Corporate Events, Private Parties &amp; Celebrations</p>
+                                    <p>Weddings, Corporate Events &amp; Celebrations</p>
                                 </div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
@@ -198,7 +198,7 @@ const Hero = () => {
                                 </video>
                                 <div className="video-overlay"></div>
                                 <div className="slide-text hero-rental-types">
-                                    <p>Weddings, Corporate Events, Private Parties &amp; Celebrations</p>
+                                    <p>Weddings, Corporate Events &amp; Celebrations</p>
                                 </div>
                                 <div className="container-fluid">
                                     <div className="slide-content">
@@ -219,6 +219,7 @@ const Hero = () => {
                     </Slider>
                 </div>
             </div>
+            <div className="hero-bottom-fade" aria-hidden="true"></div>
         </section>
     )
 }

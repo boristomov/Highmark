@@ -10,7 +10,7 @@ const AboutPage = (props) => {
     return (
         <div>
             <Navbar alwaysWhite withOffsetBand />
-            <PageTitle pageTitle={'About Our Bay Area Event Rental Company'} pagesub={'About'} />
+            <PageTitle pageTitle={'About Us'} pagesub={'About'} />
             <About2 />
             <Footer />
             <Scrollbar />

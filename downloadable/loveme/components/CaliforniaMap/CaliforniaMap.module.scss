@@ -71,6 +71,9 @@
 
     @media (max-width: 767px) {
         width: min(calc(100% - 24px), 1320px);
+        /* A taller frame on phones gives the title and service-area list
+           room to sit cleanly above/below the video instead of crowding it. */
+        aspect-ratio: 4 / 5;
         border-radius: 0;
     }
 }
