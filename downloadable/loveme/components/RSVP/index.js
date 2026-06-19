@@ -207,18 +207,6 @@ const RSVP = () => {
                                         <p className="error-text">{errors.phone || ''}</p>
                                     </div>
                                 </div>
-                                <div className="form-field-col">
-                                    <div className="form-field">
-                                        <input 
-                                            onChange={changeHandler} 
-                                            value={formData.city} 
-                                            type="text" 
-                                            className="form-control" 
-                                            name="city" 
-                                            placeholder="City" 
-                                        />
-                                    </div>
-                                </div>
                                 <div className="form-field-col form-field-full">
                                     <RentalDateRange
                                         idPrefix="inquiry-rental-period"
@@ -235,7 +223,19 @@ const RSVP = () => {
                                         errors={errors.scheduling || {}}
                                     />
                                 </div>
-                                <div className="form-field-col form-field-full">
+                                <div className="form-field-col">
+                                    <div className="form-field">
+                                        <input 
+                                            onChange={changeHandler} 
+                                            value={formData.city} 
+                                            type="text" 
+                                            className="form-control" 
+                                            name="city" 
+                                            placeholder="City" 
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-field-col">
                                     <div className="form-field">
                                         <input 
                                             onChange={changeHandler} 
