@@ -11,12 +11,16 @@ Template variables (from inquiry form):
   {{from_name}}         - Customer name
   {{from_email}}        - Customer email
   {{phone}}             - Phone number
+  {{city}}              - City
   {{event_date}}        - Event date
   {{event_start_time}}  - Event start time
   {{event_end_time}}    - Event end time
-  {{delivery_windows}}  - Preferred delivery windows
-  {{pickup_windows}}    - Preferred pickup windows
+  {{delivery_setup_date}}, {{delivery_start_time}}, {{delivery_end_time}} - First delivery window
+  {{pickup_date}}, {{pickup_start_time}}, {{pickup_end_time}}             - First pickup window
+  {{delivery_windows}}  - All preferred delivery windows (optional)
+  {{pickup_windows}}    - All preferred pickup windows (optional)
   {{scheduling_summary}}- Full event/delivery/pickup scheduling summary
+  {{rental_period}}     - Delivery date - pickup date (if provided)
   {{event_address}}     - Event location / address
   {{message}}           - Message / additional details
 -->
@@ -73,7 +77,7 @@ Template variables (from inquiry form):
                   Your message has been received, and we're excited to learn more about your upcoming event!
                 </p>
                 <p style="margin: 0 0 20px 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
-                  Our team will carefully review your inquiry and get back to you within <strong>24-48 hours</strong>.
+                  Our team will carefully review your inquiry and get back to you within <strong>24 hours</strong>.
                 </p>
                 <p style="margin: 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
                   In the meantime, feel free to browse our <a href="https://www.highmarkeventrentals.com/shop/"
@@ -90,38 +94,77 @@ Template variables (from inquiry form):
                 style="margin: 0 0 15px 0; color: rgba(47, 47, 47, 0.85); font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #E9E1D3; padding-bottom: 10px;">
                 Your Inquiry Summary
               </h3>
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fafafa; border-collapse: collapse; border: 1px solid #E9E1D3;">
+              <table width="100%" cellpadding="0" cellspacing="0"
+                style="background-color: #fafafa; border-collapse: collapse; border: 1px solid #E9E1D3;">
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; width: 140px; border-bottom: 1px solid #E9E1D3;">Name</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">{{from_name}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; width: 140px; border-bottom: 1px solid #E9E1D3;">
+                    Name</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">
+                    {{from_name}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">Email</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">{{from_email}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">
+                    Email</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">
+                    {{from_email}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">Phone</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">{{phone}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">
+                    Phone</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">
+                    {{phone}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">Event Window</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">{{event_date}} | {{event_start_time}} - {{event_end_time}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">
+                    City</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">
+                    {{city}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3; vertical-align: top;">Preferred Delivery Windows</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3; white-space: pre-line;">{{delivery_windows}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">
+                    Event Window</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">
+                    {{event_date}} | {{event_start_time}} - {{event_end_time}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3; vertical-align: top;">Preferred Pickup Windows</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3; white-space: pre-line;">{{pickup_windows}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3; vertical-align: top;">
+                    Preferred Delivery Windows</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3; white-space: pre-line;">
+                    {{delivery_windows}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">Event Location</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">{{event_address}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3; vertical-align: top;">
+                    Preferred Pickup Windows</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3; white-space: pre-line;">
+                    {{pickup_windows}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; vertical-align: top;">Message / Additional Details</td>
-                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; line-height: 1.7;">{{message}}</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; border-bottom: 1px solid #E9E1D3;">
+                    Event Location</td>
+                  <td
+                    style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; border-bottom: 1px solid #E9E1D3;">
+                    {{event_address}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.6); font-size: 14px; vertical-align: top;">
+                    Message / Additional Details</td>
+                  <td style="padding: 12px 20px; color: rgba(47, 47, 47, 0.85); font-size: 14px; line-height: 1.7;">
+                    {{message}}</td>
                 </tr>
               </table>
             </td>
@@ -166,10 +209,21 @@ To Email: {{from_email}}
 BCC: info@highmarkeventrentals.com
 From Name: Highmark Event Rentals
 
-IMPORTANT: Use {{items_html}} to display the items with images!
-Scheduling variables:
+IMPORTANT: Use {{{items_html}}} (triple braces) to display the items with images!
+
+Template variables (from quote form):
+  {{from_name}}         - Customer full name
+  {{from_email}}        - Customer email
+  {{phone}}             - Phone number
+  {{city}}              - City
+  {{event_location}}    - Event location / address
   {{event_date}}, {{event_start_time}}, {{event_end_time}}
-  {{delivery_windows}}, {{pickup_windows}}, {{scheduling_summary}}
+  {{delivery_windows}}, {{pickup_windows}}, {{scheduling_summary}}, {{rental_period}}
+  {{items_count}}       - Number of items
+  {{items_list}}        - Plain-text item list
+  {{items_html}}        - HTML item rows (use triple braces)
+  {{subtotal}}, {{total}} - Pricing (tax/delivery are quoted later, not sent)
+  {{order_notes}}       - Additional notes
 -->
 
 <!-- ========== START QUOTE TEMPLATE ========== -->
@@ -224,7 +278,7 @@ Scheduling variables:
                   We've received your quote request and are excited to help bring your vision to life!
                 </p>
                 <p style="margin: 0; color: rgba(47, 47, 47, 0.8); font-size: 15px; line-height: 1.9;">
-                  Our team will prepare a personalized quote and get back to you within <strong>24-48 hours</strong>.
+                  Our team will prepare a personalized quote and get back to you within <strong>24 hours</strong>.
                 </p>
               </div>
             </td>
@@ -245,19 +299,28 @@ Scheduling variables:
                     {{event_date}} | {{event_start_time}} - {{event_end_time}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 14px; vertical-align: top;">Delivery Windows:</td>
-                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; white-space: pre-line;">
+                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 14px; vertical-align: top;">
+                    Delivery Windows:</td>
+                  <td
+                    style="padding: 8px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; white-space: pre-line;">
                     {{delivery_windows}}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 14px; vertical-align: top;">Pickup Windows:</td>
-                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; white-space: pre-line;">
+                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 14px; vertical-align: top;">Pickup
+                    Windows:</td>
+                  <td
+                    style="padding: 8px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500; white-space: pre-line;">
                     {{pickup_windows}}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 14px;">Location:</td>
                   <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500;">
                     {{event_location}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 14px;">City:</td>
+                  <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.85); font-size: 14px; font-weight: 500;">
+                    {{city}}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.6); font-size: 14px;">Phone:</td>
@@ -275,11 +338,16 @@ Scheduling variables:
                 style="margin: 0 0 15px 0; color: rgba(47, 47, 47, 0.85); font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #E9E1D3; padding-bottom: 10px;">
                 Items Requested ({{items_count}})
               </h3>
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fafafa; border-collapse: collapse;">
+              <table width="100%" cellpadding="0" cellspacing="0"
+                style="background-color: #fafafa; border-collapse: collapse;">
                 <thead>
                   <tr style="background-color: #E9E1D3;">
-                    <th style="padding: 12px 15px; text-align: left; font-size: 12px; font-weight: 600; color: rgba(47,47,47,0.8); letter-spacing: 0.5px; text-transform: uppercase;">Item</th>
-                    <th style="padding: 12px 15px; text-align: right; font-size: 12px; font-weight: 600; color: rgba(47,47,47,0.8); letter-spacing: 0.5px; text-transform: uppercase;">Price</th>
+                    <th
+                      style="padding: 12px 15px; text-align: left; font-size: 12px; font-weight: 600; color: rgba(47,47,47,0.8); letter-spacing: 0.5px; text-transform: uppercase;">
+                      Item</th>
+                    <th
+                      style="padding: 12px 15px; text-align: right; font-size: 12px; font-weight: 600; color: rgba(47,47,47,0.8); letter-spacing: 0.5px; text-transform: uppercase;">
+                      Price</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -300,19 +368,14 @@ Scheduling variables:
                       {{subtotal}}</td>
                   </tr>
                   <tr>
-                    <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.65); font-size: 14px;">Est. Tax:</td>
-                    <td style="padding: 8px 0; text-align: right; color: rgba(47, 47, 47, 0.75); font-size: 14px;">
-                      {{tax}}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.65); font-size: 14px;">Delivery:</td>
+                    <td style="padding: 8px 0; color: rgba(47, 47, 47, 0.65); font-size: 14px;">Tax &amp; Delivery:</td>
                     <td
                       style="padding: 8px 0; text-align: right; color: rgba(47, 47, 47, 0.6); font-size: 14px; font-style: italic;">
-                      TBD</td>
+                      Quoted after review</td>
                   </tr>
                   <tr style="border-top: 2px solid #D4C9B8;">
                     <td style="padding: 15px 0 0 0; color: rgba(47, 47, 47, 0.9); font-size: 16px; font-weight: 600;">
-                      Estimated Total:</td>
+                      Estimated Subtotal:</td>
                     <td
                       style="padding: 15px 0 0 0; text-align: right; color: rgba(47, 47, 47, 0.9); font-size: 20px; font-weight: 600;">
                       {{total}}</td>

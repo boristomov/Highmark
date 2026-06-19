@@ -32,7 +32,6 @@ const CaliforniaMap = () => {
                 <div className={styles.videoOverlay}></div>
                 <div className={styles.videoText}>
                     <h2>Serving the Bay Area &amp; Beyond</h2>
-                    <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
                 </div>
                 <div className={styles.servicePanel} aria-label="Service areas">
                     <p>Delivery, setup, and pick up across:</p>

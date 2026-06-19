@@ -7,6 +7,7 @@ import Scrollbar from "../../components/scrollbar";
 import { addToCart } from "../../store/actions/action";
 import CategorySelector from "../../components/CategorySelector";
 import RentalProductGrid from "../../components/RentalProductGrid";
+import Reveal from "../../components/Reveal";
 import { supabase } from "../../lib/supabaseClient";
 import { useRouter } from "next/router";
 
@@ -176,10 +177,12 @@ const ShopPage = (props) => {
       <Navbar alwaysWhite withOffsetBand />
       <PageTitle pageTitle={"Browse Our Rental Inventory"} pagesub={"Rentals"} />
 
-      <CategorySelector
-        selectedCategory={selectedCategory}
-        onCategorySelect={handleCategorySelect}
-      />
+      <Reveal variant="fade-up" delay={60}>
+        <CategorySelector
+          selectedCategory={selectedCategory}
+          onCategorySelect={handleCategorySelect}
+        />
+      </Reveal>
 
       {searchQuery && (
         <div style={{
@@ -203,13 +206,15 @@ const ShopPage = (props) => {
       )}
 
       <div ref={productGridRef}>
-        <RentalProductGrid
-          products={filteredProducts}
-          addToCartProduct={addToCartProduct}
-          loading={loading}
-          searchQuery={searchQuery}
-          selectedCategory={selectedCategory}
-        />
+        <Reveal variant="fade-up" delay={80}>
+          <RentalProductGrid
+            products={filteredProducts}
+            addToCartProduct={addToCartProduct}
+            loading={loading}
+            searchQuery={searchQuery}
+            selectedCategory={selectedCategory}
+          />
+        </Reveal>
       </div>
 
       <Footer />

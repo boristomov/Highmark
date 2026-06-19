@@ -1,5 +1,6 @@
 import React from 'react';
 import RSVP from '../RSVP'
+import Reveal from '../Reveal'
 
 
 const Contactpage = () => {
@@ -9,7 +10,7 @@ const Contactpage = () => {
             <div className="container">
                 <div className="row">
                     <div className="col col-lg-10 offset-lg-1">
-                        <div className="office-info">
+                        <Reveal variant="fade-up" delay={60} className="office-info">
                             <div className="row align-items-stretch">
                                 <div className="col col-xl-4 col-lg-6 col-md-6 col-12 d-flex">
                                     <div className="office-info-item">
@@ -58,7 +59,7 @@ const Contactpage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Reveal>
                         <RSVP />
                     </div>
                 </div>

@@ -36,6 +36,7 @@ const CartPage = (props) => {
         lname: '',
         email: '',
         phone: '',
+        city: '',
         scheduling: createDefaultScheduling(),
         eventLocation: '',
         note: '',
@@ -122,6 +123,7 @@ const CartPage = (props) => {
                         lname: '',
                         email: '',
                         phone: '',
+                        city: '',
                         scheduling: createDefaultScheduling(),
                         eventLocation: '',
                         note: '',
@@ -143,6 +145,7 @@ const CartPage = (props) => {
                 const schedulingSummary = formatSchedulingForEmail(quoteForm.scheduling);
                 lines.push('Scheduling Preferences:');
                 lines.push(schedulingSummary.summary);
+                if (quoteForm.city) lines.push(`City: ${quoteForm.city}`);
                 if (quoteForm.eventLocation) lines.push(`Event Location: ${quoteForm.eventLocation}`);
                 if (quoteForm.note) lines.push(`Notes: ${quoteForm.note}`);
                 lines.push('');
@@ -163,6 +166,7 @@ const CartPage = (props) => {
                     lname: '',
                     email: '',
                     phone: '',
+                    city: '',
                     scheduling: createDefaultScheduling(),
                     eventLocation: '',
                     note: '',
@@ -381,6 +385,17 @@ const CartPage = (props) => {
                                                             }
                                                         }}
                                                         errors={schedulingErrors}
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>
+                                                    <input
+                                                        onChange={handleQuoteChange}
+                                                        value={quoteForm.city}
+                                                        type="text"
+                                                        className="form-control"
+                                                        name="city"
+                                                        placeholder="City"
+                                                        style={{ padding: '14px 18px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '15px' }}
                                                     />
                                                 </div>
                                                 <div className="col-md-6 col-12" style={{ marginBottom: '20px' }}>

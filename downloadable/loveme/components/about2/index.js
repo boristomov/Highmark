@@ -5,6 +5,7 @@ import abimg from '/public/images/boris/IMG_1631.jpeg'
 import apartImg from '/public/images/boris/iStock-2166246204.jpg'
 import serveImg from '/public/images/boris/iStock-1137980721.jpg'
 import { withBasePath } from '../../utils/basePath'
+import Reveal from '../Reveal'
 
 const About2 = (props) => {
 
@@ -12,7 +13,7 @@ const About2 = (props) => {
         <section className="wpo-about-section-modern section-padding">
             <div className="container">
                 <div className="about-modern-wrapper">
-                    <article className="about-content-block">
+                    <Reveal variant="fade-up" delay={60} as="article" className="about-content-block">
                         <div className="about-section-heading">
                             <h2>Our Story</h2>
                             <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="about-sep-h-logo" />
@@ -40,9 +41,9 @@ const About2 = (props) => {
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </Reveal>
 
-                    <article className="about-content-block">
+                    <Reveal variant="fade-up" delay={60} as="article" className="about-content-block">
                         <div className="about-section-heading">
                             <h2>What Sets Highmark Apart</h2>
                             <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="about-sep-h-logo" />
@@ -67,9 +68,9 @@ const About2 = (props) => {
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </Reveal>
 
-                    <article className="about-content-block about-content-block--last">
+                    <Reveal variant="fade-up" delay={60} as="article" className="about-content-block about-content-block--last">
                         <div className="about-section-heading">
                             <h2>Where We Serve</h2>
                             <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="about-sep-h-logo" />
@@ -94,7 +95,7 @@ const About2 = (props) => {
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </Reveal>
                 </div>
             </div>
         </section>

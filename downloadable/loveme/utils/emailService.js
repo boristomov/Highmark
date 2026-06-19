@@ -27,6 +27,7 @@ export const sendInquiryEmail = async (formData) => {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone || 'Not provided',
+        city: formData.city || 'Not provided',
         event_address: formData.address || 'Not provided',
         event_date: eventWindow.date || 'Not provided',
         event_start_time: eventWindow.startTime || 'Not provided',
@@ -103,6 +104,7 @@ export const sendQuoteEmail = async (formData, cartItems, totals) => {
         from_name: `${formData.fname} ${formData.lname}`,
         from_email: formData.email,
         phone: formData.phone || 'Not provided',
+        city: formData.city || 'Not provided',
 
         // Event details
         event_date: eventWindow.date || 'Not specified',

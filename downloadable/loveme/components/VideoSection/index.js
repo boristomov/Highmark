@@ -1,9 +1,6 @@
 import React from 'react'
-import { withBasePath } from '../../utils/basePath'
 // Bundled URL picks up Next basePath/assetPrefix on export (public/ path alone can 404 on GitHub Pages).
 import marJennyPic from '../../public/images/boris/IMG_1631.jpeg'
-
-const H_LOGO = '/images/boris/highmark-h-logo.png'
 
 const couplePhotoSrc =
     typeof marJennyPic === 'object' && marJennyPic?.src != null ? marJennyPic.src : marJennyPic
@@ -15,9 +12,6 @@ const VideoSection = (props) => {
                 <div className="row">
                     <div className="wpo-section-title">
                         <h2>We Are Highmark</h2>
-                        <div className="section-title-img">
-                            <img src={withBasePath(H_LOGO)} alt="Highmark" className="section-title-h-logo" />
-                        </div>
                     </div>
                 </div>
                 <div className="wpo-video-item">

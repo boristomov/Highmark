@@ -87,10 +87,7 @@ const ServiceSection = (props) => {
         <section className={`wpo-service-section ${props.pbClass}`}>
             <div className="container-fluid">
                 <div className="wpo-section-title">
-                    <h2>Event &amp; Party Rentals</h2>
-                    <div className="section-title-img">
-                        <img src={withBasePath('/images/boris/highmark-h-logo.png')} alt="Highmark" className="section-title-h-logo" />
-                    </div>
+                    <h2>Our Collection</h2>
                 </div>
                 <div className="wpo-service-active owl-carousel">
                     <Slider {...settings}>

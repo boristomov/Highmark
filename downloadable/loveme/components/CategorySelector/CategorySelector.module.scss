@@ -43,28 +43,27 @@
 
 .categoryGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
     width: 100%;
-    max-width: 100%;
-    margin: 0;
+    max-width: 1320px;
+    margin: 0 auto;
     padding: 0 20px;
 
     @media (max-width: 1024px) {
-        gap: 30px;
-        padding: 0 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
         grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 0 20px;
+        gap: 20px;
     }
 }
 
 .categoryCard {
     position: relative;
-    height: 500px;
+    height: 420px;
     border-radius: 0;
     overflow: hidden;
     cursor: pointer;
@@ -142,11 +141,11 @@
     }
 
     @media (max-width: 1024px) {
-        height: 440px;
+        height: 400px;
     }
 
     @media (max-width: 768px) {
-        height: 380px;
+        height: 360px;
     }
 }
 
@@ -185,7 +184,7 @@
     bottom: -5px;
     left: -5px;
     right: -5px;
-    padding: 60px 55px 65px;
+    padding: 44px 36px 46px;
     z-index: 3;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     background: linear-gradient(to top,
@@ -196,9 +195,9 @@
     &::before {
         content: '';
         position: absolute;
-        top: 60px;
-        left: 55px;
-        width: 60px;
+        top: 44px;
+        left: 36px;
+        width: 48px;
         height: 1px;
         background: linear-gradient(to right, rgba(233, 225, 211, 0.9), transparent);
         transition: width 0.5s ease;
@@ -207,36 +206,36 @@
     &::after {
         content: '◇';
         position: absolute;
-        top: 52px;
-        left: 55px;
-        font-size: 14px;
+        top: 36px;
+        left: 36px;
+        font-size: 13px;
         color: rgba(233, 225, 211, 0.7);
         transition: all 0.4s ease;
     }
 
     h3 {
-        font-size: 42px;
+        font-size: 30px;
         font-weight: 300;
         color: white;
-        margin-top: 30px;
-        margin-bottom: 16px;
-        letter-spacing: 2px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+        letter-spacing: 1.6px;
         text-transform: uppercase;
         transition: all 0.3s ease;
         font-family: 'Futura PT', 'Urbanist', sans-serif;
 
         @media (max-width: 768px) {
-            font-size: 32px;
-            letter-spacing: 1.5px;
+            font-size: 28px;
+            letter-spacing: 1.4px;
         }
     }
 
     p {
-        font-size: 15px;
+        font-size: 14px;
         color: rgba(255, 255, 255, 0.75);
-        line-height: 1.8;
+        line-height: 1.7;
         font-weight: 300;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.6px;
         font-style: italic;
         transition: all 0.3s ease;
 
@@ -246,17 +245,90 @@
     }
 
     @media (max-width: 768px) {
-        padding: 50px 40px 55px;
+        padding: 42px 32px 46px;
 
         &::before {
-            top: 50px;
-            left: 40px;
+            top: 42px;
+            left: 32px;
         }
 
         &::after {
-            top: 42px;
-            left: 40px;
+            top: 34px;
+            left: 32px;
         }
+    }
+}
+
+.comingSoonBadge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 4;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #1b1b1b;
+    background: rgba(233, 225, 211, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.comingSoonNote {
+    max-width: 620px;
+    margin: 44px auto 0;
+    padding: 32px 28px 36px;
+    text-align: center;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, #f5f0e8 100%);
+    border: 1px solid #d4c9b8;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(27, 27, 27, 0.07);
+
+    h3 {
+        margin: 0 0 14px;
+        font-size: 26px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #1b1b1b;
+    }
+
+    p {
+        margin: 0 0 22px;
+        font-size: 15px;
+        line-height: 1.7;
+        color: rgba(27, 27, 27, 0.7);
+        font-weight: 300;
+    }
+
+    @media (max-width: 600px) {
+        margin-top: 32px;
+        padding: 26px 20px 30px;
+
+        h3 {
+            font-size: 22px;
+        }
+    }
+}
+
+.comingSoonCta {
+    display: inline-block;
+    padding: 13px 30px;
+    background: #e9e1d3;
+    color: #1b1b1b;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid #d4c9b8;
+    transition: background 0.25s ease, transform 0.2s ease;
+
+    &:hover {
+        background: #d4c9b8;
+        transform: translateY(-1px);
     }
 }
 

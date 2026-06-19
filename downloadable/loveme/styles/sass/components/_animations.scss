@@ -43,3 +43,12 @@
     opacity: 1;
     transform: scale(1);
 }
+
+/* Respect users who prefer reduced motion: show content immediately. */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
