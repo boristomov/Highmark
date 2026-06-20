@@ -34,7 +34,6 @@ const CaliforniaMap = () => {
                     <h2>Serving the Bay Area &amp; Beyond</h2>
                 </div>
                 <div className={styles.servicePanel} aria-label="Service areas">
-                    <p>Delivery, setup, and pick up across:</p>
                     <ul>
                         {serviceAreas.map((area) => (
                             <li key={area}>{area}</li>

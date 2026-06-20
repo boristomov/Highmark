@@ -50,7 +50,7 @@ const CategorySelector = ({ selectedCategory, onCategorySelect }) => {
         },
         {
             id: 'heating-shades',
-            filter: 'tent',
+            filter: 'heating-shades',
             title: 'Heating & Shades',
             description: 'Patio heaters, umbrellas & shade',
             image: '/images/boris/homepageServices/tentCategoryPic.jpg',

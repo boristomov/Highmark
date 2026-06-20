@@ -11,6 +11,24 @@ import Reveal from "../../components/Reveal";
 import { supabase } from "../../lib/supabaseClient";
 import { useRouter } from "next/router";
 
+// Outdoor Heating & Shade line (umbrellas, patio heaters) and lounge furniture
+// are stored under the "accessories" category in the database (often with an
+// "OHS-" SKU prefix). We classify by SKU + name so umbrellas/heaters show under
+// "Heating & Shades", lounge pieces stay reserved for "Lounge Furniture"
+// (coming soon), and neither leaks into the Linens category.
+const skuOf = (p) => (p?.sku || "").toString().toLowerCase();
+const nameOf = (p) => (p?.name || "").toString().toLowerCase();
+// Lounge furniture has no live products yet (the card is "coming soon"), so we
+// only match it by name in case any are added later.
+const isLoungeItem = (p) =>
+  /\b(lounge|sofa|sectional|ottoman|chaise|loveseat|settee)\b/.test(nameOf(p));
+const isHeatingShadeItem = (p) =>
+  !isLoungeItem(p) &&
+  (skuOf(p).startsWith("ohs-") || /umbrella|heater|parasol|patio heat/.test(nameOf(p)));
+// Anything in the outdoor/lounge lines should be kept out of Linens.
+const isOutdoorItem = (p) =>
+  skuOf(p).startsWith("ohs-") || isHeatingShadeItem(p) || isLoungeItem(p);
+
 const ShopPage = (props) => {
   const router = useRouter();
   const [products, setProducts] = useState([]);
@@ -29,7 +47,7 @@ const ShopPage = (props) => {
   useEffect(() => {
     if (!router.isReady) return;
     const q = (router.query?.category || "").toString().toLowerCase();
-    const allowed = new Set(["chair", "table", "tent", "accessories"]);
+    const allowed = new Set(["chair", "table", "tent", "accessories", "heating-shades"]);
     if (q && allowed.has(q)) {
       setSelectedCategory(q);
     }
@@ -56,7 +74,13 @@ const ShopPage = (props) => {
     let filtered = products;
 
     // Category filter
-    if (selectedCategory) {
+    if (selectedCategory === "heating-shades") {
+      // Umbrellas + patio heaters (the OHS line, excluding lounge furniture)
+      filtered = filtered.filter(isHeatingShadeItem);
+    } else if (selectedCategory === "accessories") {
+      // Linens only — keep the outdoor heating/shade/lounge items out of here
+      filtered = filtered.filter((p) => p.category === "accessories" && !isOutdoorItem(p));
+    } else if (selectedCategory) {
       filtered = filtered.filter((p) => p.category === selectedCategory);
     }
 
